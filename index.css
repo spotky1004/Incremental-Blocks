@@ -1,0 +1,144 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: 'Major Mono Display', monospace;
+  user-select: none;
+}
+#warpAll {
+  height: 100vh;
+  width: 100vw;
+}
+#containerI {
+  display: block;
+  float: left;
+  height: 100vh;
+  width: 20vw;
+}
+#basicClick {
+  width: 20vw;
+  height: 30vh;
+  background-color: #404040;
+}
+#blocks {
+  padding-top: 5vh;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  width: 20vw;
+  height: 10vh;
+}
+#blockCount {
+  font-size: 2vw;
+}
+#blockTxt {
+  font-size: 1vw;
+}
+#blocksPerSec {
+  font-weight: bold;
+  color: white;
+  width: 20vw;
+  height: 10vh;
+}
+#blockPSCount {
+  padding-left: 2vw;
+  font-size: 1.3vw;
+  color: white;
+}
+#blockPSTxt {
+  margin-bottom: 1vh;
+  padding-left: 2vw;
+  font-size: 0.7vw;
+  color: white;
+}
+#blockClick {
+  margin-left: 1vw;
+  width: 18vw;
+  height: 5vh;
+  background-color: rgba(40, 40, 40, 0.6);
+
+  transition: all 0.2s;
+}
+#blockClick:hover {
+  background-color: rgba(40, 40, 40, 1);
+
+  transition: all 1s;
+}
+#blockClick:active {
+  background-color: white;
+
+  transition: all 0.1s;
+}
+#blockClickTxtWarp {
+  margin-left: 1vw;
+  padding-top: 1vh;
+  width: 16vw;
+  height: 3vh;
+  color: white;
+}
+#blockClickPlus {
+  padding-top: 0.5vh;
+  float: left;
+  font-size: 2vh;
+}
+#blockPerClick {
+  font-size: 2vh;
+}
+#blocClickTxt {
+  font-size: 1vh;
+}
+#basicUpgrade {
+  width: 20vw;
+  height: 70vh;
+  background-color: green;
+}
+#containerII {
+  display: block;
+  float: left;
+  height: 100vh;
+  width: 60vw;
+  background-color: yellow;
+}
+#lootCombat {
+  width: 60vw;
+  height: 68.5vh;
+  background-color: purple;
+}
+#containerIInI {
+  width: 60vw;
+  height: 28.5vh;
+}
+#lootWorn {
+  display: block;
+  float: left;
+  width: 45vw;
+  height: 28.5vh;
+  background-color: blue;
+}
+#lootStat {
+  display: block;
+  float: left;
+  width: 15vw;
+  height: 28.5vh;
+  background-color: red;
+}
+#progress {
+  width: 60vw;
+  height: 3vh;
+  background-color: pink;
+}
+#containerIII {
+  display: block;
+  float: left;
+  width: 20vw;
+  height: 100vh;
+}
+#stat {
+  width: 20vw;
+  height: 80vh;
+  background-color: magenta;
+}
+#option {
+  width: 20vw;
+  height: 20vh;
+  background-color: black;
+}
