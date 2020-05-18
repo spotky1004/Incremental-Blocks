@@ -66,7 +66,7 @@
 #blockClick:active {
   background-color: white;
 
-  transition: all 0.1s;
+  transition: all 0s;
 }
 #blockClickTxtWarp {
   margin-left: 1vw;
@@ -89,7 +89,31 @@
 #basicUpgrade {
   width: 20vw;
   height: 70vh;
-  background-color: green;
+  background-color: #6e6e6e;
+}
+#upgradeBanner {
+  padding-top: 1vh;
+  width: 20vw;
+  height: 4vh;
+  font-size: 3vh;
+  font-weight: bolder;
+  text-align: center;
+  background-color: rgba(40, 40, 40, 0.2);
+  animation-duration: 2s;
+  animation-name: upgradeBannerShiny;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes upgradeBannerShiny {
+  from {
+    color: #fff;
+  }
+  50% {
+    color: #bbb;
+  }
+  to {
+    color: #fff;
+  }
 }
 #containerII {
   display: block;
