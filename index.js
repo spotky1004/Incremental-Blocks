@@ -36,10 +36,18 @@ $(function (){
     $('#blockCount').html(function (index,html) {
       return notation(block);
     });
+    $('#blockPSCount').html(function (index,html) {
+      return notation(blockPS);
+    });
+    $('#blockPerClick').html(function (index,html) {
+      return notation(blockPC);
+    });
   }
 
   $(document).on('click','#blockClick',function() {
     block += blockPC;
     displayBlock();
   });
+
+  displayBlock();
 });
