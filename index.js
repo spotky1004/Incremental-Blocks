@@ -12,7 +12,11 @@ $(function (){
       } else {
         notationLevel = Math.floor(Math.log10(num)/3);
         notationSpace = Math.floor(Math.log10(num)%3);
-        notationFixed = (num / 1000 ** notationLevel).toFixed(Math.max(dim-notationSpace, 0)) ;
+        if (num < 1e3) {
+          notationFixed = (num / 1000 ** notationLevel).toFixed(Math.max(dim-notationSpace, 0)) ;
+        } else {
+          notationFixed = (num / 1000 ** notationLevel).toFixed(3-notationSpace) ;
+        }
         if (notationLevel < 11) {
           return notationFixed + standardNotation[notationLevel];
         } else {
