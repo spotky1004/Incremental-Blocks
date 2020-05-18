@@ -115,10 +115,10 @@
   background-color: #6e6e6e;
 }
 #upgradeBanner {
+  padding-left: 1vw;
   padding-top: 1vh;
   width: 20vw;
   height: 4vh;
-  font-size: 3vh;
   font-weight: bolder;
   text-align: center;
   background-color: rgba(40, 40, 40, 0.2);
@@ -126,6 +126,16 @@
   animation-name: upgradeBannerShiny;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+}
+#upgradeBanner > p:nth-child(1) {
+  float: left;
+  font-size: 3vh;
+}
+#upgradeBanner > p:nth-child(2) {
+  padding-left: 1vw;
+  padding-top: 1.5vh;
+  float: left;
+  font-size: 1vh;
 }
 @keyframes upgradeBannerShiny {
   from {

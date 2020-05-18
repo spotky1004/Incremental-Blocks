@@ -1,9 +1,12 @@
 $(function (){
+  savePoint = 'IncrementalBlocks';
   notationForm = 0;
 
   block = 0;
   blockPS = 0;
   blockPC = 1;
+  lastTick = new Date().getTime();
+  timeNow = new Date().getTime();
 
   function notation(num, dim) {
     if (notationForm == 0) {
@@ -31,8 +34,25 @@ $(function (){
       }
     }
   }
+  function gameSave() {
+    saveFile = [];
+    for (var i = 0; i < varData.length; i++) {
+      saveFile[i] = eval(varData[i]);
+    }
+    localStorage[savePoint] = JSON.stringify(saveFile);
+  }
+  function gameLoad() {
+    savedFile = JSON.parse(localStorage[savePoint]);
+    dataCopy = JSON.parse(JSON.stringify(resetData));
+    Object.assign(dataCopy, savedFile);
+    for (var i = 0; i < varData.length; i++) {
+      this[varData[i]] = dataCopy[i];
+    }
+  }
 
   function displayBlock() {
+    blockPC = 1*((upgradeHave[0] == 1) ? 2 : 1);
+    blockPS = ((upgradeHave[1] == 1) ? 1 : 0);
     $('#blockCount').html(function (index,html) {
       return notation(block);
     });
@@ -49,5 +69,17 @@ $(function (){
     displayBlock();
   });
 
+  setInterval( function (){
+    timeNow = new Date().getTime();
+    tickGain = (timeNow-lastTick)/1000;
+    block += blockPS*tickGain;
+    displayBlock();
+    lastTick = timeNow;
+  }, 50);
+  setInterval( function (){
+    gameSave();
+  }, 1000);
+
+  gameLoad();
   displayBlock();
 });
