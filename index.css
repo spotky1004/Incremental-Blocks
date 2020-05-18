@@ -3,6 +3,8 @@
   margin: 0;
   font-family: 'Major Mono Display', monospace;
   user-select: none;
+
+  transition: all 0.2s;
 }
 #warpAll {
   height: 100vh;
@@ -14,7 +16,7 @@
   height: 100vh;
   width: 20vw;
 }
-#basicClick {
+#basicBlock {
   width: 20vw;
   height: 30vh;
   background-color: #404040;
@@ -29,6 +31,27 @@
 }
 #blockCount {
   font-size: 2vw;
+  animation-duration: 10s;
+  animation-name: blockCountShiny;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes blockCountShiny {
+  from {
+    text-shadow: 0 0 20px white;
+  }
+  40% {
+    text-shadow: 0 0 10px white;
+  }
+  50% {
+    text-shadow: 0 0 0px white;
+  }
+  60% {
+    text-shadow: 0 0 10px white;
+  }
+  to {
+    text-shadow: 0 0 20px white;
+  }
 }
 #blockTxt {
   font-size: 1vw;
@@ -56,17 +79,17 @@
   height: 5vh;
   background-color: rgba(40, 40, 40, 0.6);
 
-  transition: all 0.2s;
+  transition: background-color 1s;
 }
 #blockClick:hover {
   background-color: rgba(40, 40, 40, 1);
 
-  transition: all 1s;
+  transition: background-color 1s;
 }
 #blockClick:active {
   background-color: white;
 
-  transition: all 0s;
+  transition: background-color 0s;
 }
 #blockClickTxtWarp {
   margin-left: 1vw;
