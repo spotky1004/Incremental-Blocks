@@ -1,9 +1,9 @@
 standardNotation = [
-  '', 'K', 'M', 'B', 'T', 'Qu', 'Qi', 'Sx', 'Sp', 'O', 'N',
+  '', 'k', 'm', 'b', 't', 'qu', 'qi', 'sx', 'sp', 'o', 'n',
 ];
 standardNotation2 = [
-  '', 'U', 'D', 'T', 'Qa', 'Qi', 'Sx', 'Sp', 'Oc', 'No'
+  '', 'u', 'd', 't', 'qa', 'qi', 'sx', 'sp', 'oc', 'no'
 ];
 standardNotation3 = [
-  'Dc', 'Vg', 'Tg', 'Qag', 'Qig', 'Sxg', 'Spg', 'Ocg', 'Nog', 'Ce'
+  'dc', 'vg', 'tg', 'qag', 'qig', 'sxg', 'spg', 'ocg', 'nog', 'ce'
 ];

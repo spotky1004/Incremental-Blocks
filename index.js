@@ -14,9 +14,9 @@ $(function (){
         notationSpace = Math.floor(Math.log10(num)%3);
         notationFixed = (num / 1000 ** notationLevel).toFixed(Math.max(dim-notationSpace, 0)) ;
         if (notationLevel < 11) {
-          return notationFixed + ' ' + standardNotation[notationLevel];
+          return notationFixed + standardNotation[notationLevel];
         } else {
-          return notationFixed + ' ' + standardNotation2[(notationLevel-11) % 10] + standardNotation3[Math.floor((notationLevel-11) / 10)];
+          return notationFixed + standardNotation2[(notationLevel-11) % 10] + standardNotation3[Math.floor((notationLevel-11) / 10)];
         }
       }
     } else {
