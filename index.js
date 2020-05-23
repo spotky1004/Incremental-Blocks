@@ -87,7 +87,7 @@ $(function (){
     shiftIndex = 0;
     upgradeHaveCount = 0;
     for (var i = 0; i < upgradeHave.length; i++) {
-      if (!upgradeHave[i] && upgradeCost[i]/3 <= block && shiftIndex <= 5) {
+      if (!upgradeHave[i] && upgradeCost[i]/10 <= block && shiftIndex <= 5) {
         upgradeNumShift[shiftIndex] = i;
         upgradeCostShift[shiftIndex] = upgradeCost[i];
         shiftIndex++;
