@@ -8,15 +8,15 @@
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css?ver=0.0.3">
-    <script src="vars.js?ver=0.0.3"></script>
-    <script src="index.js?ver=0.0.3"></script>
-    <title>Incremental Blocks v0.0.3</title>
+    <link rel="stylesheet" href="index.css?ver=0.1">
+    <script src="vars.js?ver=0.1"></script>
+    <script src="index.js?ver=0.1"></script>
+    <title>Incremental Blocks v0.1</title>
   </head>
   <body>
     <div id="warpAll">
       <span id="containerI">
-        <div id="basicBlock">
+        <div id="basicBlock" class="contentBlock">
           <div id="blocks">
             <p id="blockCount">0</p><p id="blockTxt">blocks</p>
           </div>
@@ -29,10 +29,60 @@
             </div>
           </div>
         </div>
-        <div id="basicUpgrade">
+        <div id="basicUpgrade" class="contentBlock">
           <div class="unlockedBlock" style="display:none;">
             <div id="upgradeBanner">
               <p>upgrades</p><p>0/100</p>
+            </div>
+            <div id="upgradesList">
+              <div class="upgradeContent upY">
+                <div>
+                  upgrade 1
+                </div>
+                <div>
+                  cost: 100.0asd
+                </div>
+              </div>
+              <div class="upgradeContent upN">
+                <div>
+                  upgrade 2
+                </div>
+                <div>
+                  cost: 0
+                </div>
+              </div>
+              <div class="upgradeContent upN">
+                <div>
+                  upgrade 3
+                </div>
+                <div>
+                  cost: 0
+                </div>
+              </div>
+              <div class="upgradeContent upN">
+                <div>
+                  upgrade 4
+                </div>
+                <div>
+                  cost: 0
+                </div>
+              </div>
+              <div class="upgradeContent upN">
+                <div>
+                  upgrade 5
+                </div>
+                <div>
+                  cost: 0
+                </div>
+              </div>
+              <div class="upgradeContent upN">
+                <div>
+                  upgrade 6
+                </div>
+                <div>
+                  cost: 0
+                </div>
+              </div>
             </div>
           </div>
           <div class="lockedBlock">
@@ -41,43 +91,43 @@
         </div>
       </span>
       <span id="containerII">
-        <div id="lootCombat">
+        <div id="lootCombat" class="contentBlock">
           <div class="unlockedBlock" style="display:none;">
 
           </div>
           <div class="lockedBlock">
-            cost: 2.500k blocks
+            cost: 2.500m blocks
           </div>
         </div>
         <div id="containerIInI">
-          <span id="lootWorn">
+          <span id="lootWorn" class="contentBlock">
             <div class="unlockedBlock" style="display:none;">
 
             </div>
             <div class="lockedBlock">
-              cost: 7.000m blocks
+              cost: 7.000b blocks
             </div>
           </span>
-          <span id="lootStat">
+          <span id="lootStat" class="contentBlock">
             <div class="unlockedBlock" style="display:none;">
 
             </div>
             <div class="lockedBlock">
-              cost: 50.00b blocks
+              cost: 50.00t blocks
             </div>
           </span>
         </div>
-        <div id="progress">
+        <div id="progress" class="contentBlock">
           <div class="unlockedBlock" style="display:none;">
 
           </div>
           <div class="lockedBlock">
-            cost: 1.000k blocks
+            cost: 1.234qu blocks
           </div>
         </div>
       </span>
       <span id="containerIII">
-        <div id="stat">
+        <div id="stat" class="contentBlock">
           <div class="unlockedBlock" style="display:none;">
 
           </div>
@@ -85,7 +135,7 @@
             cost: 1.000k blocks
           </div>
         </div>
-        <div id="option">
+        <div id="option" class="contentBlock">
           <div class="unlockedBlock" style="display:none;">
 
           </div>

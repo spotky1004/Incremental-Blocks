@@ -6,6 +6,10 @@
 
   transition: all 0.2s;
 }
+.num0 {
+  color: #d4d4d4 !important;
+  text-shadow: 0 0 10px #d4d4d4 !important;
+}
 #warpAll {
   height: 100vh;
   width: 100vw;
@@ -162,6 +166,49 @@
   to {
     color: #fff;
   }
+}
+#upgradesList {
+  width: 20vw;
+  height: 64vh;
+}
+.upgradeContent.upN {
+  background-color: rgba(219, 138, 138, 0.3);
+}
+.upgradeContent.upY {
+  background-color: rgba(40, 40, 40, 0.3);
+}
+.upgradeContent {
+  padding: 0.5vh 0 0 0.5vw;
+  margin: 0.4166vh 0 0.4166vh 1vw;
+  width: 17vw;
+  height: 9vh;
+}
+.upgradeContent.upY:hover {
+  background-color: rgba(40, 40, 40, 0.6);
+}
+.upgradeContent.upY:active {
+  background-color: rgba(255, 255, 255, 0.8);
+
+  transition: all 0s;
+}
+.upgradeContent > div {
+  color: white;
+  text-shadow: 0 0 3px white;
+}
+.upgradeContent > div:nth-child(1) {
+  padding: 0.4vh 0;
+  margin-right: 11vw;
+  width: 16vw;
+  height: 2.2vh;
+  font-size: 2.2vh;
+  background-color: rgba(40, 40, 40, 0.2);
+}
+.upgradeContent > div:nth-child(2) {
+  padding: 1vh 0 0.4vh 0;
+  margin-right: 11vw;
+  width: 16vw;
+  height: 3vh;
+  font-size: 3vh;
 }
 #containerII {
   display: block;
