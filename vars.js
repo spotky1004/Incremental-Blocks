@@ -9,7 +9,7 @@ standardNotation3 = [
 ];
 upgradeName = [
   'bpc +1', 'bps +1', 'bpc +2', 'bps +5', 'bpc +4', 'bps +20', 'bpc +24', 'bps +60', 'bpc +96', 'bps +175',
-  'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
+  'bpc +384', 'bps +721', 'bps + 4.400k', 'bps 5% -> bpc', 'bps +21.74k', 'bps +104.8k', 'bpc x1.5', 'bps x2', 'bpc +100k', 'bps +600k',
   'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
   'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
   'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
@@ -21,7 +21,7 @@ upgradeName = [
 ];
 upgradeCost = [
   30, 50, 300, 1e3, 1e3, 5.5e3, 12e3, 25e3, 42e3, 80.8e3,
-  1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
+  131e3, 456.7e3, 1.4e6, 2.5e6, 5.8e6, 36.75e6, 234.5e6, 520e6, 1.2e9, 1.3e9,
   1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
   1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
   1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
