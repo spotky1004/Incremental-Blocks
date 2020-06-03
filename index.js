@@ -5,8 +5,20 @@ $(function (){
   block = 0;
   blockPS = 0;
   blockPC = 1;
+  totalBlock = 0;
+  clickCount = 0;
+  playtime = 0;
   lastTick = new Date().getTime();
   timeNow = new Date().getTime();
+
+  function copyToClipboard(val) {
+    var t = document.createElement("textarea");
+    document.body.appendChild(t);
+    t.value = val;
+    t.select();
+    document.execCommand('copy');
+    document.body.removeChild(t);
+  }
 
   function notation(num, dim) {
     if (notationForm == 0) {
@@ -40,6 +52,8 @@ $(function (){
       saveFile[i] = eval(varData[i]);
     }
     localStorage[savePoint] = JSON.stringify(saveFile);
+
+    console.log('saved!')
   }
   function gameLoad() {
     savedFile = JSON.parse(localStorage[savePoint]);
@@ -49,11 +63,33 @@ $(function (){
       this[varData[i]] = dataCopy[i];
     }
   }
+  function gameExport() {
+    saveFile = {};
+    for (var i = 0; i < varData.length; i++) {
+      saveFile[i] = eval(varData[i]);
+    }
+    copyToClipboard(btoa(JSON.stringify(saveFile)));
+  }
+  function gameImport() {
+    var inputedSaveN = prompt('Import Save', '');
+    var inputedSave = atob(inputedSaveN);
+    if (inputedSave != null && inputedSave != '') {
+      const savedFile = JSON.parse(inputedSave);
+      dataCopy = JSON.parse(JSON.stringify(resetData));
+      Object.assign(dataCopy, savedFile);
+      setTimeout(function(){
+        for (var i = 0; i < varData.length; i++) {
+          this[varData[i]] = dataCopy[i];
+        }
+      }, 0);
+    }
+  }
 
   function displayAll() {
     displayBlock();
     displayUnlock();
     displayUpgrade();
+    displayStat();
   }
   function displayUnlock() {
     for (var i = 1; i < 8; i++) {
@@ -127,9 +163,24 @@ $(function (){
       return upgradeHaveCount + '/100';
     });
   }
+  function displayStat() {
+    statVars = [];
+    statVars[0] = notation(totalBlock);
+    statVars[1] = clickCount;
+    statVars[2] = (playtime/3600).toFixed(3);
+    statVars[3] = notation(bpcP);
+    statVars[4] = notation(bpsP);
+    statVars[5] = notation(bpcM);
+    statVars[6] = notation(bpsM);
+    $('.statline > span').html(function (index,html) {
+      return statVars[index];
+    });
+  }
 
   $(document).on('click','#blockClick',function() {
     block += blockPC;
+    totalBlock += blockPC;
+    clickCount++;
     displayBlock();
   });
   $(document).on('click','.lockedBlock',function() {
@@ -147,13 +198,30 @@ $(function (){
     block -= upgradeCostShift[indexThis];
     displayUpgrade();
   });
+  $(document).on('click','.optionBlock',function() {
+    indexThis = $('.optionBlock').index(this);
+    switch (indexThis) {
+      case 0:
+        gameSave();
+        break;
+      case 1:
+        gameExport();
+        break;
+      case 2:
+        gameImport();
+        break;
+    }
+  });
 
   setInterval( function (){
     timeNow = new Date().getTime();
     tickGain = (timeNow-lastTick)/1000;
     block += blockPS*tickGain;
+    totalBlock += blockPS*tickGain;
+    playtime += tickGain;
     displayBlock();
     displayUnlock();
+    displayStat();
     lastTick = timeNow;
   }, 50);
   setInterval( function (){

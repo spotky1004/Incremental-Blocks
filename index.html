@@ -3,15 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="user-scalable=no">
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css?ver=0.1.3">
-    <script src="vars.js?ver=0.1.3"></script>
-    <script src="index.js?ver=0.1.3"></script>
-    <title>Incremental Blocks v0.1.3</title>
+    <link rel="stylesheet" href="index.css?ver=0.1.4">
+    <script src="vars.js?ver=0.1.4"></script>
+    <script src="index.js?ver=0.1.4"></script>
+    <title>Incremental Blocks v0.1.4</title>
   </head>
   <body>
     <div id="warpAll">
@@ -129,7 +126,32 @@
       <span id="containerIII">
         <div id="stat" class="contentBlock">
           <div class="unlockedBlock" style="display:none;">
-
+            <div id="statBanner">
+              <p>status</p>
+            </div>
+            <div class="statEra">
+              <div class="statline">
+                -total blocks: <span>0</span>
+              </div>
+              <div class="statline">
+                -click count: <span>0</span>
+              </div>
+              <div class="statline">
+                -play time(hour): <span>0</span>
+              </div>
+              <div class="statline">
+                -pure bpc: <span>0</span>
+              </div>
+              <div class="statline">
+                -pure bps: <span>0</span>
+              </div>
+              <div class="statline">
+                -bpc mult.: <span>0</span>
+              </div>
+              <div class="statline">
+                -bps mult.: <span>0</span>
+              </div>
+            </div>
           </div>
           <div class="lockedBlock">
             cost: 1.000k blocks
@@ -137,7 +159,22 @@
         </div>
         <div id="option" class="contentBlock">
           <div class="unlockedBlock" style="display:none;">
+            <div class="optionLine">
+              <span class="optionBlock">
+                save
+              </span>
+            </div>
+            <div class="optionLine">
+              <span class="optionBlock">
+                export
+              </span>
+              <span class="optionBlock">
+                import
+              </span>
+            </div>
+            <div class="optionLine">
 
+            </div>
           </div>
           <div class="lockedBlock">
             cost: 10 blocks

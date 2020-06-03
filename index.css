@@ -254,10 +254,66 @@
 #stat {
   width: 20vw;
   height: 80vh;
-  background-color: magenta;
+  background-color: #7d7d7d;
+}
+#statBanner {
+  padding-top: 0.5vh;
+  margin-bottom: 0.5vh;
+  width: 20vw;
+  height: 2vh;
+  font-weight: bolder;
+  text-align: center;
+  color: white;
+  background-color: rgba(40, 40, 40, 0.2);
+}
+.statEra {
+  padding: 0.5vh 0 0.5vh 0.5vw;
+  margin-left: 1vw;
+  width: 17.5vw;
+  background-color: rgba(20, 20, 20, 0.3);
+}
+.statEra > div {
+  font-size: 1.8vh;
+  color: white
+}
+.statEra > div:not(:last-child) {
+  margin-bottom: 0.5vh;
 }
 #option {
+  padding-top: 1vh;
   width: 20vw;
-  height: 20vh;
-  background-color: black;
+  height: 19vh;
+  background-color: #616161;
+}
+.optionLine {
+  margin-left: 1vw;
+  margin-bottom: 1vh;
+  padding-left: 1vw;
+  width: 17vw;
+  height: 5.3333vh;
+}
+.optionBlock {
+  display: block;
+  float: left;
+  margin-right: 1vw;
+  padding: 1.6665vh 0;
+  width: 7.5vw;
+  background-color: rgba(150, 150, 150, 0.6);
+  text-align: center;
+  font-size: 2vh;
+  color: white;
+}
+.optionBlock:hover {
+  background-color: rgba(150, 150, 150, 0.9);
+  box-shadow: 10px 10px 7px #555;
+  transform: scale(1.1);
+
+  transition: all 0.2s ease;
+}
+.optionBlock:active {
+  background-color: #fff;
+  box-shadow: 0 0 0 #fff;
+  transform: scale(1);
+
+  transition: all 0s;
 }

@@ -50,7 +50,8 @@ blockUnlocked = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
 varData = [
-  'block', 'lastTick', 'upgradeHave', 'blockUnlocked'
+  'block', 'lastTick', 'upgradeHave', 'blockUnlocked', 'totalBlock',
+  'clickCount', 'playtime'
 ];
 resetData = {
   0: 0,
@@ -69,5 +70,8 @@ resetData = {
   ],
   3: [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ]
+  ],
+  4: 0,
+  5: 0,
+  6: 0
 };
