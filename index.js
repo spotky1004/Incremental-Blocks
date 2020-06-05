@@ -253,9 +253,10 @@ $(function (){
       }
       pointerThisBlock = -1;
     }
-    bupc = 100e3*2.6**buildingNow*((upgradeHave[20] == 1) ? 5 : 1)*((upgradeHave[21] == 1) ? 6 : 1)*((upgradeHave[22] == 1) ? 7 : 1)*((upgradeHave[25] == 1) ? 5 : 1)*((upgradeHave[26] == 1) ? 5 : 1)*((upgradeHave[27] == 1) ? 5 : 1)*((upgradeHave[28] == 1) ? 10 : 1);
+    bupc = 100e3*2.7**buildingNow*((upgradeHave[20] == 1) ? 5 : 1)*((upgradeHave[21] == 1) ? 6 : 1)*((upgradeHave[22] == 1) ? 7 : 1)*((upgradeHave[25] == 1) ? 5 : 1)*((upgradeHave[26] == 1) ? 5 : 1)*((upgradeHave[27] == 1) ? 5 : 1)*((upgradeHave[28] == 1) ? 10 : 1);
     (bupc > block) ? bupc = block : 0;
     (bupc > thisBlockValue) ? bupc = thisBlockValue : 0;
+    (buildings == buildingNow) ? 0 : bupc = 0;
   }
 
   $(document).on('click','#blockClick',function() {
