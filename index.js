@@ -8,6 +8,9 @@ $(function (){
   totalBlock = 0;
   clickCount = 0;
   playtime = 0;
+  buildings = 0;
+  buildingNow = 1;
+  pointerThisBlock = 0;
   lastTick = new Date().getTime();
   timeNow = new Date().getTime();
 
@@ -52,8 +55,6 @@ $(function (){
       saveFile[i] = eval(varData[i]);
     }
     localStorage[savePoint] = JSON.stringify(saveFile);
-
-    console.log('saved!')
   }
   function gameLoad() {
     savedFile = JSON.parse(localStorage[savePoint]);
@@ -90,6 +91,7 @@ $(function (){
     displayUnlock();
     displayUpgrade();
     displayStat();
+    displayBuild();
   }
   function displayUnlock() {
     for (var i = 1; i < 8; i++) {
@@ -176,6 +178,55 @@ $(function (){
       return statVars[index];
     });
   }
+  function displayBuild() {
+    calculateBuild();
+    $('#buildPerClick').html(function (index,html) {
+      return notation(bupc);
+    });
+    for (var i = 0; i < 35; i++) {
+      colorStr = '';
+      if (buildProgress[buildingNow][pointerThis] >= thisBlockValue) {
+        for (var j = 0; j < 3; j++) {
+          colorStr += blockColors[buildingShape[buildingNow][i]][j] + ', ';
+        }
+        colorStr += '1';
+      } else if (i == pointerThisBlock) {
+        colorRawPoint = Math.log10(buildProgress[buildingNow][pointerThis]/3**buildingNow/1e6);
+        colorPointer = Math.floor(colorRawPoint);
+        colorBland = Math.log10(colorRawPoint) - colorPointer;
+        if (colorPointer != 0) {
+          for (var j = 0; j < 3; j++) {
+            colorStr += blockColors[buildingShape[buildingNow][colorPointer]][j] + ', ';
+          }
+          colorStr += '1';
+        } else {
+          for (var j = 0; j < 3; j++) {
+            colorStr += blockColors[buildingShape[buildingNow][i]][j] + ', ';
+          }
+          colorStr += '1';
+        }
+      }
+      $('.buildBlock').attr({
+        'style' : 'background-color: rgba(' + colorStr + ');'
+      });
+    }
+  }
+
+  function calculateBuild() {
+    baseBuilding = 1e6*3**buildingNow;
+    for (var i = 0; i < 36; i++) {
+      pointerThisBlock = (35-Math.floor(i/6)*6)-(5-(i%6));
+      thisBlockValue = baseBuilding*10**buildingShape[buildingNow][pointerThisBlock];
+      if (buildProgress[buildingNow][pointerThisBlock] < thisBlockValue) {
+        break;
+      } else if (buildProgress[buildingNow][pointerThis] > thisBlockValue) {
+        buildProgress[buildingNow][pointerThisBlock] = thisBlockValue;
+      }
+    }
+    bupc = 100e3*3**buildingNow;
+    (bupc > block) ? bupc = block : 0;
+    (bupc > thisBlockValue) ? bupc = thisBlockValue : 0;
+  }
 
   $(document).on('click','#blockClick',function() {
     block += blockPC;
@@ -226,6 +277,7 @@ $(function (){
   }, 50);
   setInterval( function (){
     displayUpgrade();
+    displayBuild();
     gameSave();
   }, 1000);
 
