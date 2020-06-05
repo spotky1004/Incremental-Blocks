@@ -9,7 +9,7 @@ $(function (){
   clickCount = 0;
   playtime = 0;
   buildings = 0;
-  buildingNow = 1;
+  buildingNow = 0;
   pointerThisBlock = 0;
   lastTick = new Date().getTime();
   timeNow = new Date().getTime();
@@ -105,12 +105,12 @@ $(function (){
     }
   }
   function displayBlock() {
-    bpsP = ((upgradeHave[1] == 1) ? 1 : 0)+((upgradeHave[3] == 1) ? 5 : 0)+((upgradeHave[5] == 1) ? 20 : 0)+((upgradeHave[7] == 1) ? 60 : 0)+((upgradeHave[9] == 1) ? 175 : 0)+((upgradeHave[11] == 1) ? 721 : 0)+((upgradeHave[12] == 1) ? 4.4e3 : 0)+((upgradeHave[14] == 1) ? 21.74e3 : 0)+((upgradeHave[15] == 1) ? 104.8e3 : 0)+((upgradeHave[19] == 1) ? 600e3 : 0);
-    bpsM = 1*((upgradeHave[17] == 1) ? 2 : 1);
+    bpsP = ((upgradeHave[1] == 1) ? 1 : 0)+((upgradeHave[3] == 1) ? 5 : 0)+((upgradeHave[5] == 1) ? 20 : 0)+((upgradeHave[7] == 1) ? 60 : 0)+((upgradeHave[9] == 1) ? 175 : 0)+((upgradeHave[11] == 1) ? 721 : 0)+((upgradeHave[12] == 1) ? 4.4e3 : 0)+((upgradeHave[14] == 1) ? 21.74e3 : 0)+((upgradeHave[15] == 1) ? 104.8e3 : 0)+((upgradeHave[19] == 1) ? 600e3 : 0)+((upgradeHave[23] == 1) ? 2.222e6 : 1)+((upgradeHave[24] == 1) ? 6e6 : 1);
+    bpsM = 1*((upgradeHave[17] == 1) ? 2 : 1)*(2**buildings);
     blockPS = bpsP*bpsM;
     bpcP = 1+((upgradeHave[0] == 1) ? 1 : 0)+((upgradeHave[2] == 1) ? 2 : 0)+((upgradeHave[4] == 1) ? 4 : 0)+((upgradeHave[6] == 1) ? 24 : 0)+((upgradeHave[8] == 1) ? 96 : 0)+((upgradeHave[10] == 1) ? 384 : 0)+((upgradeHave[18] == 1) ? 100e3 : 0);
-    bpcM = 1*((upgradeHave[16] == 1) ? 1.5 : 1);
-    blockPC = bpcP*bpcM+(((upgradeHave[13] == 1) ? 0.05 : 0)*blockPS);
+    bpcM = 1*((upgradeHave[16] == 1) ? 1.5 : 1)*(2**buildings);
+    blockPC = bpcP*bpcM+((((upgradeHave[13] == 1) ? 0.05 : 0)+((upgradeHave[29] == 1) ? 0.1 : 0))*blockPS);
     $('#blockCount').html(function (index,html) {
       reg = /0/gi;
       strReg1 = notation(block);
@@ -183,47 +183,77 @@ $(function (){
     $('#buildPerClick').html(function (index,html) {
       return notation(bupc);
     });
-    for (var i = 0; i < 35; i++) {
+    for (var i = 0; i < 36; i++) {
       colorStr = '';
-      if (buildProgress[buildingNow][pointerThis] >= thisBlockValue) {
+      extraDeco = '';
+      if (buildingShape[buildingNow][i] != 0) {
+        thisBlockValue = baseBuilding*10**buildingShape[buildingNow][i];
+      } else {
+        thisBlockValue = 0;
+      }
+      if (buildingShape[buildingNow][i] == 0) {
+        colorStr = '0, 0, 0, 0';
+      } else if (buildProgress[buildingNow][i] > 100 && buildingShape[buildingNow][pointerThisBlock] != 0 && i != pointerThisBlock) {
         for (var j = 0; j < 3; j++) {
-          colorStr += blockColors[buildingShape[buildingNow][i]][j] + ', ';
+          colorStr += blockColors[buildingShape[buildingNow][i]-1][j] + ', ';
         }
         colorStr += '1';
-      } else if (i == pointerThisBlock) {
-        colorRawPoint = Math.log10(buildProgress[buildingNow][pointerThis]/3**buildingNow/1e6);
-        colorPointer = Math.floor(colorRawPoint);
-        colorBland = Math.log10(colorRawPoint) - colorPointer;
-        if (colorPointer != 0) {
+        extraDeco = ' box-shadow: 7px 7px 0 #777;';
+      } else {
+        colorRawPoint = Math.log10((buildProgress[buildingNow][i]-1)/(3**buildingNow*1e6))+1;
+        colorPointer = Math.max(Math.floor(colorRawPoint), 0);
+        colorBland = colorRawPoint - colorPointer;
+        if (!isFinite(colorRawPoint)) {
+          colorStr = '0, 0, 0, 0';
+        } else if (colorPointer != 0) {
           for (var j = 0; j < 3; j++) {
-            colorStr += blockColors[buildingShape[buildingNow][colorPointer]][j] + ', ';
+            colorStr += (blockColors[colorPointer-1][j]*(1-colorBland)+blockColors[colorPointer][j]*(colorBland))/2 + ', ';
           }
           colorStr += '1';
         } else {
           for (var j = 0; j < 3; j++) {
-            colorStr += blockColors[buildingShape[buildingNow][i]][j] + ', ';
+            colorStr += '0, ';
           }
-          colorStr += '1';
+          colorStr += colorBland;
         }
       }
-      $('.buildBlock').attr({
-        'style' : 'background-color: rgba(' + colorStr + ');'
+      $('.buildBlock:eq(' + i + ')').attr({
+        'style' : 'background-color: rgba(' + colorStr + ');' + extraDeco
       });
     }
+    $('#buildingNum').html(function (index,html) {
+      return 'building ' + (buildingNow+1);
+    });
+    $('#buildMult > span').html(function (index,html) {
+      return notation(2**buildings);
+    });
   }
 
   function calculateBuild() {
     baseBuilding = 1e6*3**buildingNow;
     for (var i = 0; i < 36; i++) {
       pointerThisBlock = (35-Math.floor(i/6)*6)-(5-(i%6));
-      thisBlockValue = baseBuilding*10**buildingShape[buildingNow][pointerThisBlock];
-      if (buildProgress[buildingNow][pointerThisBlock] < thisBlockValue) {
-        break;
-      } else if (buildProgress[buildingNow][pointerThis] > thisBlockValue) {
+      if (buildingShape[buildingNow][pointerThisBlock] != 0) {
+        thisBlockValue = baseBuilding*10**(buildingShape[buildingNow][pointerThisBlock]-1);
+      } else {
+        thisBlockValue = 0;
+      }
+      if (buildProgress[buildingNow][pointerThisBlock] > thisBlockValue) {
         buildProgress[buildingNow][pointerThisBlock] = thisBlockValue;
       }
     }
-    bupc = 100e3*3**buildingNow;
+    for (var i = 0; i < 36; i++) {
+      pointerThisBlock = (35-Math.floor(i/6)*6)-(5-(i%6));
+      thisBlockValue = baseBuilding*10**(buildingShape[buildingNow][pointerThisBlock]-1);
+      if (buildProgress[buildingNow][pointerThisBlock] < thisBlockValue && buildingShape[buildingNow][pointerThisBlock] != 0) {
+        break;
+      }
+      if (buildings <= buildingNow && i == 35) {
+        buildings++;
+      }
+      pointerThisBlock = -1;
+    }
+    bupc = 100e3*2.6**buildingNow*((upgradeHave[20] == 1) ? 5 : 1)*((upgradeHave[21] == 1) ? 6 : 1)*((upgradeHave[22] == 1) ? 7 : 1)*((upgradeHave[25] == 1) ? 5 : 1)*((upgradeHave[26] == 1) ? 5 : 1)*((upgradeHave[27] == 1) ? 5 : 1)*((upgradeHave[28] == 1) ? 10 : 1);
     (bupc > block) ? bupc = block : 0;
     (bupc > thisBlockValue) ? bupc = thisBlockValue : 0;
   }
@@ -262,6 +292,27 @@ $(function (){
         gameImport();
         break;
     }
+  });
+  $(document).on('click','#buildClick',function() {
+    calculateBuild();
+    buildProgress[buildingNow][pointerThisBlock] += bupc;
+    block -= bupc;
+    displayBuild();
+  });
+  $(document).on('click','#buildingNav > span',function() {
+    switch ($('#buildingNav > span').index(this)) {
+      case 0:
+        if (buildingNow != 0) {
+          buildingNow--;
+        }
+        break;
+      case 1:
+        if (buildingNow < buildings) {
+          buildingNow++;
+        }
+        break;
+    }
+    displayBuild();
   });
 
   setInterval( function (){

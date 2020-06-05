@@ -376,6 +376,22 @@
   font-weight: bold;
   text-align: center;
 }
+#buildMult {
+  margin-top: 3%;
+  height: 6%;
+  font-size: 1.2vh;
+  color: #e37919;
+  text-shadow: 0.5px 0.5px 0 #777;
+  font-weight: bold;
+  text-align: center;
+}
+#buildMult > span {
+  height: 6%;
+  font-size: 2em;
+  color: #e37919;
+  font-weight: 600;
+  text-align: center;
+}
 #containerIInI {
   width: 60vw;
   height: 28.5vh;
