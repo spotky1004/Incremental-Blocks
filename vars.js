@@ -14,7 +14,7 @@ upgradeName = [
   'bps x3', 'bps x2', 'bps x1.5', 'bps +32.00m', 'token/click 0.5%p', 'token/click 0.5%p', 'token/click 0.5%p', 'bps 15% -> bpc', 'boost effect x1.5', 'boost cool -20s',
   'token/click 1%p', 'bps +100.0m', 'bps x1.8', 'bps x1.7', 'boost cool -30s', 'bpc x7.500k', 'token/click 1%p', 'boost cool -30s', 'bpc x9', 'bps x2',
   'bupc x5', 'bupc x4', 'bupc x3', 'bupc x2', 'bupc x1', 'bps x2.5', 'bupc x10', 'bps x5', 'token/click 2%p', 'boost cool -30s',
-  'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
+  'token x2', 'token x3', 'token/click 2%p', 'bps x4', 'bps x3', 'boost cool -20s', 'bps +333.3m', 'bu eff x3', 'bupc x7', 'bu eff x3',
   'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
   'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
   'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder'
@@ -26,7 +26,7 @@ upgradeCost = [
   10e12, 45e12, 157e12, 532e12, 40e12, 120e12, 360e12, 123.4e12, 123.5e12, 123.6e12,
   960e12, 800e15, 1.4e15, 3.32e15, 1e15, 2.223e15, 3.612e15, 2e15, 5e15, 14e15,
   10e15, 30e15, 90e15, 270e15, 810e15, 1.5e18, 2.43e18, 8e18, 12e18, 21e18,
-  1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
+  6.666e18, 10e18, 15e18, 46e18, 200e18, 155e18, 999.9e18, 3e21, 3e21, 15e21,
   1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
   1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
   1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300
