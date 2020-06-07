@@ -412,7 +412,7 @@ $(function (){
       bActive[4] = boostSelData[indexThis][2];
       bToken -= boostSelData[indexThis][3];
       bTokenUsed += boostSelData[indexThis][3];
-      bCool = 300-((upgradeHave[39] == 1) ? 20 : 0)-((upgradeHave[44] == 1) ? 30 : 0)-((upgradeHave[47] == 1) ? 30 : 0)-((upgradeHave[59] == 1) ? 30 : 0);
+      bCool = 240-((upgradeHave[39] == 1) ? 20 : 0)-((upgradeHave[44] == 1) ? 30 : 0)-((upgradeHave[47] == 1) ? 30 : 0)-((upgradeHave[59] == 1) ? 30 : 0);
       bTotal++;
       $('#boostSelect > div:nth-child(1) > div:not(:first-child)').hide();
       $('#boostSelect > div:nth-child(1) > div:eq(2)').show();
