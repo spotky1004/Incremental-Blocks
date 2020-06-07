@@ -399,7 +399,7 @@ $(function (){
         }
         break;
       case 1:
-        if (buildingNow < buildings) {
+        if (buildingNow < buildings && buildingNow < 19) {
           buildingNow++;
         }
         break;
