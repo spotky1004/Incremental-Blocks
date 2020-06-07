@@ -5,10 +5,10 @@
     <meta name="viewport" content="user-scalable=no">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css?ver=0.2.4">
-    <script src="vars.js?ver=0.2.4"></script>
-    <script src="index.js?ver=0.2.4"></script>
-    <title>Incremental Blocks v0.2.4</title>
+    <link rel="stylesheet" href="index.css?ver=0.3">
+    <script src="vars.js?ver=0.3"></script>
+    <script src="index.js?ver=0.3"></script>
+    <title>Incremental Blocks v0.3</title>
   </head>
   <body>
     <div id="warpAll">
@@ -173,12 +173,50 @@
           </div>
         </div>
         <div id="containerIInI">
-          <span id="inventory" class="contentBlock">
+          <span id="boostSelect" class="contentBlock">
             <div class="unlockedBlock" style="display:none;">
-
+              <div id="boostToken">
+                <div id="tokenImage"></div><div id="tokenNum">0</div>
+              </div>
+              <div id="selectBoost">
+                <span class="boostCell">
+                  <div class="boostType">bu eff</div>
+                  <div class="boostBuff">x5</div>
+                  <div class="boostTime">0:30</div>
+                  <div class="boostCost">10 token</div>
+                </span>
+                <span class="boostCell">
+                  <div class="boostType">bpc</div>
+                  <div class="boostBuff">x10</div>
+                  <div class="boostTime">0:30</div>
+                  <div class="boostCost">10 token</div>
+                </span>
+                <span class="boostCell">
+                  <div class="boostType">bps</div>
+                  <div class="boostBuff">x10</div>
+                  <div class="boostTime">0:30</div>
+                  <div class="boostCost">10 token</div>
+                </span>
+              </div>
+              <div id="selectedBoost">
+                <div id="innerSelectedBoost">
+                  <div id="boostInfo">
+                    <span id="activeBoostName">bu eff</span> x<span id="activeBoostNum">10000</span>
+                  </div>
+                  <div id="activeBoostTime">
+                    time left: <span id="activeBoostTimeNum">1:00.00</span>
+                  </div>
+                  <meter value="0" max="1" id="activeBoostTimeLeft"></meter>
+                </div>
+              </div>
+              <div id="boostCoolTime">
+                <div>cool time</div>
+                <div id="boostCoolTimeNum">3:12</div>
+                <div>left</div>
+              </div>
             </div>
             <div class="lockedBlock">
-              cost: 7.000b blocks
+              cost: 200.0t blocks
             </div>
           </span>
           <span id="middleContentProgress" class="contentBlock">
@@ -186,7 +224,7 @@
 
             </div>
             <div class="lockedBlock">
-              cost: 50.00t blocks
+              cost: 2.000qu blocks
             </div>
           </span>
         </div>
@@ -195,7 +233,7 @@
 
           </div>
           <div class="lockedBlock">
-            cost: 1.234qu blocks
+            cost: 1.234sp blocks
           </div>
         </div>
       </span>
@@ -226,6 +264,31 @@
               </div>
               <div class="statline">
                 -bps mult.: <span>0</span>
+              </div>
+            </div>
+            <div class="statEra">
+              <div class="statline">
+                -buildings: <span>0</span>
+              </div>
+              <div class="statline">
+                -building mult.: <span>0</span>
+              </div>
+              <div class="statline">
+                -bupc mult.: <span>0</span>
+              </div>
+              <div class="statline">
+                -block used: <span>0</span>
+              </div>
+            </div>
+            <div class="statEra">
+              <div class="statline">
+                -total token: <span>0</span>
+              </div>
+              <div class="statline">
+                -token chance: <span>0</span>%
+              </div>
+              <div class="statline">
+                -boost used: <span>0</span>
               </div>
             </div>
           </div>

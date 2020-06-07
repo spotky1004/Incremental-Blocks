@@ -360,6 +360,7 @@
   font-size: 6vh;
   text-align: center;
   color: white;
+  cursor: pointer;
 }
 #buildingNav > span:hover {
   background-color: rgba(255, 255, 255, 0.4);
@@ -396,12 +397,136 @@
   width: 60vw;
   height: 28.5vh;
 }
-#inventory {
+#boostSelect {
   display: block;
   float: left;
   width: 45vw;
   height: 28.5vh;
-  background-color: blue;
+  background-color: #858585;
+}
+.boostActive {
+  animation-duration: 9s;
+  animation-name: boostShiny;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes boostShiny {
+  from {
+    box-shadow: 0px 0px 15px 15px #aaa inset;
+  }
+  50% {
+    box-shadow: 0px 0px 10px 5px #ccc inset;
+  }
+  to {
+    box-shadow: 0px 0px 15px 15px #aaa inset;
+  }
+}
+#boostToken {
+  margin-top: 1vh;
+  width: 45vw;
+  height: 5vh;
+  text-align: center;
+}
+#tokenImage {
+  margin-left: 5vh;
+  float: left;
+  width: 5vh;
+  height: 5vh;
+  background-image: url(Resource/boostToken.png);
+  background-size: 5vh 5vh;
+}
+#tokenNum {
+  float: left;
+  height: 5vh;
+  font-size: 5vh;
+  color: #d4ac1e;
+  text-align: right;
+  text-shadow: 0 0 4px #d4ac1e;
+}
+#boostSelect > div:nth-child(1) > div:not(:first-child) {
+  text-align: center;
+}
+#boostSelect > div:nth-child(1) > div:nth-child(2) {
+
+}
+.boostCell {
+  padding: 1vh 0;
+  margin: 1vh 1vw;
+  display: block;
+  float: left;
+  width: 13vw;
+  height: 17.5vh;
+  background-color: rgba(200, 200, 200, 0.6);
+}
+.boostCell:hover {
+  transform: scale(1.08);
+  box-shadow: 6px 6px 8px #666;
+}
+.boostCell:active {
+  transform: scale(1);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: all 0.05s;
+}
+.boostType {
+  font-size: 5vh;
+  color: #e05e3a;
+  text-shadow: 0 0 4px #e05e3a;
+}
+.boostBuff {
+  font-size: 4vh;
+  color: #e05e3a;
+  text-shadow: 0 0 4px #e05e3a;
+}
+.boostTime {
+  margin: 1.5vh 0 1.5vh 0;
+  font-size: 3vh;
+  color: white;
+  text-shadow: 0 0 4px #fff;
+}
+.boostCost {
+  font-size: 2vh;
+  color: #e8d61e;
+  text-shadow: 0 0 4px #333;
+}
+#boostSelect > div:nth-child(1) > div:nth-child(3) {
+
+}
+#boostSelect > div:nth-child(1) > div:nth-child(4) {
+  font-size: 4.4vh;
+  color: #fff;
+  text-shadow: 0 0 5px #fff;
+}
+#boostCoolTimeNum {
+  font-size: 8.8vh;
+}
+#innerSelectedBoost {
+  margin: 0.5vh 1vw;
+  height: 21vh;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+#boostInfo {
+  width: 100%;
+  height: 5vh;
+  font-size: 5vh;
+  color: #e05e3a;
+  text-shadow: 0 0 4px #e05e3a;
+  text-align: left;
+}
+#activeBoostTime {
+  width: 100%;
+  height: 8vh;
+  font-size: 4vh;
+  color: #fff;
+  text-shadow: 0 0 4px #fff;
+  text-align: left;
+}
+#activeBoostTimeNum {
+  font-size: 8vh;
+}
+#activeBoostTimeLeft {
+  margin: 2% 0 0 1.5%;
+  width: 90%;
+  height: 2.5em;
 }
 #middleContentProgress {
   display: block;
@@ -438,22 +563,25 @@
 }
 .statEra {
   padding: 0.5vh 0 0.5vh 0.5vw;
+  margin-bottom: 0.5vh;
   margin-left: 1vw;
   width: 17.5vw;
   background-color: rgba(20, 20, 20, 0.3);
 }
 .statEra > div {
-  font-size: 1.8vh;
+  font-size: 1.6vh;
   color: white
 }
 .statEra > div:not(:last-child) {
   margin-bottom: 0.5vh;
 }
 #option {
-  padding-top: 1vh;
   width: 20vw;
-  height: 19vh;
+  height: 20vh;
   background-color: #616161;
+}
+.optionLine:first-child {
+  padding-top: 1vh;
 }
 .optionLine {
   margin-left: 1vw;

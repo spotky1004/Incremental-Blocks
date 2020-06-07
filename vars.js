@@ -11,9 +11,9 @@ upgradeName = [
   'bpc +1', 'bps +1', 'bpc +2', 'bps +5', 'bpc +4', 'bps +20', 'bpc +24', 'bps +60', 'bpc +96', 'bps +175',
   'bpc +384', 'bps +721', 'bps +4.400k', 'bps 5% -> bpc', 'bps +21.74k', 'bps +104.8k', 'bpc x1.5', 'bps x2', 'bpc +100k', 'bps +600k',
   'bupc x5', 'bupc x8', 'bupc x12', 'bps +2.222m', 'bps +14.000m', 'bupc x5', 'bupc x5', 'bupc x5', 'bupc x10', 'bps 10% -> bpc',
-  'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
-  'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
-  'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
+  'bps x3', 'bps x2', 'bps x1.5', 'bps +32.00m', 'token/click 0.5%p', 'token/click 0.5%p', 'token/click 0.5%p', 'bps 15% -> bpc', 'boost effect x1.5', 'boost cool -20s',
+  'token/click 1%p', 'bps +100.0m', 'bps x1.8', 'bps x1.7', 'boost cool -30s', 'bpc x7.500k', 'token/click 1%p', 'boost cool -30s', 'bpc x9', 'bps x2',
+  'bupc x5', 'bupc x4', 'bupc x3', 'bupc x2', 'bupc x1', 'bps x2.5', 'bupc x10', 'bps x5', 'token/click 2%p', 'boost cool -30s',
   'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
   'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
   'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
@@ -23,9 +23,9 @@ upgradeCost = [
   30, 50, 300, 1e3, 1e3, 5.5e3, 12e3, 25e3, 42e3, 80.8e3,
   131e3, 456.7e3, 1.4e6, 2.5e6, 5.8e6, 36.75e6, 234.5e6, 520e6, 1.2e9, 1.3e9,
   400e6, 800e6, 1.6e7, 50e9, 88.88e9, 333e9, 333e9, 333e9, 1.248e12, 3e12,
-  1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
-  1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
-  1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
+  10e12, 45e12, 157e12, 532e12, 40e12, 120e12, 360e12, 123.4e12, 123.5e12, 123.6e12,
+  960e12, 800e15, 1.4e15, 3.32e15, 1e15, 2.223e15, 3.612e15, 2e15, 5e15, 14e15,
+  10e15, 30e15, 90e15, 270e15, 810e15, 17e18, 50e18, 100e18, 400e18, 52e21,
   1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
   1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
   1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
@@ -44,7 +44,7 @@ upgradeHave = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
 blockCost = [
-  50, 2.5e6, 7e9, 50e12, 1.234e15, 1e3, 10
+  50, 2.5e6, 200e12, 2e15, 1.234e24, 1e3, 10
 ];
 blockUnlocked = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -99,12 +99,12 @@ buildingShape = [
     0, 6, 5, 5, 6, 0
   ],
   [
-    0, 0, 0, 0, 0, 0,
-    7, 5, 7, 5, 7, 0,
+    0, 0, 0, 0, 2, 2,
+    7, 5, 7, 5, 7, 7,
     0, 5, 6, 5, 0, 0,
-    7, 5, 7, 5, 7, 0,
+    7, 5, 7, 5, 7, 7,
     0, 5, 6, 5, 0, 0,
-    7, 5, 7, 5, 7, 0
+    7, 5, 7, 5, 7, 7
   ],
   [
     0, 0, 0, 0, 0, 0,
@@ -132,67 +132,67 @@ buildingShape = [
   ],
   [
     0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    10, 0, 0, 0, 0, 0
+    0, 0, 10, 10, 0, 0,
+    0, 10, 7, 9, 10, 0,
+    0, 10, 6, 5, 10, 0,
+    0, 3, 10, 10, 3, 0,
+    4, 2, 1, 1, 2, 4
+  ],
+  [
+    0, 0, 0, 10, 10, 10,
+    0, 0, 6, 6, 6, 6,
+    0, 6, 7, 7, 7, 6,
+    6, 6, 6, 6, 6, 6,
+    6, 6, 7, 7, 7, 6,
+    6, 6, 6, 6, 6, 6
+  ],
+  [
+    10, 10, 10, 10, 10, 0,
+    10, 5, 5, 5, 10, 0,
+    10, 10, 10, 10, 10, 10,
+    10, 10, 10, 5, 6, 10,
+    10, 3, 10, 5, 5, 10,
+    10, 3, 10, 10, 10, 10
+  ],
+  [
+    0, 0, 3, 3, 0, 0,
+    0, 2, 8, 8, 4, 0,
+    2, 7, 10, 10, 9, 4,
+    1, 7, 10, 10, 9, 5,
+    0, 1, 6, 6, 5, 0,
+    0, 0, 6, 6, 0, 0
+  ],
+  [
+    0, 0, 0, 6, 0, 0,
+    0, 0, 6, 6, 0, 0,
+    0, 7, 7, 7, 7, 0,
+    0, 0, 6, 6, 0, 0,
+    0, 0, 6, 0, 0, 0,
+    0, 10, 10, 10, 10, 0
+  ],
+  [
+    0, 3, 3, 3, 3, 0,
+    0, 3, 10, 10, 3, 0,
+    0, 3, 10, 10, 3, 0,
+    0, 3, 10, 10, 3, 0,
+    0, 3, 10, 10, 3, 0,
+    0, 3, 10, 10, 3, 0
+  ],
+  [
+    0, 10, 2, 2, 10, 0,
+    10, 2, 8, 7, 2, 10,
+    2, 7, 2, 2, 8, 2,
+    2, 8, 2, 2, 7, 2,
+    10, 2, 7, 8, 2, 10,
+    0, 10, 2, 2, 10, 0
   ],
   [
     0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    10, 0, 0, 0, 0, 0
-  ],
-  [
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    10, 0, 0, 0, 0, 0
-  ],
-  [
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    10, 0, 0, 0, 0, 0
-  ],
-  [
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    10, 0, 0, 0, 0, 0
-  ],
-  [
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    10, 0, 0, 0, 0, 0
-  ],
-  [
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    10, 0, 0, 0, 0, 0
-  ],
-  [
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0,
-    10, 0, 0, 0, 0, 0
+    0, 0, 5, 5, 0, 0,
+    0, 5, 10, 10, 5, 0,
+    5, 10, 6, 6, 10, 5,
+    10, 6, 6, 6, 6, 10
   ],
   [
     0, 0, 0, 0, 0, 0,
@@ -376,9 +376,23 @@ buildProgress = [
     0, 0, 0, 0, 0, 0
   ]
 ];
+boostShortName = [
+  'bpc', 'bps', 'bupc', 'bu eff', 'tok p', 'tok m'
+];
+boostRange = [
+  [3, 6], [2, 4], [10, 50], [2, 6], [2, 3], [2, 3]
+];
+boostLongName = [
+  'bpc mult', 'bps mult', 'bupc mult', 'bupc effect', 'token %', 'token mult'
+];
+boostSelData = [
+  [0, 4, 30, 10], [1, 7, 60, 100], [3, 64, 90, 1e3]
+];
 varData = [
   'block', 'lastTick', 'upgradeHave', 'blockUnlocked', 'totalBlock',
-  'clickCount', 'playtime', 'buildings', 'buildingNow', 'buildProgress'
+  'clickCount', 'playtime', 'buildings', 'buildingNow', 'buildProgress',
+  'blockUsedInBuilding', 'blockUsedInBuilding', 'boostSelData', 'bToken', 'bCool',
+  'bTotal', 'bTokenTotal', 'bTokenUsed'
 ];
 resetData = {
   0: 0,
@@ -564,5 +578,15 @@ resetData = {
       0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0
     ]
-  ]
+  ],
+  10: 0,
+  11: 0,
+  12: [
+    [0, 4, 30, 10], [1, 7, 60, 100], [3, 64, 90, 1e3]
+  ],
+  13: 0,
+  14: 180,
+  15: 0,
+  16: 0,
+  17: 0
 };
