@@ -533,12 +533,12 @@
   float: left;
   width: 15vw;
   height: 28.5vh;
-  background-color: red;
+  background-color: #636363;
 }
 #unlockProgress {
   width: 60vw;
   height: 3vh;
-  background-color: pink;
+  background-color: #292929;
 }
 #containerIII {
   display: block;
