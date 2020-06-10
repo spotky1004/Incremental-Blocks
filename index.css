@@ -244,15 +244,15 @@
 @keyframes mystTxtShiny {
   from {
     color: #fff;
-    text-shadow: 0 0 5px #aaa;
+    text-shadow: 0 0 5px #45254f;
   }
   50% {
     color: #45254f;
-    text-shadow: 0 0 15px #aaa;
+    text-shadow: 0 0 15px #45254f;
   }
   to {
     color: #fff;
-    text-shadow: 0 0 5px #aaa;
+    text-shadow: 0 0 5px #45254f;
   }
 }
 @keyframes hueRotateAnimation {
