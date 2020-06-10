@@ -213,6 +213,56 @@
   height: 2.5vh;
   font-size: 2.5vh;
 }
+.mystUpgrade {
+  background: linear-gradient(90deg, #e0b8b8, #d8e0b8, #b8e0c8, #b8c8e0, #d8b8e0);
+  animation-duration: 0.5s;
+  animation-name: hueRotateAnimation;
+  animation-iteration-count: infinite;
+}
+.mystUpgrade:hover {
+  opacity: 0.8;
+}
+#mystUpgrade {
+  width: 20vw; height: 70vh;
+  background-color: #25424f;
+}
+#mystUpgradeBanner {
+  padding-left: 1vw;
+  padding-top: 1vh;
+  width: 19vw;
+  height: 4vh;
+  font-weight: bolder;
+  text-align: center;
+  background: linear-gradient(90deg, #e0b8b8, #d8e0b8, #b8e0c8, #b8c8e0, #d8b8e0);
+  animation: hueRotateAnimation 2s infinite alternate;
+}
+#mystUpgradeBanner > p:nth-child(1) {
+  float: left;
+  font-size: 3vh;
+  animation: mystTxtShiny 20s infinite alternate;
+}
+@keyframes mystTxtShiny {
+  from {
+    color: #fff;
+    text-shadow: 0 0 5px #aaa;
+  }
+  50% {
+    color: #45254f;
+    text-shadow: 0 0 15px #aaa;
+  }
+  to {
+    color: #fff;
+    text-shadow: 0 0 5px #aaa;
+  }
+}
+@keyframes hueRotateAnimation {
+  from {
+    filter: hue-rotate(0deg);
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
 #containerII {
   display: block;
   float: left;

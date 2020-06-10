@@ -5,10 +5,10 @@
     <meta name="viewport" content="user-scalable=no">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css?ver=0.3.6">
-    <script src="vars.js?ver=0.3.6"></script>
+    <link rel="stylesheet" href="index.css?ver=0.4">
+    <script src="vars.js?ver=0.4"></script>
     <script src="index.js?ver=0.3.6"></script>
-    <title>Incremental Blocks v0.3.6</title>
+    <title>Incremental Blocks v0.4</title>
   </head>
   <body>
     <div id="warpAll">
@@ -28,57 +28,64 @@
         </div>
         <div id="basicUpgrade" class="contentBlock">
           <div class="unlockedBlock" style="display:none;">
-            <div id="upgradeBanner">
-              <p>upgrades</p><p>0/100</p>
+            <div id="upgradeOrign">
+              <div id="upgradeBanner">
+                <p>upgrades</p><p>0/100</p>
+              </div>
+              <div id="upgradesList">
+                <div class="upgradeContent upN">
+                  <div>
+                    upgrade 1
+                  </div>
+                  <div>
+                    cost: 100.0asd
+                  </div>
+                </div>
+                <div class="upgradeContent upN">
+                  <div>
+                    upgrade 2
+                  </div>
+                  <div>
+                    cost: 0
+                  </div>
+                </div>
+                <div class="upgradeContent upN">
+                  <div>
+                    upgrade 3
+                  </div>
+                  <div>
+                    cost: 0
+                  </div>
+                </div>
+                <div class="upgradeContent upN">
+                  <div>
+                    upgrade 4
+                  </div>
+                  <div>
+                    cost: 0
+                  </div>
+                </div>
+                <div class="upgradeContent upN">
+                  <div>
+                    upgrade 5
+                  </div>
+                  <div>
+                    cost: 0
+                  </div>
+                </div>
+                <div class="upgradeContent upN">
+                  <div>
+                    upgrade 6
+                  </div>
+                  <div>
+                    cost: 0
+                  </div>
+                </div>
+              </div>
             </div>
-            <div id="upgradesList">
-              <div class="upgradeContent upY">
-                <div>
-                  upgrade 1
-                </div>
-                <div>
-                  cost: 100.0asd
-                </div>
-              </div>
-              <div class="upgradeContent upN">
-                <div>
-                  upgrade 2
-                </div>
-                <div>
-                  cost: 0
-                </div>
-              </div>
-              <div class="upgradeContent upN">
-                <div>
-                  upgrade 3
-                </div>
-                <div>
-                  cost: 0
-                </div>
-              </div>
-              <div class="upgradeContent upN">
-                <div>
-                  upgrade 4
-                </div>
-                <div>
-                  cost: 0
-                </div>
-              </div>
-              <div class="upgradeContent upN">
-                <div>
-                  upgrade 5
-                </div>
-                <div>
-                  cost: 0
-                </div>
-              </div>
-              <div class="upgradeContent upN">
-                <div>
-                  upgrade 6
-                </div>
-                <div>
-                  cost: 0
-                </div>
+            <div id="mystUpgrade" style="display:none;">
+              <div id="mystUpgradeBanner">
+                <p>myst upgrades</p>
               </div>
             </div>
           </div>
@@ -224,7 +231,7 @@
 
             </div>
             <div class="lockedBlock">
-              cost: 2.000qu blocks
+              cost: 1.000e50 blocks
             </div>
           </span>
         </div>
@@ -233,7 +240,7 @@
 
           </div>
           <div class="lockedBlock">
-            cost: 1.234sp blocks
+            cost: 5.000e70 blocks
           </div>
         </div>
       </span>

@@ -31,7 +31,7 @@ $(function (){
   }
 
   function notation(num, dim) {
-    if (notationForm == 0) {
+    if (num < 1e40) {
       if (num <= 1) {
         return num.toFixed(dim);
       } else {
@@ -116,12 +116,12 @@ $(function (){
     }
   }
   function displayBlock() {
-    bpsP = ((upgradeHave[1] == 1) ? 1 : 0)+((upgradeHave[3] == 1) ? 5 : 0)+((upgradeHave[5] == 1) ? 20 : 0)+((upgradeHave[7] == 1) ? 60 : 0)+((upgradeHave[9] == 1) ? 175 : 0)+((upgradeHave[11] == 1) ? 721 : 0)+((upgradeHave[12] == 1) ? 4.4e3 : 0)+((upgradeHave[14] == 1) ? 21.74e3 : 0)+((upgradeHave[15] == 1) ? 104.8e3 : 0)+((upgradeHave[19] == 1) ? 600e3 : 0)+((upgradeHave[23] == 1) ? 2.222e6 : 0)+((upgradeHave[24] == 1) ? 14e6 : 0)+((upgradeHave[33] == 1) ? 32e6 : 0)+((upgradeHave[41] == 1) ? 100e6 : 0)+((upgradeHave[66] == 1) ? 333.3e6 : 0);
-    bpsM = 1*(4**buildings)*((upgradeHave[17] == 1) ? 2 : 1)*((upgradeHave[30] == 1) ? 3 : 1)*((upgradeHave[31] == 1) ? 2 : 1)*((upgradeHave[32] == 1) ? 1.5 : 1)*((upgradeHave[42] == 1) ? 1.8 : 1)*((upgradeHave[43] == 1) ? 1.7 : 1)*((upgradeHave[49] == 1) ? 2 : 1)*((upgradeHave[55] == 1) ? 2.5 : 1)*((upgradeHave[57] == 1) ? 5 : 1)*((bActive[0] == 1) ? bActive[1] : 1)*((upgradeHave[63] == 1) ? 4 : 1)*((upgradeHave[64] == 1) ? 3 : 1);
+    bpsP = ((upgradeHave[1] == 1) ? 1 : 0)+((upgradeHave[3] == 1) ? 5 : 0)+((upgradeHave[5] == 1) ? 20 : 0)+((upgradeHave[7] == 1) ? 60 : 0)+((upgradeHave[9] == 1) ? 175 : 0)+((upgradeHave[11] == 1) ? 721 : 0)+((upgradeHave[12] == 1) ? 4.4e3 : 0)+((upgradeHave[14] == 1) ? 21.74e3 : 0)+((upgradeHave[15] == 1) ? 104.8e3 : 0)+((upgradeHave[19] == 1) ? 600e3 : 0)+((upgradeHave[23] == 1) ? 2.222e6 : 0)+((upgradeHave[24] == 1) ? 14e6 : 0)+((upgradeHave[33] == 1) ? 32e6 : 0)+((upgradeHave[41] == 1) ? 100e6 : 0)+((upgradeHave[66] == 1) ? 333.3e6 : 0)+((upgradeHave[81] == 1) ? 2.109e9 : 0);
+    bpsM = 1*(4**buildings)*((upgradeHave[17] == 1) ? 2 : 1)*((upgradeHave[30] == 1) ? 3 : 1)*((upgradeHave[31] == 1) ? 2 : 1)*((upgradeHave[32] == 1) ? 1.5 : 1)*((upgradeHave[42] == 1) ? 1.8 : 1)*((upgradeHave[43] == 1) ? 1.7 : 1)*((upgradeHave[49] == 1) ? 2 : 1)*((upgradeHave[55] == 1) ? 2.5 : 1)*((upgradeHave[57] == 1) ? 5 : 1)*((bActive[0] == 1) ? bActive[1] : 1)*((upgradeHave[63] == 1) ? 4 : 1)*((upgradeHave[64] == 1) ? 3 : 1)*((upgradeHave[72] == 1) ? 3.5 : 1)*((upgradeHave[77] == 1) ? 4 : 1)*((upgradeHave[82] == 1) ? 3 : 1)*((upgradeHave[89] == 1) ? 3 : 1)*((upgradeHave[90] == 1) ? 2 : 1)*((upgradeHave[91] == 1) ? 3 : 1)*((upgradeHave[92] == 1) ? 5 : 1)*((upgradeHave[93] == 1) ? 7: 1)*((upgradeHave[94] == 1) ? 11 : 1)*((upgradeHave[95] == 1) ? 13 : 1)*((upgradeHave[96] == 1) ? 17 : 1)*((upgradeHave[97] == 1) ? 19 : 1)*((upgradeHave[98] == 1) ? 23 : 1);
     blockPS = bpsP*bpsM;
     bpcP = 1+((upgradeHave[0] == 1) ? 1 : 0)+((upgradeHave[2] == 1) ? 2 : 0)+((upgradeHave[4] == 1) ? 4 : 0)+((upgradeHave[6] == 1) ? 24 : 0)+((upgradeHave[8] == 1) ? 96 : 0)+((upgradeHave[10] == 1) ? 384 : 0)+((upgradeHave[18] == 1) ? 100e3 : 0);
     bpcM = 1*(4**buildings)*((upgradeHave[16] == 1) ? 1.5 : 1)*((upgradeHave[45] == 1) ? 7500 : 1)*((upgradeHave[48] == 1) ? 9 : 1)*((bActive[0] == 0) ? bActive[1] : 1);
-    blockPC = bpcP*bpcM+((((upgradeHave[13] == 1) ? 0.05 : 0)+((upgradeHave[29] == 1) ? 0.1 : 0)+((upgradeHave[37] == 1) ? 0.15 : 0))*blockPS)*((bActive[0] == 0) ? bActive[1] : 1)/((bActive[0] == 1) ? bActive[1] : 1);
+    blockPC = bpcP*bpcM+((((upgradeHave[13] == 1) ? 0.05 : 0)+((upgradeHave[29] == 1) ? 0.1 : 0)+((upgradeHave[37] == 1) ? 0.15 : 0)+((upgradeHave[78] == 1) ? 0.2 : 0)+((upgradeHave[79] == 1) ? 0.25 : 0))*blockPS)*((bActive[0] == 0) ? bActive[1] : 1)/((bActive[0] == 1) ? bActive[1] : 1);
     $('#blockCount').html(function (index,html) {
       reg = /0/gi;
       strReg1 = notation(block);
@@ -147,6 +147,16 @@ $(function (){
       } else if (upgradeHave[i]) {
         upgradeHaveCount++;
       }
+    }
+    if (upgradeHave[97] == 1 && upgradeHave[98] == 1) {
+      $('.upgradeContent:eq(0)').addClass('mystUpgrade');
+    }
+    if (upgradeHave[99] == 0) {
+      $('#upgradeOrign').show();
+      $('#mystUpgrade').hide();
+    } else {
+      $('#upgradeOrign').hide();
+      $('#mystUpgrade').show();
     }
     for (var i = 0; i < upgradeNumShift.length; i++) {
       if (upgradeNumShift[i] != -1) {
@@ -249,8 +259,8 @@ $(function (){
     });
   }
   function displayBoost() {
-    bTokenCh = (((upgradeHave[34] == 1) ? 0.5 : 0)+((upgradeHave[35] == 1) ? 0.5 : 0)+((upgradeHave[36] == 1) ? 0.5 : 0)+((upgradeHave[40] == 1) ? 1 : 0)+((upgradeHave[46] == 1) ? 1 : 0)+((upgradeHave[58] == 1) ? 2 : 0)+((upgradeHave[62] == 1) ? 2 : 0))*((bActive[0] == 4) ? bActive[1] : 1);
-    bTokenMult = ((bActive[0] == 5) ? bActive[1] : 1)*((upgradeHave[60] == 1) ? 2 : 1)*((upgradeHave[61] == 1) ? 3 : 1);
+    bTokenCh = (((upgradeHave[34] == 1) ? 0.5 : 0)+((upgradeHave[35] == 1) ? 0.5 : 0)+((upgradeHave[36] == 1) ? 0.5 : 0)+((upgradeHave[40] == 1) ? 1 : 0)+((upgradeHave[46] == 1) ? 1 : 0)+((upgradeHave[58] == 1) ? 2 : 0)+((upgradeHave[62] == 1) ? 2 : 0)+((upgradeHave[74] == 1) ? 3 : 0)+((upgradeHave[75] == 1) ? 3 : 0)+((upgradeHave[84] == 1) ? 4 : 0))*((bActive[0] == 4) ? bActive[1] : 1);
+    bTokenMult = ((bActive[0] == 5) ? bActive[1] : 1)*((upgradeHave[60] == 1) ? 2 : 1)*((upgradeHave[61] == 1) ? 3 : 1)*((upgradeHave[81] == 1) ? 2 : 1);
     $('#tokenNum').html(function (index,html) {
       return bToken;
     });
@@ -329,7 +339,7 @@ $(function (){
       }
       pointerThisBlock = -1;
     }
-    bupcM = ((upgradeHave[20] == 1) ? 5 : 1)*((upgradeHave[21] == 1) ? 8 : 1)*((upgradeHave[22] == 1) ? 12 : 1)*((upgradeHave[25] == 1) ? 5 : 1)*((upgradeHave[26] == 1) ? 5 : 1)*((upgradeHave[27] == 1) ? 5 : 1)*((upgradeHave[28] == 1) ? 10 : 1)*((upgradeHave[50] == 1) ? 5 : 1)*((upgradeHave[51] == 1) ? 4 : 1)*((upgradeHave[52] == 1) ? 3 : 1)*((upgradeHave[53] == 1) ? 2 : 1)*((upgradeHave[54] == 1) ? 1 : 1)*((upgradeHave[56] == 1) ? 10 : 1)*((upgradeHave[68] == 1) ? 7 : 1)*((bActive[0] == 2) ? bActive[1] : 1);
+    bupcM = ((upgradeHave[20] == 1) ? 5 : 1)*((upgradeHave[21] == 1) ? 8 : 1)*((upgradeHave[22] == 1) ? 12 : 1)*((upgradeHave[25] == 1) ? 5 : 1)*((upgradeHave[26] == 1) ? 5 : 1)*((upgradeHave[27] == 1) ? 5 : 1)*((upgradeHave[28] == 1) ? 10 : 1)*((upgradeHave[50] == 1) ? 5 : 1)*((upgradeHave[51] == 1) ? 4 : 1)*((upgradeHave[52] == 1) ? 3 : 1)*((upgradeHave[53] == 1) ? 2 : 1)*((upgradeHave[54] == 1) ? 1 : 1)*((upgradeHave[56] == 1) ? 10 : 1)*((upgradeHave[68] == 1) ? 7 : 1)*((upgradeHave[70] == 1) ? 4 : 1)*((upgradeHave[71] == 1) ? 5 : 1)*((upgradeHave[85] == 1) ? 6 : 1)*((upgradeHave[88] == 1) ? 10 : 1)*((bActive[0] == 2) ? bActive[1] : 1);
     bupc = 100e3*2.7**buildingNow*bupcM;
     (bupc > block) ? bupc = block : 0;
     (bupc > thisBlockValue) ? bupc = thisBlockValue : 0;
@@ -385,7 +395,7 @@ $(function (){
   });
   $(document).on('click','#buildClick',function() {
     calculateBuild();
-    buildProgress[buildingNow][pointerThisBlock] += bupc*((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 3 : 1)*((upgradeHave[69] == 1) ? 3 : 1);
+    buildProgress[buildingNow][pointerThisBlock] += bupc*((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 3 : 1)*((upgradeHave[69] == 1) ? 3 : 1)*((upgradeHave[87] == 1) ? 3 : 1);
     block -= bupc;
     blockUsedInBuilding += bupc;
     clickCount++;
@@ -413,7 +423,7 @@ $(function (){
       bActive[4] = boostSelData[indexThis][2];
       bToken -= boostSelData[indexThis][3];
       bTokenUsed += boostSelData[indexThis][3];
-      bCool = 240-((upgradeHave[39] == 1) ? 20 : 0)-((upgradeHave[44] == 1) ? 30 : 0)-((upgradeHave[47] == 1) ? 30 : 0)-((upgradeHave[59] == 1) ? 30 : 0)-((upgradeHave[65] == 1) ? 20 : 0);
+      bCool = 240-((upgradeHave[39] == 1) ? 20 : 0)-((upgradeHave[44] == 1) ? 30 : 0)-((upgradeHave[47] == 1) ? 30 : 0)-((upgradeHave[59] == 1) ? 30 : 0)-((upgradeHave[65] == 1) ? 20 : 0)-((upgradeHave[73] == 1) ? 15 : 0)-((upgradeHave[76] == 1) ? 10 : 0)-((upgradeHave[65] == 1) ? 20 : 0)-((upgradeHave[83] == 1) ? 20 : 0)-((upgradeHave[86] == 1) ? 10 : 0);
       bTotal++;
       $('#boostSelect > div:nth-child(1) > div:not(:first-child)').hide();
       $('#boostSelect > div:nth-child(1) > div:eq(2)').show();

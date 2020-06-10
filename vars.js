@@ -15,9 +15,9 @@ upgradeName = [
   'token/click 1%p', 'bps +100.0m', 'bps x1.8', 'bps x1.7', 'boost cool -30s', 'bpc x7.500k', 'token/click 1%p', 'boost cool -30s', 'bpc x9', 'bps x2',
   'bupc x5', 'bupc x4', 'bupc x3', 'bupc x2', 'bupc x1', 'bps x2.5', 'bupc x10', 'bps x5', 'token/click 2%p', 'boost cool -30s',
   'token x2', 'token x3', 'token/click 2%p', 'bps x4', 'bps x3', 'boost cool -20s', 'bps +333.3m', 'bu eff x3', 'bupc x7', 'bu eff x3',
-  'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
-  'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder',
-  'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder', 'PlaceHolder'
+  'bupc x4', 'bupc x5', 'bps x3.5', 'boost cool -15s', 'token/click 3%', 'token/click 3%', 'boost cool -10s', 'bps x4', 'bps 20% -> bpc', 'bps 25% -> bpc',
+  'token x2', 'bps +2.109b', 'bps x3', 'boost cool -20s', 'token/click 4%', 'bupc x6', 'boost cool -10s', 'bu eff x3', 'bupc x10', 'bps x3',
+  'bps x2', 'bps x3', 'bps x5', 'bps x7', 'bps x11', 'bps x13', 'bps x17', 'bps x19', 'bps x23', 'go to next stage!'
 ];
 upgradeCost = [
   30, 50, 300, 1e3, 1e3, 5.5e3, 12e3, 25e3, 42e3, 80.8e3,
@@ -27,9 +27,9 @@ upgradeCost = [
   960e12, 800e15, 1.4e15, 3.32e15, 1e15, 2.223e15, 3.612e15, 2e15, 5e15, 14e15,
   10e15, 30e15, 90e15, 270e15, 810e15, 1.5e18, 2.43e18, 8e18, 12e18, 21e18,
   6.666e18, 10e18, 15e18, 46e18, 200e18, 155e18, 999.9e18, 3e21, 3e21, 15e21,
-  1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
-  1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300,
-  1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300, 1e300
+  1.515e24, 3e24, 2.345e24, 3.5e24, 20e24, 100e24, 220e24, 750e24, 1.52e27, 10e27,
+  15e27, 20e27, 60e27, 120e27, 230e27, 330e27, 359e27, 396e27, 423e27, 1e30,
+  2.5e30, 5.5e30, 19.25e30, 105.8e30, 794.1e30, 9.131e33, 123.3e33, 2.157e36, 42.07e36, 10e39
 ];
 upgradeHave = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -44,7 +44,7 @@ upgradeHave = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
 blockCost = [
-  50, 2.5e6, 200e12, 2e15, 1.234e24, 1e3, 10
+  50, 2.5e6, 200e12, 1e50, 1e70, 1e3, 10
 ];
 blockUnlocked = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
