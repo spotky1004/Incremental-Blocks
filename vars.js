@@ -15,7 +15,7 @@ upgradeName = [
   'token/click 1%p', 'bps +100.0m', 'bps x1.8', 'bps x1.7', 'boost cool -30s', 'bpc x7.500k', 'token/click 1%p', 'boost cool -30s', 'bpc x9', 'bps x2',
   'bupc x5', 'bupc x4', 'bupc x3', 'bupc x2', 'bupc x1', 'bps x2.5', 'bupc x10', 'bps x5', 'token/click 2%p', 'boost cool -30s',
   'token x2', 'token x3', 'token/click 2%p', 'bps x4', 'bps x3', 'boost cool -20s', 'bps +333.3m', 'bu eff x3', 'bupc x7', 'bu eff x3',
-  'bupc x4', 'bupc x5', 'bps x3.5', 'boost cool -15s', 'token/click 3%', 'token/click 3%', 'boost cool -10s', 'bps x4', 'bps 20% -> bpc', 'bps 25% -> bpc',
+  'bupc x4', 'bupc x5', 'bps x3.5', 'boost cool -15s', 'token/click 3%', 'token/click 3%', 'boost cool -10s', 'bps x15', 'bps 20% -> bpc', 'bps 25% -> bpc',
   'token x2', 'bps +2.109b', 'bps x3', 'boost cool -20s', 'token/click 4%', 'bupc x6', 'boost cool -10s', 'bu eff x3', 'bupc x10', 'bps x3',
   'bps x2', 'bps x3', 'bps x5', 'bps x7', 'bps x11', 'bps x13', 'bps x17', 'bps x19', 'bps x23', 'go to next stage!'
 ];
