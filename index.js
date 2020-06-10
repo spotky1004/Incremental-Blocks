@@ -31,7 +31,7 @@ $(function (){
   }
 
   function notation(num, dim) {
-    if (num < 1e40) {
+    if (num < 1e30) {
       if (num <= 1) {
         return num.toFixed(dim);
       } else {
