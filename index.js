@@ -452,6 +452,8 @@ $(function (){
 
   gameLoad();
   displayAll();
+  blockUnlocked[3] = 0;
+  blockUnlocked[4] = 0;
   $('#boostSelect > div:nth-child(1) > div:not(:first-child)').hide();
   $('#boostSelect > div:nth-child(1) > div:eq(1)').show();
 });
