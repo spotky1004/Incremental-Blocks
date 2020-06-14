@@ -18,6 +18,7 @@ $(function (){
   bCool = 180;
   bActive = [-1, -1, -1, -1, -1];
   bTotal = 0;
+  tickGain = 0;
   lastTick = new Date().getTime();
   timeNow = new Date().getTime();
 
@@ -58,6 +59,11 @@ $(function (){
   }
   function timeNotation(timeNum, hourShow, minShow, secShow, degShow) {
     return ((hourShow == 1) ? Math.floor(timeNum/3600) + ((minShow == 1) ? ':' : '') : '') + ((minShow == 1) ? ((Math.floor(timeNum%3600)/60 <= 9 && hourShow == 1) ? '0' : '') + Math.floor((timeNum%3600)/60) + ((Math.floor(timeNum%3600)/60 == 0 && hourShow == 1) ? '0' : '') + ((secShow == 1) ? ':' : '') : '') + ((secShow == 1) ? ((Math.floor(timeNum%60) <= 9 && minShow == 1) ? '0' : '') + Math.floor(timeNum%60) + ((degShow == 1) ? '.' : '') : '') + ((degShow == 1) ? ((Math.floor((timeNum%1)*100) <= 9 && secShow == 1) ? '0' : '') + Math.floor((timeNum%1)*100) : '');
+  }
+  function drawRuneLine(selector1, selector2, color, width) {
+    pos1 = $(selector1).position();
+    pos2 = $(selector2).position();
+    $('<line>').attr({x1: pos1.left, y1: pos1.top, x2: pos2.left, y2: pos2.top}).css({stroke: 'rgba(' + color + ')', 'stroke-width': width}).appendTo('#runeLine');
   }
   function gameSave() {
     saveFile = [];
@@ -113,6 +119,17 @@ $(function (){
         $('.contentBlock:eq(' + i + ') > div:nth-child(1)').hide();
         $('.contentBlock:eq(' + i + ') > div:nth-child(2)').show();
       }
+    }
+    if (upgradeHave[99] == 1) {
+      $('#middleContentNav > span:eq(1)').removeClass('lockedNav').addClass('openedNav');
+      $('#middleContentNav > span:eq(1)').html(function (index,html) {
+        return 'rune';
+      });
+    } else {
+      $('#middleContentNav > span:eq(1)').addClass('lockedNav').removeClass('openedNav');
+      $('#middleContentNav > span:eq(1)').html(function (index,html) {
+        return 'locked';
+      });
     }
   }
   function displayBlock() {
@@ -431,6 +448,19 @@ $(function (){
       gameSave();
     }
   });
+  $(document).on('click','#middleContentNav > span.openedNav',function() {
+    indexThis = $('#middleContentNav > span').index(this);
+    $('#middleContentWarp > div').hide();
+    $('#middleContentWarp > div:eq(' + indexThis + ')').show();
+    switch (indexThis) {
+      case 0:
+        $('#middleContent').css('background-image', 'url(Resource/buildBackground.jpg)');
+        break;
+      case 1:
+        $('#middleContent').css('background-image', 'url(Resource/Rune/runeBackground.jpg)');
+        break;
+    }
+  });
 
   setInterval( function (){
     timeNow = new Date().getTime();
@@ -456,12 +486,19 @@ $(function (){
   blockUnlocked[4] = 0;
   $('#boostSelect > div:nth-child(1) > div:not(:first-child)').hide();
   $('#boostSelect > div:nth-child(1) > div:eq(1)').show();
+  $('#middleContentWarp > div').hide();
+  $('#middleContentWarp > div:eq(0)').show();
+  drawRuneLine('#rune1', '#rune2', '200, 200, 100, 0', '2');
 });
 
 function gameReset() {
   for (var i = 0; i < varData.length; i++) {
     this[varData[i]] = resetData[i];
   }
-  gameSave();
+  saveFile = [];
+  for (var i = 0; i < varData.length; i++) {
+    saveFile[i] = eval(varData[i]);
+  }
+  localStorage[savePoint] = JSON.stringify(saveFile);
   location.reload();
 }

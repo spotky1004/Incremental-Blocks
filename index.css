@@ -443,6 +443,26 @@
   font-weight: 600;
   text-align: center;
 }
+#runeLine {
+  position: absolute;
+  width: 59vw;
+  height: 63.5vh;
+}
+#runes {
+  position: relative;
+  z-index: 3;
+}
+#rune1 {
+  width: 10vw;
+  height: 10vw;
+  background-color: black;
+}
+#rune2 {
+  margin-top: 10vw;
+  width: 10vw;
+  height: 10vw;
+  background-color: black;
+}
 #containerIInI {
   width: 60vw;
   height: 28.5vh;
