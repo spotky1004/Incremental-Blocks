@@ -27,6 +27,7 @@ $(function (){
   runeTimeOut = 0;
   screenWidthNow = $(window).width();
   screenHeightNow = $(window).height();
+  resetTimer = 100;
 
   function copyToClipboard(val) {
     var t = document.createElement("textarea");
@@ -461,6 +462,15 @@ $(function (){
       case 2:
         gameImport();
         break;
+      case 3:
+        resetTimer--;
+        $('.optionBlock:eq(3)').html(function (index,html) {
+          return resetTimer;
+        });
+        if (resetTimer == 0) {
+          gameReset();
+        }
+        break;
     }
   });
   $(document).on('click','#buildClick',function() {
@@ -541,6 +551,16 @@ $(function (){
     displayUpgrade();
     displayBuild();
     gameSave();
+    if (resetTimer < 100) {
+      resetTimer++;
+      $('.optionBlock:eq(3)').html(function (index,html) {
+        return resetTimer;
+      });
+    } else if (resetTimer == 100) {
+      $('.optionBlock:eq(3)').html(function (index,html) {
+        return 'reset';
+      });
+    }
   }, 500);
 
   gameLoad();
