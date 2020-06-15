@@ -8,6 +8,7 @@ $(function (){
   totalBlock = 0;
   clickCount = 0;
   playtime = 0;
+  middleMenu = 0;
   buildings = 0;
   buildingNow = 0;
   pointerThisBlock = 0;
@@ -21,6 +22,11 @@ $(function (){
   tickGain = 0;
   lastTick = new Date().getTime();
   timeNow = new Date().getTime();
+  screenWidthBef = 0;
+  screenHeightBef = 0;
+  runeTimeOut = 0;
+  screenWidthNow = $(window).width();
+  screenHeightNow = $(window).height();
 
   function copyToClipboard(val) {
     var t = document.createElement("textarea");
@@ -30,6 +36,9 @@ $(function (){
     document.execCommand('copy');
     document.body.removeChild(t);
   }
+  function toRadians(deg) {
+		return deg*(Math.PI / 180);
+	}
 
   function notation(num, dim) {
     if (num < 1e30) {
@@ -60,10 +69,15 @@ $(function (){
   function timeNotation(timeNum, hourShow, minShow, secShow, degShow) {
     return ((hourShow == 1) ? Math.floor(timeNum/3600) + ((minShow == 1) ? ':' : '') : '') + ((minShow == 1) ? ((Math.floor(timeNum%3600)/60 <= 9 && hourShow == 1) ? '0' : '') + Math.floor((timeNum%3600)/60) + ((Math.floor(timeNum%3600)/60 == 0 && hourShow == 1) ? '0' : '') + ((secShow == 1) ? ':' : '') : '') + ((secShow == 1) ? ((Math.floor(timeNum%60) <= 9 && minShow == 1) ? '0' : '') + Math.floor(timeNum%60) + ((degShow == 1) ? '.' : '') : '') + ((degShow == 1) ? ((Math.floor((timeNum%1)*100) <= 9 && secShow == 1) ? '0' : '') + Math.floor((timeNum%1)*100) : '');
   }
-  function drawRuneLine(selector1, selector2, color, width) {
-    pos1 = $(selector1).position();
-    pos2 = $(selector2).position();
-    $('<line>').attr({x1: pos1.left, y1: pos1.top, x2: pos2.left, y2: pos2.top}).css({stroke: 'rgba(' + color + ')', 'stroke-width': width}).appendTo('#runeLine');
+  function drawRuneLine(selector1, selector2, colorThis, widthThis) {
+    pos1 = $(selector1);
+    pos2 = $(selector2);
+    $('<line>').attr({x1: (Math.abs(pos1.position().left)+pos1.width()/2), y1: (Math.abs(pos1.position().top)+pos1.height()/2), x2: (Math.abs(pos2.position().left)+pos2.width()/2), y2: (Math.abs(pos2.position().top)+pos2.height()/2)}).css({stroke: 'rgba(' + colorThis + ')', strokeWidth: widthThis}).appendTo('#runeLine');
+    $('#runeLine').html(function (index,html) {
+      reg = /><\/line>/gi;
+      strReg = html;
+      return String(strReg.replace(reg, '/>'));
+    });
   }
   function gameSave() {
     saveFile = [];
@@ -168,10 +182,10 @@ $(function (){
     if (upgradeHave[97] == 1 && upgradeHave[98] == 1) {
       $('.upgradeContent:eq(0)').addClass('mystUpgrade');
     }
-    if (upgradeHave[99] == 0) {
+    if (middleMenu == 0) {
       $('#upgradeOrign').show();
       $('#mystUpgrade').hide();
-    } else {
+    } else if (middleMenu == 1) {
       $('#upgradeOrign').hide();
       $('#mystUpgrade').show();
     }
@@ -331,6 +345,20 @@ $(function (){
       });
     }
   }
+  function displyRune() {
+    if (screenWidthBef != screenWidthNow || screenHeightBef != screenHeightNow) {
+      $('#runeRotation').css({width: screenHeightNow*0.508, height: screenHeightNow*0.508, 'margin-left': (screenWidthNow*0.59-screenHeightNow*0.508)/2});
+      $('#runeRortationOffset').css({width: screenHeightNow*0.508, height: screenHeightNow*0.508});
+      $('#runeLine').css({width: screenHeightNow*0.508, height: screenHeightNow*0.508});
+      $('#runes').css({width: screenHeightNow*0.508, height: screenHeightNow*0.508});
+      clearTimeout(runeTimeOut);
+      runePositionSet();
+      drawAllRuneLine();
+    }
+    for (var i = 0; i < 10; i++) {
+
+    }
+  }
 
   function calculateBuild() {
     baseBuilding = 1e6*3**buildingNow*((buildingNow >= 12) ? 10**(buildingNow-11) : 1 );
@@ -370,6 +398,31 @@ $(function (){
       boostSelData[i][2] = Math.floor(Math.random()*(20*(i+1))+(i+1)*10);
       boostSelData[i][3] = Math.floor((Math.random()*4+8)**(i+1))
     }
+  }
+  function drawAllRuneLine() {
+    $('#runeRotation').css('animation', 'none');
+    $('#runeLine').html(function (index,html) {
+      return '';
+    });
+    runeTimeOut = setTimeout( function (){
+      for (var i = 1; i < 4; i++) {
+        for (var j = 0; j < 3; j++) {
+          drawRuneLine('.rune:eq(' + (3*(i%3)+j) + ')', '.rune:eq(' + (3*((i+1)%3)+j) + ')', + ((i == 3) ? 200 : 0) +  ','  + ((i == 2) ? 200 : 0) + ','  + ((i == 1) ? 200 : 0) + ', 1', '10');
+        }
+      }
+      for (var i = 0; i < 9; i++) {
+        drawRuneLine('.rune:eq(9)', '.rune:eq(' + i + ')', '255, 255, 255 , 1', '10');
+      }
+      $('#runeRotation').css('animation', 'runesRotation 60s linear infinite');
+    }, 50);
+  }
+  function runePositionSet() {
+    radius = screenHeightNow*0.204;
+    runeDeg = 40;
+    for (var i = 0; i < 9; i++) {
+      $('.rune:eq(' + i + ')').css({left: Math.floor(radius*(Math.cos(toRadians(i*runeDeg))+1)), top: Math.floor(radius*(Math.sin(toRadians(i*runeDeg))+1)) });
+    }
+    $('.rune:eq(9)').css({left: radius, top: radius});
   }
 
   $(document).on('click','#blockClick',function() {
@@ -450,20 +503,27 @@ $(function (){
   });
   $(document).on('click','#middleContentNav > span.openedNav',function() {
     indexThis = $('#middleContentNav > span').index(this);
-    $('#middleContentWarp > div').hide();
-    $('#middleContentWarp > div:eq(' + indexThis + ')').show();
-    switch (indexThis) {
-      case 0:
-        $('#middleContent').css('background-image', 'url(Resource/buildBackground.jpg)');
-        break;
-      case 1:
-        $('#middleContent').css('background-image', 'url(Resource/Rune/runeBackground.jpg)');
-        break;
+    if (indexThis != middleMenu) {
+      $('#middleContentWarp > div').hide();
+      $('#middleContentWarp > div:eq(' + indexThis + ')').show();
+      switch (indexThis) {
+        case 0:
+          $('#middleContent').css('background-image', 'url(Resource/buildBackground.jpg)');
+          break;
+        case 1:
+          $('#middleContent').css('background-image', 'url(Resource/Rune/runeBackground.jpg)');
+          drawAllRuneLine();
+          break;
+      }
+      middleMenu = indexThis;
+      displayUpgrade();
     }
   });
 
   setInterval( function (){
     timeNow = new Date().getTime();
+    screenWidthNow = $(window).width();
+    screenHeightNow = $(window).height();
     tickGain = (timeNow-lastTick)/1000;
     block += blockPS*tickGain;
     totalBlock += blockPS*tickGain;
@@ -472,6 +532,9 @@ $(function (){
     displayUnlock();
     displayStat();
     displayBoost();
+    displyRune();
+    screenWidthBef = screenWidthNow;
+    screenHeightBef = screenHeightNow;
     lastTick = timeNow;
   }, 50);
   setInterval( function (){
@@ -488,7 +551,6 @@ $(function (){
   $('#boostSelect > div:nth-child(1) > div:eq(1)').show();
   $('#middleContentWarp > div').hide();
   $('#middleContentWarp > div:eq(0)').show();
-  drawRuneLine('#rune1', '#rune2', '200, 200, 100, 0', '2');
 });
 
 function gameReset() {
