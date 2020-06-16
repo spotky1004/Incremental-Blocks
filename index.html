@@ -5,10 +5,10 @@
     <meta name="viewport" content="user-scalable=no">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css?ver=0.4.4.3">
-    <script src="vars.js?ver=0.4.4.3"></script>
-    <script src="index.js?ver=0.4.4.3"></script>
-    <title>Incremental Blocks v0.4.4.3</title>
+    <link rel="stylesheet" href="index.css?ver=0.4.4.4">
+    <script src="vars.js?ver=0.4.4.4"></script>
+    <script src="index.js?ver=0.4.4.4"></script>
+    <title>Incremental Blocks v0.4.4.4</title>
   </head>
   <body>
     <div id="warpAll">
@@ -175,24 +175,22 @@
               </div>
               <div id="runeMenu">
                 <div id="runeRotation">
-                  <svg id="runeLine">
-
-                  </svg>
+                  <svg id="runeLine"></svg>
                   <div id="runes">
                     <div id="alphaRunes">
-                      <div class="rune">
+                      <div class="rune" style="display:none;">
                         <div>
                           <div>
                           </div>
                         </div>
                       </div>
-                      <div class="rune">
+                      <div class="rune" style="display:none;">
                         <div>
                           <div>
                           </div>
                         </div>
                       </div>
-                      <div class="rune">
+                      <div class="rune" style="display:none;">
                         <div>
                           <div>
                           </div>
@@ -200,19 +198,19 @@
                       </div>
                     </div>
                     <div id="betaRunes">
-                      <div class="rune">
+                      <div class="rune" style="display:none;">
                         <div>
                           <div>
                           </div>
                         </div>
                       </div>
-                      <div class="rune">
+                      <div class="rune" style="display:none;">
                         <div>
                           <div>
                           </div>
                         </div>
                       </div>
-                      <div class="rune">
+                      <div class="rune" style="display:none;">
                         <div>
                           <div>
                           </div>
@@ -220,19 +218,19 @@
                       </div>
                     </div>
                     <div id="gammaRunes">
-                      <div class="rune">
+                      <div class="rune" style="display:none;">
                         <div>
                           <div>
                           </div>
                         </div>
                       </div>
-                      <div class="rune">
+                      <div class="rune" style="display:none;">
                         <div>
                           <div>
                           </div>
                         </div>
                       </div>
-                      <div class="rune">
+                      <div class="rune" style="display:none;">
                         <div>
                           <div>
                           </div>
@@ -240,7 +238,7 @@
                       </div>
                     </div>
                     <div id="omegaRunes">
-                      <div class="rune">
+                      <div class="rune" style="display:none;">
                         <div>
                           <div>
                           </div>
@@ -249,9 +247,26 @@
                     </div>
                   </div>
                 </div>
-
                 <div id="runeEtc">
-
+                  <span id="runeNameTxt">
+                    hover on<br>rune
+                  </span>
+                  <span id="runeInfo">
+                    <div id="selRuneLevel">
+                      level i
+                    </div>
+                    <div id="selRuneBoostInfo">
+                      <div id="selRuneBoostName">
+                        <span class="runeRedMarkup">buff block production<span>
+                      </div>
+                      <div id="selRuneBoostInfoNum">
+                        <span class="runeRedMarkup">x2 -> x5<span>
+                      </div>
+                    </div>
+                    <div id="selRuneCost">
+                      cost: <span id="selRuneCostNum">5</span> power
+                    </div>
+                  </span>
                 </div>
               </div>
             </div>
@@ -312,7 +327,7 @@
 
             </div>
             <div class="lockedBlock">
-              cost: 1.000e50 blocks
+              cost: 5.000e40 blocks
             </div>
           </span>
         </div>
@@ -402,6 +417,9 @@
             <div class="optionLine">
               <span class="optionBlock">
                 reset
+              </span>
+              <span class="optionBlock">
+                <a href="https://discord.gg/wkdVQxT" target="_blank">discord</a>
               </span>
             </div>
           </div>

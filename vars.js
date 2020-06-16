@@ -388,11 +388,21 @@ boostLongName = [
 boostSelData = [
   [0, 4, 30, 10], [1, 7, 60, 100], [3, 64, 90, 1e3]
 ];
+runeLevels = [
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+];
+runeName = [
+  '<span class="runeRedMarkup">block<br>product</span>', '<span class="runeRedMarkup">building<br>product</span>', '<span class="runeRedMarkup">token<br>product</span>',
+  '<span class="runeBlueMarkup">short<br>boost</span>', '<span class="runeBlueMarkup">no<br>boost</span>', '<span class="runeBlueMarkup">upgrade<br>boost</span>',
+  '<span class="runeGreenMarkup">divide<br>build</span>', '<span class="runeGreenMarkup">master<br>build</span>', '<span class="runeGreenMarkup">re<br>build</span>',
+  '<span class="runeWhiteMarkup">overall<br>boost</span>'
+];
 varData = [
   'block', 'lastTick', 'upgradeHave', 'blockUnlocked', 'totalBlock',
   'clickCount', 'playtime', 'buildings', 'buildingNow', 'buildProgress',
   'blockUsedInBuilding', 'blockUsedInBuilding', 'boostSelData', 'bToken', 'bCool',
-  'bTotal', 'bTokenTotal', 'bTokenUsed'
+  'bTotal', 'bTokenTotal', 'bTokenUsed', 'runeLevels', 'mBlock',
+  'mActive'
 ];
 resetData = {
   0: 0,
@@ -588,5 +598,10 @@ resetData = {
   14: 180,
   15: 0,
   16: 0,
-  17: 0
+  17: 0,
+  18: [
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+  ],
+  19: 0,
+  20: 0
 };

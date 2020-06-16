@@ -11,6 +11,7 @@ $(function (){
   middleMenu = 0;
   buildings = 0;
   buildingNow = 0;
+  buildingMult = 1;
   pointerThisBlock = 0;
   blockUsedInBuilding = 0;
   bToken = 0;
@@ -25,9 +26,12 @@ $(function (){
   screenWidthBef = 0;
   screenHeightBef = 0;
   runeTimeOut = 0;
+  runeTimeOut2 = 0;
   screenWidthNow = $(window).width();
   screenHeightNow = $(window).height();
   resetTimer = 100;
+  pBlock = 0;
+  pActive = 0;
 
   function copyToClipboard(val) {
     var t = document.createElement("textarea");
@@ -66,6 +70,24 @@ $(function (){
         return num.toFixed(2);
       }
     }
+  }
+  function romanize (num) {
+    if (num == 0) {
+      return '0';
+    }
+    if (isNaN(num))
+      return NaN;
+    var digits = String(+num).split(""),
+      key = [
+        "","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+        "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+        "","I","II","III","IV","V","VI","VII","VIII","IX"
+      ],
+      roman = "",
+      i = 3;
+    while (i--)
+      roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+      return (Array(+digits.join("") + 1).join("M") + roman).toLowerCase();
   }
   function timeNotation(timeNum, hourShow, minShow, secShow, degShow) {
     return ((hourShow == 1) ? Math.floor(timeNum/3600) + ((minShow == 1) ? ':' : '') : '') + ((minShow == 1) ? ((Math.floor(timeNum%3600)/60 <= 9 && hourShow == 1) ? '0' : '') + Math.floor((timeNum%3600)/60) + ((Math.floor(timeNum%3600)/60 == 0 && hourShow == 1) ? '0' : '') + ((secShow == 1) ? ':' : '') : '') + ((secShow == 1) ? ((Math.floor(timeNum%60) <= 9 && minShow == 1) ? '0' : '') + Math.floor(timeNum%60) + ((degShow == 1) ? '.' : '') : '') + ((degShow == 1) ? ((Math.floor((timeNum%1)*100) <= 9 && secShow == 1) ? '0' : '') + Math.floor((timeNum%1)*100) : '');
@@ -347,17 +369,30 @@ $(function (){
     }
   }
   function displyRune() {
+    for (var i = 0; i < 10; i++) {
+      if (i == 0 || runeLevels[i] >= 1 || runeLevels[9] >= 1) {
+        $('.rune:eq(' + i + ')').show();
+      } else {
+        $('.rune:eq(' + i + ')').hide();
+      }
+    }
     if (screenWidthBef != screenWidthNow || screenHeightBef != screenHeightNow) {
       $('#runeRotation').css({width: screenHeightNow*0.508, height: screenHeightNow*0.508, 'margin-left': (screenWidthNow*0.59-screenHeightNow*0.508)/2});
       $('#runeRortationOffset').css({width: screenHeightNow*0.508, height: screenHeightNow*0.508});
       $('#runeLine').css({width: screenHeightNow*0.508, height: screenHeightNow*0.508});
       $('#runes').css({width: screenHeightNow*0.508, height: screenHeightNow*0.508});
       clearTimeout(runeTimeOut);
+      clearTimeout(runeTimeOut2);
       runePositionSet();
-      drawAllRuneLine();
+      runeTimeOut2 = setTimeout( function (){
+        drawAllRuneLine();
+      }, 75);
     }
-    for (var i = 0; i < 10; i++) {
-
+    if (mActive) {
+      powerBulkM = 1;
+      blockUsageM = 1e40;
+      thisBulk = Math.min(powerBulkM, block/blockUsageM);
+      block -= thisBulk*blockUsageM;
     }
   }
 
@@ -402,19 +437,25 @@ $(function (){
   }
   function drawAllRuneLine() {
     $('#runeRotation').css('animation', 'none');
+    $('.rune').css('animation', 'none');
     $('#runeLine').html(function (index,html) {
       return '';
     });
     runeTimeOut = setTimeout( function (){
       for (var i = 1; i < 4; i++) {
         for (var j = 0; j < 3; j++) {
-          drawRuneLine('.rune:eq(' + (3*(i%3)+j) + ')', '.rune:eq(' + (3*((i+1)%3)+j) + ')', + ((i == 3) ? 200 : 0) +  ','  + ((i == 2) ? 200 : 0) + ','  + ((i == 1) ? 200 : 0) + ', 1', '10');
+          if ((((3*(i%3)+j) == 0 || runeLevels[(3*(i%3)+j)-1] >= 1) && ((3*((i+1)%3)+j) == 0 || runeLevels[(3*((i+1)%3)+j)-1] >= 1)) || (runeLevels[9] == 1)) {
+            drawRuneLine('.rune:eq(' + (3*(i%3)+j) + ')', '.rune:eq(' + (3*((i+1)%3)+j) + ')', + ((i == 3) ? 200 : 0) +  ','  + ((i == 2) ? 200 : 0) + ','  + ((i == 1) ? 200 : 0) + ', 1', Math.sqrt(runeLevels[(3*(i%3)+j)]));
+          }
         }
       }
-      for (var i = 0; i < 9; i++) {
-        drawRuneLine('.rune:eq(9)', '.rune:eq(' + i + ')', '255, 255, 255 , 1', '10');
+      if (runeLevels[9] >= 1) {
+        for (var i = 0; i < 9; i++) {
+          drawRuneLine('.rune:eq(9)', '.rune:eq(' + i + ')', '255, 255, 255 , 1', Math.sqrt(runeLevels[9]));
+        }
       }
       $('#runeRotation').css('animation', 'runesRotation 60s linear infinite');
+      $('.rune').css('animation', 'runeBackgroundRotation linear 60s infinite');
     }, 50);
   }
   function runePositionSet() {
@@ -528,6 +569,19 @@ $(function (){
       middleMenu = indexThis;
       displayUpgrade();
     }
+  });
+  $(document).on('mouseover','.rune',function(e) {
+    thisIndex = $(".rune").index(this);
+    runeOn = thisIndex;
+    $('#runeNameTxt').html(function (index,html) {
+      return runeName[runeOn];
+    });
+  });
+  $(document).on('mouseout','.rune',function(e) {
+    runeOn = 0;
+    $('#runeNameTxt').html(function (index,html) {
+      return 'hover on<br>rune';
+    });
   });
 
   setInterval( function (){
