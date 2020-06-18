@@ -315,8 +315,11 @@ $(function (){
     $('#buildingNum').html(function (index,html) {
       return 'building ' + (buildingNow+1);
     });
-    $('#buildMult > span').html(function (index,html) {
+    $('#buildMult > span:eq(0)').html(function (index,html) {
       return notation(buildingMult);
+    });
+    $('#buildMult > span:eq(1)').html(function (index,html) {
+      return notation(runeBuffCalc(1, runeLevels[1]), 1);
     });
   }
   function displayBoost() {
@@ -455,7 +458,7 @@ $(function (){
     (bupc > block) ? bupc = block : 0;
     (bupc > thisBlockValue) ? bupc = thisBlockValue : 0;
     (buildings == buildingNow) ? 0 : bupc = 0;
-    buildingMult = 4**buildings;
+    buildingMult = runeBuffCalc(1, runeLevels[1])**buildings;
   }
   function rollBoost() {
     for (var i = 0; i < 3; i++) {
@@ -500,7 +503,10 @@ $(function (){
   function runeBuffCalc(r, l) {
     switch (r) {
       case 0:
-        return Math.floor((l*(l+1))/2+1);
+        return Math.floor(((l*(l+1))/2+1)*(1+l*0.03));
+        break;
+      case 1:
+        return (4+0.2*l).toFixed(1);
         break;
       default:
         return 1;
@@ -509,7 +515,10 @@ $(function (){
   function runeCostCalc(r, l) {
     switch (r) {
       case 0:
-        return Math.floor((1+l/10)**l);
+        return Math.floor((1+l/50)**(l/1.2));
+        break;
+      case 1:
+        return (l**2+6*l+5)**2;
         break;
       default:
         return 1e300;
@@ -540,7 +549,7 @@ $(function (){
           markUpThis = 'White'
           break;
       }
-      return '<span class=rune' + markUpThis + 'Markup>x' + notation(runeBuffCalc(runeOn, runeLevels[runeOn])) + ' -> ' + 'x' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)));
+      return '<span class=rune' + markUpThis + 'Markup>x' + notation(runeBuffCalc(runeOn, runeLevels[runeOn]), 2) + ' -> ' + 'x' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)), 2);
     });
     $('#selRuneCostNum').html(function (index,html) {
       return notation(runeCostCalc(runeOn, runeLevels[runeOn]));
