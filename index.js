@@ -401,7 +401,7 @@ $(function (){
   }
   function displayPower() {
     $('#powerBulkNum').html(function (index,html) {
-      return 'power /' + notation(Math.pow(2, powerBulkLevel), 5);
+      return 'speed /' + notation(Math.pow(2, powerBulkLevel), 5);
     });
     if (pActive) {
       powerBulkM = 1;
