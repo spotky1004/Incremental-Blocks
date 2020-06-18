@@ -405,7 +405,6 @@ $(function (){
       blockUsageM = 1e40;
       ppsCap = 1;
       thisBulk = Math.min(powerBulkM*tickGain, Math.min(block/blockUsageM, ppsCap*tickGain*Math.pow(2, powerBulkLevel)));
-      console.log(block*tickGain/blockUsageM)
       block -= thisBulk*blockUsageM;
       if (block < 0) {
         block = 0;
