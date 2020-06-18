@@ -12,11 +12,14 @@ $(function (){
   buildings = 0;
   buildingNow = 0;
   buildingMult = 1;
+  bupcM = 1;
+  mBlock = 0;
   pointerThisBlock = 0;
   blockUsedInBuilding = 0;
   bToken = 0;
   bTokenTotal = 0;
   bTokenUsed = 0;
+  bTokenCh = 0;
   bCool = 180;
   bActive = [-1, -1, -1, -1, -1];
   bTotal = 0;
@@ -30,8 +33,12 @@ $(function (){
   screenWidthNow = $(window).width();
   screenHeightNow = $(window).height();
   resetTimer = 100;
-  pBlock = 0;
+  power = 0;
   pActive = 0;
+  ppsCap = 1;
+  powerProgress = 0;
+  powerBulkLevel = 0;
+  blockUsageM = 1e40;
 
   function copyToClipboard(val) {
     var t = document.createElement("textarea");
@@ -171,10 +178,10 @@ $(function (){
   }
   function displayBlock() {
     bpsP = ((upgradeHave[1] == 1) ? 1 : 0)+((upgradeHave[3] == 1) ? 5 : 0)+((upgradeHave[5] == 1) ? 20 : 0)+((upgradeHave[7] == 1) ? 60 : 0)+((upgradeHave[9] == 1) ? 175 : 0)+((upgradeHave[11] == 1) ? 721 : 0)+((upgradeHave[12] == 1) ? 4.4e3 : 0)+((upgradeHave[14] == 1) ? 21.74e3 : 0)+((upgradeHave[15] == 1) ? 104.8e3 : 0)+((upgradeHave[19] == 1) ? 600e3 : 0)+((upgradeHave[23] == 1) ? 2.222e6 : 0)+((upgradeHave[24] == 1) ? 14e6 : 0)+((upgradeHave[33] == 1) ? 32e6 : 0)+((upgradeHave[41] == 1) ? 100e6 : 0)+((upgradeHave[66] == 1) ? 333.3e6 : 0)+((upgradeHave[81] == 1) ? 2.109e9 : 0);
-    bpsM = 1*(4**buildings)*((upgradeHave[17] == 1) ? 2 : 1)*((upgradeHave[30] == 1) ? 3 : 1)*((upgradeHave[31] == 1) ? 2 : 1)*((upgradeHave[32] == 1) ? 1.5 : 1)*((upgradeHave[42] == 1) ? 1.8 : 1)*((upgradeHave[43] == 1) ? 1.7 : 1)*((upgradeHave[49] == 1) ? 2 : 1)*((upgradeHave[55] == 1) ? 2.5 : 1)*((upgradeHave[57] == 1) ? 5 : 1)*((bActive[0] == 1) ? bActive[1] : 1)*((upgradeHave[63] == 1) ? 4 : 1)*((upgradeHave[64] == 1) ? 3 : 1)*((upgradeHave[72] == 1) ? 3.5 : 1)*((upgradeHave[77] == 1) ? 15 : 1)*((upgradeHave[82] == 1) ? 3 : 1)*((upgradeHave[89] == 1) ? 3 : 1)*((upgradeHave[90] == 1) ? 2 : 1)*((upgradeHave[91] == 1) ? 3 : 1)*((upgradeHave[92] == 1) ? 5 : 1)*((upgradeHave[93] == 1) ? 7: 1)*((upgradeHave[94] == 1) ? 11 : 1)*((upgradeHave[95] == 1) ? 13 : 1)*((upgradeHave[96] == 1) ? 17 : 1)*((upgradeHave[97] == 1) ? 19 : 1)*((upgradeHave[98] == 1) ? 23 : 1);
+    bpsM = 1*(4**buildings)*((upgradeHave[17] == 1) ? 2 : 1)*((upgradeHave[30] == 1) ? 3 : 1)*((upgradeHave[31] == 1) ? 2 : 1)*((upgradeHave[32] == 1) ? 1.5 : 1)*((upgradeHave[42] == 1) ? 1.8 : 1)*((upgradeHave[43] == 1) ? 1.7 : 1)*((upgradeHave[49] == 1) ? 2 : 1)*((upgradeHave[55] == 1) ? 2.5 : 1)*((upgradeHave[57] == 1) ? 5 : 1)*((bActive[0] == 1) ? bActive[1] : 1)*((upgradeHave[63] == 1) ? 4 : 1)*((upgradeHave[64] == 1) ? 3 : 1)*((upgradeHave[72] == 1) ? 3.5 : 1)*((upgradeHave[77] == 1) ? 15 : 1)*((upgradeHave[82] == 1) ? 3 : 1)*((upgradeHave[89] == 1) ? 3 : 1)*((upgradeHave[90] == 1) ? 2 : 1)*((upgradeHave[91] == 1) ? 3 : 1)*((upgradeHave[92] == 1) ? 5 : 1)*((upgradeHave[93] == 1) ? 7: 1)*((upgradeHave[94] == 1) ? 11 : 1)*((upgradeHave[95] == 1) ? 13 : 1)*((upgradeHave[96] == 1) ? 17 : 1)*((upgradeHave[97] == 1) ? 19 : 1)*((upgradeHave[98] == 1) ? 23 : 1)*runeBuffCalc(0, runeLevels[0]);
     blockPS = bpsP*bpsM;
     bpcP = 1+((upgradeHave[0] == 1) ? 1 : 0)+((upgradeHave[2] == 1) ? 2 : 0)+((upgradeHave[4] == 1) ? 4 : 0)+((upgradeHave[6] == 1) ? 24 : 0)+((upgradeHave[8] == 1) ? 96 : 0)+((upgradeHave[10] == 1) ? 384 : 0)+((upgradeHave[18] == 1) ? 100e3 : 0);
-    bpcM = 1*(4**buildings)*((upgradeHave[16] == 1) ? 1.5 : 1)*((upgradeHave[45] == 1) ? 7500 : 1)*((upgradeHave[48] == 1) ? 9 : 1)*((bActive[0] == 0) ? bActive[1] : 1);
+    bpcM = 1*(4**buildings)*((upgradeHave[16] == 1) ? 1.5 : 1)*((upgradeHave[45] == 1) ? 7500 : 1)*((upgradeHave[48] == 1) ? 9 : 1)*((bActive[0] == 0) ? bActive[1] : 1)*runeBuffCalc(0, runeLevels[0]);
     blockPC = bpcP*bpcM+((((upgradeHave[13] == 1) ? 0.05 : 0)+((upgradeHave[29] == 1) ? 0.1 : 0)+((upgradeHave[37] == 1) ? 0.15 : 0)+((upgradeHave[78] == 1) ? 0.2 : 0)+((upgradeHave[79] == 1) ? 0.25 : 0))*blockPS)*((bActive[0] == 0) ? bActive[1] : 1)/((bActive[0] == 1) ? bActive[1] : 1);
     $('#blockCount').html(function (index,html) {
       reg = /0/gi;
@@ -370,7 +377,7 @@ $(function (){
   }
   function displyRune() {
     for (var i = 0; i < 10; i++) {
-      if (i == 0 || runeLevels[i] >= 1 || runeLevels[9] >= 1) {
+      if (i == 0 || runeLevels[i-1] >= 1 || runeLevels[9] >= 1) {
         $('.rune:eq(' + i + ')').show();
       } else {
         $('.rune:eq(' + i + ')').hide();
@@ -388,12 +395,36 @@ $(function (){
         drawAllRuneLine();
       }, 75);
     }
-    if (mActive) {
+  }
+  function displayPower() {
+    $('#powerBulkNum').html(function (index,html) {
+      return 'power /' + notation(Math.pow(2, powerBulkLevel), 5);
+    });
+    if (pActive) {
       powerBulkM = 1;
       blockUsageM = 1e40;
-      thisBulk = Math.min(powerBulkM, block/blockUsageM);
+      ppsCap = 1;
+      thisBulk = Math.min(powerBulkM*tickGain, Math.min(block/blockUsageM, ppsCap*tickGain*Math.pow(2, powerBulkLevel)));
+      console.log(block*tickGain/blockUsageM)
       block -= thisBulk*blockUsageM;
+      if (block < 0) {
+        block = 0;
+      }
+      power += Math.floor(thisBulk+powerProgress);
+      powerProgress += thisBulk-Math.floor(thisBulk+powerProgress);
+      $('#togglePower').css('background', 'linear-gradient(90deg, rgba(71, 237, 126, 0.3) ' + powerProgress*100 + '% ' + powerProgress*100 + '%, #404040 ' + powerProgress*100 + '%)');
+    } else {
+      $('#togglePower').css('background', 'linear-gradient(90deg, rgba(237, 179, 71, 0.3) ' + powerProgress*100 + '% ' + powerProgress*100 + '%, #404040 ' + powerProgress*100 + '%)');
     }
+    $('#togglePowerBlockNum').html(function (index,html) {
+      return notation(blockUsageM*Math.pow(2, powerBulkLevel));
+    });
+    $('#togglePowerPowerNum').html(function (index,html) {
+      return notation(ppsCap*Math.pow(2, powerBulkLevel), 2);
+    });
+    $('#powerNum').html(function (index,html) {
+      return notation(power);
+    });
   }
 
   function calculateBuild() {
@@ -436,8 +467,9 @@ $(function (){
     }
   }
   function drawAllRuneLine() {
+    /*
     $('#runeRotation').css('animation', 'none');
-    $('.rune').css('animation', 'none');
+    $('.rune').css('animation', 'none'); */
     $('#runeLine').html(function (index,html) {
       return '';
     });
@@ -454,8 +486,8 @@ $(function (){
           drawRuneLine('.rune:eq(9)', '.rune:eq(' + i + ')', '255, 255, 255 , 1', Math.sqrt(runeLevels[9]));
         }
       }
-      $('#runeRotation').css('animation', 'runesRotation 60s linear infinite');
-      $('.rune').css('animation', 'runeBackgroundRotation linear 60s infinite');
+      /* $('#runeRotation').css('animation', 'runesRotation 60s linear infinite');
+      $('.rune').css('animation', 'runeBackgroundRotation linear 60s infinite'); */
     }, 50);
   }
   function runePositionSet() {
@@ -465,6 +497,55 @@ $(function (){
       $('.rune:eq(' + i + ')').css({left: Math.floor(radius*(Math.cos(toRadians(i*runeDeg))+1)), top: Math.floor(radius*(Math.sin(toRadians(i*runeDeg))+1)) });
     }
     $('.rune:eq(9)').css({left: radius, top: radius});
+  }
+  function runeBuffCalc(r, l) {
+    switch (r) {
+      case 0:
+        return Math.floor((l*(l+1))/2+1);
+        break;
+      default:
+        return 1;
+    }
+  }
+  function runeCostCalc(r, l) {
+    switch (r) {
+      case 0:
+        return Math.floor((1+l/10)**l);
+        break;
+      default:
+        return 1e300;
+    }
+  }
+  function hoverRuneDisplay() {
+    $('#runeNameTxt').html(function (index,html) {
+      return runeName[runeOn];
+    });
+    $('#selRuneLevel').html(function (index,html) {
+      return 'level ' + romanize(runeLevels[runeOn]);
+    });
+    $('#selRuneBoostName').html(function (index,html) {
+      return runeInfoStr[runeOn];
+    });
+    $('#selRuneBoostInfoNum').html(function (index,html) {
+      switch (Math.floor(runeOn/3)) {
+        case 0:
+          markUpThis = 'Red'
+          break;
+        case 1:
+          markUpThis = 'Blue'
+          break;
+        case 2:
+          markUpThis = 'Green'
+          break;
+        case 3:
+          markUpThis = 'White'
+          break;
+      }
+      return '<span class=rune' + markUpThis + 'Markup>x' + notation(runeBuffCalc(runeOn, runeLevels[runeOn])) + ' -> ' + 'x' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)));
+    });
+    $('#selRuneCostNum').html(function (index,html) {
+      return notation(runeCostCalc(runeOn, runeLevels[runeOn]));
+    });
   }
 
   $(document).on('click','#blockClick',function() {
@@ -573,15 +654,48 @@ $(function (){
   $(document).on('mouseover','.rune',function(e) {
     thisIndex = $(".rune").index(this);
     runeOn = thisIndex;
-    $('#runeNameTxt').html(function (index,html) {
-      return runeName[runeOn];
-    });
+    hoverRuneDisplay();
   });
   $(document).on('mouseout','.rune',function(e) {
     runeOn = 0;
     $('#runeNameTxt').html(function (index,html) {
       return 'hover on<br>rune';
     });
+    $('#selRuneLevel').html(function (index,html) {
+      return '';
+    });
+    $('#selRuneBoostName').html(function (index,html) {
+      return '';
+    });
+    $('#selRuneBoostInfoNum').html(function (index,html) {
+      return '';
+    });
+    $('#selRuneCostNum').html(function (index,html) {
+      return '0';
+    });
+  });
+  $(document).on('click','.rune',function() {
+    if (power >= runeCostCalc(runeOn, runeLevels[runeOn])) {
+      power -= runeCostCalc(runeOn, runeLevels[runeOn]);
+      runeLevels[runeOn]++;
+      hoverRuneDisplay();
+      drawAllRuneLine();
+    }
+  });
+  $(document).on('click','#togglePower',function() {
+    if (pActive == 1) {
+      pActive--;
+    } else {
+      pActive++;
+    }
+  });
+  $(document).on('click','.powerBulkButton',function() {
+    thisIndex = $(".powerBulkButton").index(this);
+    if (thisIndex == 0 && powerBulkLevel < 0) {
+      powerBulkLevel++;
+    } else if (thisIndex == 1 && powerBulkLevel >= -10){
+      powerBulkLevel--;
+    }
   });
 
   setInterval( function (){
@@ -597,6 +711,7 @@ $(function (){
     displayStat();
     displayBoost();
     displyRune();
+    displayPower();
     screenWidthBef = screenWidthNow;
     screenHeightBef = screenHeightNow;
     lastTick = timeNow;
@@ -619,7 +734,6 @@ $(function (){
 
   gameLoad();
   displayAll();
-  blockUnlocked[3] = 0;
   blockUnlocked[4] = 0;
   $('#boostSelect > div:nth-child(1) > div:not(:first-child)').hide();
   $('#boostSelect > div:nth-child(1) > div:eq(1)').show();

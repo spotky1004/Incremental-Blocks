@@ -44,7 +44,7 @@ upgradeHave = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
 blockCost = [
-  50, 2.5e6, 200e12, 1e50, 1e70, 1e3, 10
+  50, 2.5e6, 200e12, 2.5e40, 1e70, 1e3, 10
 ];
 blockUnlocked = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -380,7 +380,7 @@ boostShortName = [
   'bpc', 'bps', 'bupc', 'bu eff', 'tok p', 'tok m'
 ];
 boostRange = [
-  [3, 6], [2, 4], [10, 50], [2, 6], [2, 3], [2, 3]
+  [2, 3], [2, 3], [3, 10], [2, 4], [2, 3], [2, 3]
 ];
 boostLongName = [
   'bpc mult', 'bps mult', 'bupc mult', 'bupc effect', 'token %', 'token mult'
@@ -397,12 +397,24 @@ runeName = [
   '<span class="runeGreenMarkup">divide<br>build</span>', '<span class="runeGreenMarkup">master<br>build</span>', '<span class="runeGreenMarkup">re<br>build</span>',
   '<span class="runeWhiteMarkup">overall<br>boost</span>'
 ];
+runeInfoStr = [
+  '<span class="runeRedMarkup">boost block production</span>',
+  '<span class="runeRedMarkup">boost block production per building</span>',
+  '<span class="runeRedMarkup">boost token production</span>',
+  '<span class="runeBlueMarkup">make boost time shorter, but greater boost</span>',
+  '<span class="runeBlueMarkup">make part of rolled boost actived (same -> larger)</span>',
+  '<span class="runeBlueMarkup">boosts effect of boost</span>',
+  '<span class="runeGreenMarkup">divide cost of building</span>',
+  '<span class="runeGreenMarkup">boost bupc(100%), bu eff(10%)</span>',
+  '<span class="runeGreenMarkup">you can build same building again, but effect 10%</span>',
+  '<span class="runeWhiteMarkup">all runes level +1, but loose all</span>'
+];
 varData = [
   'block', 'lastTick', 'upgradeHave', 'blockUnlocked', 'totalBlock',
   'clickCount', 'playtime', 'buildings', 'buildingNow', 'buildProgress',
   'blockUsedInBuilding', 'blockUsedInBuilding', 'boostSelData', 'bToken', 'bCool',
-  'bTotal', 'bTokenTotal', 'bTokenUsed', 'runeLevels', 'mBlock',
-  'mActive'
+  'bTotal', 'bTokenTotal', 'bTokenUsed', 'runeLevels', 'power',
+  'pActive', 'powerProgress', 'powerBulkLevel'
 ];
 resetData = {
   0: 0,
@@ -603,5 +615,7 @@ resetData = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   ],
   19: 0,
-  20: 0
+  20: 0,
+  21: 0,
+  22: 0
 };

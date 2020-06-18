@@ -5,10 +5,10 @@
     <meta name="viewport" content="user-scalable=no">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css?ver=0.4.4.4">
-    <script src="vars.js?ver=0.4.4.4"></script>
-    <script src="index.js?ver=0.4.4.4"></script>
-    <title>Incremental Blocks v0.4.4.4</title>
+    <link rel="stylesheet" href="index.css?ver=0.5">
+    <script src="vars.js?ver=0.5"></script>
+    <script src="index.js?ver=0.5"></script>
+    <title>Incremental Blocks v0.5</title>
   </head>
   <body>
     <div id="warpAll">
@@ -253,18 +253,18 @@
                   </span>
                   <span id="runeInfo">
                     <div id="selRuneLevel">
-                      level i
+
                     </div>
                     <div id="selRuneBoostInfo">
                       <div id="selRuneBoostName">
-                        <span class="runeRedMarkup">buff block production<span>
+                        <span class="runeRedMarkup"><span>
                       </div>
                       <div id="selRuneBoostInfoNum">
-                        <span class="runeRedMarkup">x2 -> x5<span>
+                        <span class="runeRedMarkup"><span>
                       </div>
                     </div>
                     <div id="selRuneCost">
-                      cost: <span id="selRuneCostNum">5</span> power
+                      cost: <span id="selRuneCostNum">0</span> power
                     </div>
                   </span>
                 </div>
@@ -322,12 +322,36 @@
               cost: 200.0t blocks
             </div>
           </span>
-          <span id="middleContentProgress" class="contentBlock">
+          <span id="powerProduction" class="contentBlock">
             <div class="unlockedBlock" style="display:none;">
-
+              <div id="powerCount">
+                <div id="powerNum">
+                  0
+                </div>
+                <div id="powerTxt">
+                  power
+                </div>
+              </div>
+              <div id="togglePower">
+                <div id="togglePowerBlock">
+                  -<span id="togglePowerBlockNum">1e40</span> block/s
+                </div>
+                <div id="togglePowerPower">
+                  +<span id="togglePowerPowerNum">1</span> power/s
+                </div>
+              </div>
+              <div class="powerBulkButton">
+                ▲
+              </div>
+              <div id="powerBulkNum">
+                speed /1
+              </div>
+              <div class="powerBulkButton">
+                ▼
+              </div>
             </div>
             <div class="lockedBlock">
-              cost: 5.000e40 blocks
+              cost: 2.500e40 blocks
             </div>
           </span>
         </div>
