@@ -407,7 +407,7 @@ mystUpgradeRes = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
 mystRes = [
-  ['block', 1], ['bToken', 1], ['power', 1], ['playtime', 0], ['clickCount', 0]
+  ['block', 1], ['bToken', 1], ['power', 1], ['playtime', 0], ['clickCount', 0], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1]
 ];
 mystLevels = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
