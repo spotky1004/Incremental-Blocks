@@ -266,6 +266,7 @@ $(function (){
   function displayStat() {
     (blockUnlocked[1] == 1) ? $('.statEra:eq(1)').show() : $('.statEra:eq(1)').hide();
     (blockUnlocked[2] == 1) ? $('.statEra:eq(2)').show() : $('.statEra:eq(2)').hide();
+    (upgradeHave[99] == 1) ? $('.statEra:eq(3)').show() : $('.statEra:eq(3)').hide();
     statVars = [];
     statVars[0] = notation(totalBlock);
     statVars[1] = clickCount;
@@ -287,7 +288,7 @@ $(function (){
     statVars[17] = totRuneLevel;
     statVars[18] = notation(powerBulkM);
     statVars[19] = 0;
-    statVars[100] = notation(Math.log10(totalBlock+1)**1.2+upgradeHaveCount/5+Math.sqrt(Math.sqrt(bTotal))+Math.sqrt(playtime/3600)+Math.log10(clickCount+1)**2+Math.sqrt(Math.max(buildings-20, 0))+Math.log10(bTokenTotal+1)**1.5+Math.log(powerTot+1)**2+Math.sqrt(totRuneLevel), 4);
+    statVars[100] = notation(Math.log10(totalBlock+1)**1.2+upgradeHaveCount/5+Math.sqrt(Math.sqrt(bTotal))+Math.sqrt(playtime/3600)+Math.log10(clickCount+1)**2+Math.sqrt(Math.max(buildings-20, 0))+Math.log10(bTokenTotal+1)**1.5+Math.log(powerTot+1)**2+Math.sqrt(totRuneLevel)+totMystUp/2, 4);
     $('.statline > span').html(function (index,html) {
       return statVars[index];
     });
