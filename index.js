@@ -617,7 +617,7 @@ $(function (){
         return Math.floor(500*(l**2+(1+l)))**((l/10)+1);
         break;
       case 4:
-        return Math.floor(2e3*(l**4+1));
+        return Math.floor(2e3*(l**4+1))**((l/5)+1);
         break;
       case 5:
         return Math.floor(12e3*((8+l/10)**l));
