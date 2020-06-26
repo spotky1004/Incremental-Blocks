@@ -608,7 +608,7 @@ $(function (){
         return Math.floor((1+l/50)**(l/1.2));
         break;
       case 1:
-        return (l**2+6*l+5)**2;
+        return (l**2+6*l+5)**(2+l/10);
         break;
       case 2:
         return Math.floor((10*(l+1))**(l/3+1));
