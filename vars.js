@@ -391,30 +391,65 @@ boostSelData = [
 runeLevels = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
+mystUnlock = [
+  0, 0, 0, 1e50, 1e55, 1e60, 1e65, 1e70, 1e75, 1e80
+];
+mystUpgradeRes = [
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+];
+mystRes = [
+  ['block', 1], ['bToken', 1], ['power', 1], ['playtime', 0], ['clickCount', 0]
+];
+mystLevels = [
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+];
 runeName = [
   '<span class="runeRedMarkup">block<br>product</span>', '<span class="runeRedMarkup">building<br>product</span>', '<span class="runeRedMarkup">token<br>product</span>',
-  '<span class="runeBlueMarkup">short<br>boost</span>', '<span class="runeBlueMarkup">no<br>boost</span>', '<span class="runeBlueMarkup">upgrade<br>boost</span>',
-  '<span class="runeGreenMarkup">divide<br>build</span>', '<span class="runeGreenMarkup">master<br>build</span>', '<span class="runeGreenMarkup">re<br>build</span>',
+  '<span class="runeBlueMarkup">speed<br>boost</span>', '<span class="runeBlueMarkup">no<br>boost</span>', '<span class="runeBlueMarkup">upgrade<br>boost</span>',
+  '<span class="runeGreenMarkup">re<br>build</span>', '<span class="runeGreenMarkup">divide<br>build</span>', '<span class="runeGreenMarkup">master<br>build</span>',
   '<span class="runeWhiteMarkup">overall<br>boost</span>'
 ];
 runeInfoStr = [
   '<span class="runeRedMarkup">boost block production</span>',
   '<span class="runeRedMarkup">boost block production per building</span>',
   '<span class="runeRedMarkup">boost token production</span>',
-  '<span class="runeBlueMarkup">make boost time shorter, but greater boost</span>',
-  '<span class="runeBlueMarkup">make part of rolled boost actived (same -> larger)</span>',
-  '<span class="runeBlueMarkup">boosts effect of boost</span>',
+  '<span class="runeBlueMarkup">make boost time and cool shorter, but greater boost</span>',
+  '<span class="runeBlueMarkup">make part of rolled boost actived (same -> big)</span>',
+  '<span class="runeBlueMarkup">boosts effect of boost and time and cost(^3)</span>',
+  '<span class="runeGreenMarkup">you can build same building again, but reduced effect</span>',
   '<span class="runeGreenMarkup">divide cost of building</span>',
-  '<span class="runeGreenMarkup">boost bupc(100%), bu eff(10%)</span>',
-  '<span class="runeGreenMarkup">you can build same building again, but effect 10%</span>',
+  '<span class="runeGreenMarkup">n% of block -> bupc</span>',
   '<span class="runeWhiteMarkup">all runes level +1, but loose all</span>'
+];
+rebuildLevel = [
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
 varData = [
   'block', 'lastTick', 'upgradeHave', 'blockUnlocked', 'totalBlock',
   'clickCount', 'playtime', 'buildings', 'buildingNow', 'buildProgress',
   'blockUsedInBuilding', 'blockUsedInBuilding', 'boostSelData', 'bToken', 'bCool',
   'bTotal', 'bTokenTotal', 'bTokenUsed', 'runeLevels', 'power',
-  'pActive', 'powerProgress', 'powerBulkLevel'
+  'pActive', 'powerProgress', 'powerBulkLevel', 'powerTot', 'rebuildLevel',
+  'mystLevels'
 ];
 resetData = {
   0: 0,
@@ -617,5 +652,22 @@ resetData = {
   19: 0,
   20: 0,
   21: 0,
-  22: 0
+  22: 0,
+  23: 0,
+  24: [
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+  ],
+  25: [
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  ]
 };

@@ -245,6 +245,47 @@
   font-size: 3vh;
   animation: mystTxtShiny 20s infinite alternate;
 }
+.mystUpgradeContent {
+  padding: 0.25vh 0 0.25vh 0.5vw;
+  margin: 0.8vh 0 1.2vh 1vw;
+  width: 17vw;
+  height: 4.5vh;
+}
+.mystUpgradeContent.upN {
+  filter: brightness(0.5);
+}
+.mystUpgradeContent.upY {
+  cursor: pointer;
+}
+.mystUpgradeContent.upY:hover {
+  filter: brightness(1.5);
+}
+.mystUpgradeContent.upY:active {
+  background-color: rgba(255, 255, 255, 0.8);
+
+  transition: all 0s;
+}
+.mystUpgradeContent > div:nth-child(1) {
+  background: linear-gradient(to right, #ed93ed, #22e3d6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  text-shadow: 0 0 3px white;
+  margin-right: 11vw;
+  width: 16vw;
+  height: 1.7vh;
+  font-size: 1.7vh;
+  background-color: rgba(40, 40, 40, 0.2);
+}
+.mystUpgradeContent > div:nth-child(2) {
+  padding: 0.5vh 0 0.5vh 0;
+  margin-right: 11vw;
+  width: 16vw;
+  height: 1.8vh;
+  font-size: 1.8vh;
+  color: white;
+  background-color: rgba(40, 40, 40, 0.2);
+}
 @keyframes mystTxtShiny {
   from {
     color: #fff;
@@ -400,6 +441,19 @@
 }
 #buildClickTxt {
   font-size: 1vh;
+}
+#baseBlockVaule {
+  margin: 2vh 0 0 10%; padding-top: 1vh;
+  width: 80%; height: 3vh;
+  color: white; font-size: 2vh; text-align: center;
+  background-color: rgba(40, 40, 40, 0.6);
+  border-radius: 4px;
+}
+#baseBlockVauleMinNum {
+  font-size: 1.5vh;
+}
+#baseBlockVauleMaxNum {
+  font-size: 2vh;
 }
 #buildingNav {
   margin-left: 0.75vw;
