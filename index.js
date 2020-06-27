@@ -168,6 +168,7 @@ $(function (){
     displayBuild();
     displayBoost();
     displayMystUpgrade();
+    bugFix();
     displayStat();
   }
   function displayUnlock() {
