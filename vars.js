@@ -434,7 +434,7 @@ runeInfoStr = [
   '<span class="runeBlueMarkup">make boost time and cool shorter, but greater boost</span>',
   '<span class="runeBlueMarkup">make part of rolled boost actived (same -> big)</span>',
   '<span class="runeBlueMarkup">boosts effect of boost and time and cost(^3)</span>',
-  '<span class="runeGreenMarkup">you can build same building again, but reduced effect</span>',
+  '<span class="runeGreenMarkup">you can build again, but harder to build and reduced effect</span>',
   '<span class="runeGreenMarkup">divide cost of building</span>',
   '<span class="runeGreenMarkup">n% of block -> bupc</span>',
   '<span class="runeWhiteMarkup">all runes level +1, but loose all</span>'
@@ -449,7 +449,7 @@ varData = [
   'blockUsedInBuilding', 'blockUsedInBuilding', 'boostSelData', 'bToken', 'bCool',
   'bTotal', 'bTokenTotal', 'bTokenUsed', 'runeLevels', 'power',
   'pActive', 'powerProgress', 'powerBulkLevel', 'powerTot', 'rebuildLevel',
-  'mystLevels'
+  'mystLevels', 'cheatEnabled'
 ];
 resetData = {
   0: 0,
@@ -669,5 +669,6 @@ resetData = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-  ]
+  ],
+  26: 0
 };

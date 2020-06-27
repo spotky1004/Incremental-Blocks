@@ -1,6 +1,7 @@
 $(function (){
   savePoint = 'IncrementalBlocks';
   notationForm = 0;
+  cheatEnabled = 0;
 
   block = 0;
   blockPS = 0;
@@ -158,6 +159,19 @@ $(function (){
           this[varData[i]] = dataCopy[i];
         }
       }, 0);
+    }
+  }
+  function cheatPrompt() {
+    var inputedCommand = prompt('to use:\nskip (sec)\nblock (num), build (num/all), token (num), power (num)\nrune (num) (level)', '');
+    inputArr = inputedCommand.split(' ');
+    switch (inputArr[0]) {
+      case 'skip':
+        if (!isNaN(Number(inputArr[1]))) {
+          lastTick -= inputArr[1]*1000;
+        }
+        break;
+      default:
+
     }
   }
 
@@ -448,10 +462,10 @@ $(function (){
     $('#powerBulkNum').html(function (index,html) {
       return 'speed /' + notation(Math.pow(2, powerBulkLevel*-1), 5);
     });
+    powerBulkM = 2**(mystLevels[0]+mystLevels[1]+mystLevels[2]);
+    ppsCap = powerBulkM*Math.pow(2, powerBulkLevel);
+    blockUsageM = 1e40*1.5**Math.log(Math.max(ppsCap, 1));
     if (pActive) {
-      powerBulkM = 2**(mystLevels[0]+mystLevels[1]+mystLevels[2]);
-      ppsCap = powerBulkM*Math.pow(2, powerBulkLevel);
-      blockUsageM = 1e40*1.5**Math.log(Math.max(ppsCap, 1));
       thisBulk = Math.min(ppsCap*tickGain, block/blockUsageM);
       block -= thisBulk*blockUsageM;
       if (block < 0) {
@@ -708,14 +722,17 @@ $(function (){
         gameSave();
         break;
       case 1:
-        gameExport();
+        cheatPrompt();
         break;
       case 2:
-        gameImport();
+        gameExport();
         break;
       case 3:
+        gameImport();
+        break;
+      case 4:
         resetTimer--;
-        $('.optionBlock:eq(3)').html(function (index,html) {
+        $('.optionBlock:eq(4)').html(function (index,html) {
           return resetTimer;
         });
         if (resetTimer == 0) {
@@ -862,11 +879,11 @@ $(function (){
     gameSave();
     if (resetTimer < 100) {
       resetTimer++;
-      $('.optionBlock:eq(3)').html(function (index,html) {
+      $('.optionBlock:eq(4)').html(function (index,html) {
         return resetTimer;
       });
     } else if (resetTimer == 100) {
-      $('.optionBlock:eq(3)').html(function (index,html) {
+      $('.optionBlock:eq(4)').html(function (index,html) {
         return 'reset';
       });
     }
@@ -879,6 +896,9 @@ $(function (){
   $('#boostSelect > div:nth-child(1) > div:eq(1)').show();
   $('#middleContentWarp > div').hide();
   $('#middleContentWarp > div:eq(0)').show();
+  if (cheatEnabled) {
+    $('.optionBlock:eq(1)').show();
+  }
 });
 
 function gameReset() {
@@ -889,9 +909,15 @@ function gameReset() {
   for (var i = 0; i < varData.length; i++) {
     saveFile[i] = eval(varData[i]);
   }
+  block = 0;
   localStorage[savePoint] = JSON.stringify(saveFile);
   location.reload();
 }
+function enableCheat() {
+  cheatEnabled = 1;
+  $('.optionBlock:eq(1)').show();
+}
+
 
 /*
   $('#basicBlock > div:eq(2)').html(function (index,html) {
