@@ -622,7 +622,7 @@ $(function (){
           buildings++;
           buildingNow++;
           if (buildingNow == 20) {
-            buildingNow = 19;
+            buildingNow = 0;
           }
         }
         pointerThisBlock = -1;
@@ -1291,11 +1291,15 @@ $(function (){
       case 0:
         if (buildingNow != 0) {
           buildingNow--;
+        } else {
+          buildingNow = buildings;
         }
         break;
       case 1:
         if (buildingNow < buildings && buildingNow < 19) {
           buildingNow++;
+        } else {
+          buildingNow = 0;
         }
         break;
     }
