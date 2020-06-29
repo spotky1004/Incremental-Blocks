@@ -20,6 +20,7 @@ $(function (){
   bToken = 0;
   bTokenTotal = 0;
   bTokenUsed = 0;
+  bTokenGain = 1;
   bTokenCh = 0;
   bCool = 180;
   bActive = [-1, -1, -1, -1, -1];
@@ -47,6 +48,7 @@ $(function (){
   blockUsageM = 1e40;
   totRuneLevel = 0;
   activeRolledBoost = [1, 1, 1, 1, 1, 1];
+  totalRebuild = 0;
 
   function copyToClipboard(val) {
     var t = document.createElement("textarea");
@@ -209,11 +211,11 @@ $(function (){
   }
   function displayBlock() {
     bpsP = ((upgradeHave[1] == 1) ? 1 : 0)+((upgradeHave[3] == 1) ? 5 : 0)+((upgradeHave[5] == 1) ? 20 : 0)+((upgradeHave[7] == 1) ? 60 : 0)+((upgradeHave[9] == 1) ? 175 : 0)+((upgradeHave[11] == 1) ? 721 : 0)+((upgradeHave[12] == 1) ? 4.4e3 : 0)+((upgradeHave[14] == 1) ? 21.74e3 : 0)+((upgradeHave[15] == 1) ? 104.8e3 : 0)+((upgradeHave[19] == 1) ? 600e3 : 0)+((upgradeHave[23] == 1) ? 2.222e6 : 0)+((upgradeHave[24] == 1) ? 14e6 : 0)+((upgradeHave[33] == 1) ? 32e6 : 0)+((upgradeHave[41] == 1) ? 100e6 : 0)+((upgradeHave[66] == 1) ? 333.3e6 : 0)+((upgradeHave[81] == 1) ? 2.109e9 : 0);
-    bpsM = 1*(runeBuffCalc(1, runeLevels[1])**buildings)*((upgradeHave[17] == 1) ? 2 : 1)*((upgradeHave[30] == 1) ? 3 : 1)*((upgradeHave[31] == 1) ? 2 : 1)*((upgradeHave[32] == 1) ? 1.5 : 1)*((upgradeHave[42] == 1) ? 1.8 : 1)*((upgradeHave[43] == 1) ? 1.7 : 1)*((upgradeHave[49] == 1) ? 2 : 1)*((upgradeHave[55] == 1) ? 2.5 : 1)*((upgradeHave[57] == 1) ? 5 : 1)*((bActive[0] == 1) ? bActive[1] : 1)*((upgradeHave[63] == 1) ? 4 : 1)*((upgradeHave[64] == 1) ? 3 : 1)*((upgradeHave[72] == 1) ? 3.5 : 1)*((upgradeHave[77] == 1) ? 15 : 1)*((upgradeHave[82] == 1) ? 3 : 1)*((upgradeHave[89] == 1) ? 3 : 1)*((upgradeHave[90] == 1) ? 2 : 1)*((upgradeHave[91] == 1) ? 3 : 1)*((upgradeHave[92] == 1) ? 5 : 1)*((upgradeHave[93] == 1) ? 7: 1)*((upgradeHave[94] == 1) ? 11 : 1)*((upgradeHave[95] == 1) ? 13 : 1)*((upgradeHave[96] == 1) ? 17 : 1)*((upgradeHave[97] == 1) ? 19 : 1)*((upgradeHave[98] == 1) ? 23 : 1)*runeBuffCalc(0, runeLevels[0])*activeRolledBoost[1];
+    bpsM = 1*(buildingMult)*((upgradeHave[17] == 1) ? 2 : 1)*((upgradeHave[30] == 1) ? 3 : 1)*((upgradeHave[31] == 1) ? 2 : 1)*((upgradeHave[32] == 1) ? 1.5 : 1)*((upgradeHave[42] == 1) ? 1.8 : 1)*((upgradeHave[43] == 1) ? 1.7 : 1)*((upgradeHave[49] == 1) ? 2 : 1)*((upgradeHave[55] == 1) ? 2.5 : 1)*((upgradeHave[57] == 1) ? 5 : 1)*((bActive[0] == 1) ? bActive[1] : 1)*((upgradeHave[63] == 1) ? 4 : 1)*((upgradeHave[64] == 1) ? 3 : 1)*((upgradeHave[72] == 1) ? 3.5 : 1)*((upgradeHave[77] == 1) ? 15 : 1)*((upgradeHave[82] == 1) ? 3 : 1)*((upgradeHave[89] == 1) ? 3 : 1)*((upgradeHave[90] == 1) ? 2 : 1)*((upgradeHave[91] == 1) ? 3 : 1)*((upgradeHave[92] == 1) ? 5 : 1)*((upgradeHave[93] == 1) ? 7: 1)*((upgradeHave[94] == 1) ? 11 : 1)*((upgradeHave[95] == 1) ? 13 : 1)*((upgradeHave[96] == 1) ? 17 : 1)*((upgradeHave[97] == 1) ? 19 : 1)*((upgradeHave[98] == 1) ? 23 : 1)*runeBuffCalc(0, runeLevels[0])*activeRolledBoost[1];
     blockPS = bpsP*bpsM;
     bpcP = 1+((upgradeHave[0] == 1) ? 1 : 0)+((upgradeHave[2] == 1) ? 2 : 0)+((upgradeHave[4] == 1) ? 4 : 0)+((upgradeHave[6] == 1) ? 24 : 0)+((upgradeHave[8] == 1) ? 96 : 0)+((upgradeHave[10] == 1) ? 384 : 0)+((upgradeHave[18] == 1) ? 100e3 : 0);
-    bpcM = 1*(runeBuffCalc(1, runeLevels[1])**buildings)*((upgradeHave[16] == 1) ? 1.5 : 1)*((upgradeHave[45] == 1) ? 7500 : 1)*((upgradeHave[48] == 1) ? 9 : 1)*((bActive[0] == 0) ? bActive[1] : 1)*runeBuffCalc(0, runeLevels[0])*activeRolledBoost[0];
-    blockPC = bpcP*bpcM+((((upgradeHave[13] == 1) ? 0.05 : 0)+((upgradeHave[29] == 1) ? 0.1 : 0)+((upgradeHave[37] == 1) ? 0.15 : 0)+((upgradeHave[78] == 1) ? 0.2 : 0)+((upgradeHave[79] == 1) ? 0.25 : 0))*blockPS)*((bActive[0] == 0) ? bActive[1] : 1)/((bActive[0] == 1) ? bActive[1] : 1);
+    bpcM = 1*(buildingMult)*((upgradeHave[16] == 1) ? 1.5 : 1)*((upgradeHave[45] == 1) ? 7500 : 1)*((upgradeHave[48] == 1) ? 9 : 1)*((bActive[0] == 0) ? bActive[1] : 1)*runeBuffCalc(0, runeLevels[0])*activeRolledBoost[1];
+    blockPC = bpcP*bpcM+((((upgradeHave[13] == 1) ? 0.05 : 0)+((upgradeHave[29] == 1) ? 0.1 : 0)+((upgradeHave[37] == 1) ? 0.15 : 0)+((upgradeHave[78] == 1) ? 0.2 : 0)+((upgradeHave[79] == 1) ? 0.25 : 0))*blockPS)*((bActive[0] == 0) ? bActive[1] : 1)/((bActive[0] == 1) ? bActive[1] : 1)/activeRolledBoost[1];
     $('#blockCount').html(function (index,html) {
       reg = /0/gi;
       strReg1 = notation(block);
@@ -282,6 +284,7 @@ $(function (){
     (blockUnlocked[1] == 1) ? $('.statEra:eq(1)').show() : $('.statEra:eq(1)').hide();
     (blockUnlocked[2] == 1) ? $('.statEra:eq(2)').show() : $('.statEra:eq(2)').hide();
     (upgradeHave[99] == 1) ? $('.statEra:eq(3)').show() : $('.statEra:eq(3)').hide();
+    (runeLevels[6] >= 1) ? $('.statline:eq(19)').show() : $('.statline:eq(19)').hide();
     statVars = [];
     statVars[0] = notation(totalBlock);
     statVars[1] = clickCount;
@@ -302,8 +305,8 @@ $(function (){
     statVars[16] = notation(powerTot);
     statVars[17] = totRuneLevel;
     statVars[18] = notation(powerBulkM);
-    statVars[19] = 0;
-    statVars[100] = notation(Math.log10(totalBlock+1)**1.2+upgradeHaveCount/5+Math.sqrt(Math.sqrt(bTotal))+Math.sqrt(playtime/3600)+Math.log10(clickCount+1)**2+Math.sqrt(Math.max(buildings-20, 0))+Math.log10(bTokenTotal+1)**1.5+Math.log(powerTot+1)**2+Math.sqrt(totRuneLevel)+totMystUp/2, 4);
+    statVars[19] = totalRebuild;
+    statVars[100] = notation(Math.log10(totalBlock+1)**1.2+upgradeHaveCount/5+Math.sqrt(Math.sqrt(bTotal))+Math.sqrt(playtime/3600)+Math.log10(clickCount+1)**2+Math.sqrt(Math.max(buildings-20, 0))+Math.log10(bTokenTotal+1)**1.5+Math.log(powerTot+1)**2+Math.sqrt(totRuneLevel)+totMystUp/2+totalRebuild**1.5, 4);
     $('.statline > span').html(function (index,html) {
       return statVars[index];
     });
@@ -319,40 +322,67 @@ $(function (){
     for (var i = 0; i < 36; i++) {
       colorStr = '';
       extraDeco = '';
-      if (buildingShape[buildingNow][i] != 0) {
-        thisBlockValue = baseBuilding*10**buildingShape[buildingNow][i];
-      } else {
-        thisBlockValue = 0;
-      }
-      if (buildingShape[buildingNow][i] == 0) {
-        colorStr = '0, 0, 0, 0';
-      } else if (buildProgress[buildingNow][i] > 100 && buildingShape[buildingNow][pointerThisBlock] != 0 && i != pointerThisBlock) {
-        for (var j = 0; j < 3; j++) {
-          colorStr += blockColors[buildingShape[buildingNow][i]-1][j] + ', ';
+      if (buildings < 20 || runeLevels[6] == 0) {
+        $('#rebuildNum').hide();
+        $('#rebuildMult').hide();
+        if (buildingShape[buildingNow][i] != 0) {
+          thisBlockValue = baseBuilding*10**buildingShape[buildingNow][i];
+        } else {
+          thisBlockValue = 0;
         }
-        colorStr += '1';
-        extraDeco = ' box-shadow: 7px 7px 0 #777;';
-      } else {
-        colorRawPoint = Math.log10((buildProgress[buildingNow][i]-1)/(3**buildingNow*1e6*((buildingNow >= 12) ? 10**(buildingNow-11) : 1 )))+1;
-        colorPointer = Math.max(Math.floor(colorRawPoint), 0);
-        colorBland = colorRawPoint - colorPointer;
-        if (!isFinite(colorRawPoint)) {
+        if (buildingShape[buildingNow][i] == 0) {
           colorStr = '0, 0, 0, 0';
-        } else if (colorPointer != 0) {
+        } else if (buildProgress[buildingNow][i] > 100 && buildingShape[buildingNow][pointerThisBlock] != 0 && i != pointerThisBlock) {
           for (var j = 0; j < 3; j++) {
-            colorStr += (blockColors[colorPointer-1][j]*(1-colorBland)+blockColors[colorPointer][j]*(colorBland))/2 + ', ';
+            colorStr += blockColors[buildingShape[buildingNow][i]-1][j] + ', ';
           }
           colorStr += '1';
+          extraDeco = ' box-shadow: 7px 7px 0 #777;';
         } else {
-          for (var j = 0; j < 3; j++) {
-            colorStr += '0, ';
+          colorRawPoint = Math.log10((buildProgress[buildingNow][i]-1)/(3**buildingNow*1e6*((buildingNow >= 12) ? 10**(buildingNow-11) : 1 )))+1;
+          colorPointer = Math.max(Math.floor(colorRawPoint), 0);
+          colorBland = colorRawPoint - colorPointer;
+          if (!isFinite(colorRawPoint)) {
+            colorStr = '0, 0, 0, 0';
+          } else if (colorPointer != 0) {
+            for (var j = 0; j < 3; j++) {
+              colorStr += (blockColors[colorPointer-1][j]*(1-colorBland)+blockColors[colorPointer][j]*(colorBland))/2 + ', ';
+            }
+            colorStr += '1';
+          } else {
+            for (var j = 0; j < 3; j++) {
+              colorStr += '0, ';
+            }
+            colorStr += colorBland;
           }
-          colorStr += colorBland;
         }
+        $('.buildBlock:eq(' + i + ')').attr({
+          'style' : 'background-color: rgba(' + colorStr + ');' + extraDeco
+        });
+      } else {
+        $('#rebuildNum').show();
+        $('#rebuildMult').show();
+        colorStr = '';
+        thisBlockValue = baseBuilding*10**(buildingShape[buildingNow][i]-1);
+        if (buildingShape[buildingNow][i] != 0) {
+          for (var j = 0; j < 3; j++) {
+            colorStr += blockColors[buildingShape[buildingNow][i]-1][j] + ', ';
+          }
+          if (rebuildProgress[buildingNow][i] == 0) {
+            colorStr += '0.2';
+          } else if (rebuildProgress[buildingNow][i] < 1) {
+            colorStr += 0.2+rebuildProgress[buildingNow][i]*0.7;
+          } else {
+            colorStr += '1';
+            extraDeco = ' box-shadow: 7px 7px 0 #777;';
+          }
+        } else {
+          colorStr = '0, 0, 0, 0'
+        }
+        $('.buildBlock:eq(' + i + ')').attr({
+          'style' : 'background-color: rgba(' + colorStr + ');' + extraDeco
+        });
       }
-      $('.buildBlock:eq(' + i + ')').attr({
-        'style' : 'background-color: rgba(' + colorStr + ');' + extraDeco
-      });
     }
     $('#buildingNum').html(function (index,html) {
       return 'building ' + (buildingNow+1);
@@ -368,6 +398,15 @@ $(function (){
     });
     $('#baseBlockVauleMaxNum').html(function (index,html) {
       return fillBlank(notation(baseBuilding*10**Math.min(buildingNow, ((buildingNow != 9) ? 10 : 9 ))), 8);
+    });
+    $('#rebuildNum').html(function (index,html) {
+      return 'rebuild ' + (reBuild[buildingNow]+1);
+    });
+    $('#rebuildMult > span:eq(0)').html(function (index,html) {
+      return notation(reBuildMult, 4);
+    });
+    $('#rebuildMult > span:eq(1)').html(function (index,html) {
+      return notation(runeBuffCalc(1, runeLevels[1])**runeBuffCalc(6, runeLevels[1]), 4);
     });
   }
   function displayBoost() {
@@ -429,7 +468,7 @@ $(function (){
     }
     if (runeLevels[4]) {
       for (var i = 0; i < 3; i++) {
-        activeRolledBoost[boostSelData[i][0]] = Math.max(activeRolledBoost[boostSelData[i][0]], boostSelData[i][1]*runeBuffCalc(4, runeLevels[4]), 1);
+        activeRolledBoost[boostSelData[i][0]] = Math.max(activeRolledBoost[boostSelData[i][0]], boostSelData[i][1]**runeBuffCalc(4, runeLevels[4]), 1);
       }
     }
   }
@@ -503,6 +542,7 @@ $(function (){
     }
     for (var i = 0; i < 10; i++) {
       if (mystUnlock[i] < totalBlock) {
+        $('.mystUpgradeContent:eq(' + i + ')').show();
         upgradeResThis = eval(mystRes[i][0]);
         upgradeCostThis = eval(mystUpgradeCost(i, mystLevels[i]));
         if (upgradeResThis >= upgradeCostThis) {
@@ -511,7 +551,7 @@ $(function (){
           $('.mystUpgradeContent:eq(' + i + ')').removeClass('upY').addClass('upN');
         }
         $('.mystUpgradeContent:eq(' + i + ') > div:eq(1) > span').html(function (index,html) {
-          return notation(upgradeCostThis);
+          return notation((i != 3) ? upgradeCostThis : upgradeCostThis/3600);
         });
         $('.mystUpgradeContent:eq(' + i + ') > div:eq(0) > span').html(function (index,html) {
           return mystLevels[i];
@@ -526,35 +566,63 @@ $(function (){
     bToken = Math.floor(bToken);
   }
   function calculateBuild() {
-    baseBuilding = 1e6*3**buildingNow*((buildingNow >= 12) ? 10**(buildingNow-11) : 1 );
-    for (var i = 0; i < 36; i++) {
-      pointerThisBlock = (35-Math.floor(i/6)*6)-(5-(i%6));
-      if (buildingShape[buildingNow][pointerThisBlock] != 0) {
+    if (buildings < 20 || runeLevels[6] == 0) {
+      baseBuilding = 1e6*3**buildingNow*((buildingNow%20 >= 12) ? 10**(buildingNow-11) : 1 )/runeBuffCalc(7, runeLevels[7]);
+    } else {
+      baseBuilding = 1e6*3**buildingNow*((buildingNow%20 >= 12) ? 10**(buildingNow-11) : 1 )*3.486e27**(reBuild[buildingNow]+1)/runeBuffCalc(7, runeLevels[7]);
+    }
+    bupcM = ((upgradeHave[20] == 1) ? 5 : 1)*((upgradeHave[21] == 1) ? 8 : 1)*((upgradeHave[22] == 1) ? 12 : 1)*((upgradeHave[25] == 1) ? 5 : 1)*((upgradeHave[26] == 1) ? 5 : 1)*((upgradeHave[27] == 1) ? 5 : 1)*((upgradeHave[28] == 1) ? 10 : 1)*((upgradeHave[50] == 1) ? 5 : 1)*((upgradeHave[51] == 1) ? 4 : 1)*((upgradeHave[52] == 1) ? 3 : 1)*((upgradeHave[53] == 1) ? 2 : 1)*((upgradeHave[54] == 1) ? 1 : 1)*((upgradeHave[56] == 1) ? 10 : 1)*((upgradeHave[68] == 1) ? 14 : 1)*((upgradeHave[70] == 1) ? 8 : 1)*((upgradeHave[71] == 1) ? 10 : 1)*((upgradeHave[85] == 1) ? 6 : 1)*((upgradeHave[88] == 1) ? 10 : 1)*((bActive[0] == 2) ? bActive[1] : 1)*activeRolledBoost[2];
+    bupc = 100e3*2.7**buildingNow*bupcM+block*mystLevels[3]/1e10*((bActive[0] == 2) ? bActive[1] : 1)*activeRolledBoost[2];
+    if (buildings < 20 || runeLevels[6] == 0) {
+      for (var i = 0; i < 36; i++) {
+        pointerThisBlock = (35-Math.floor(i/6)*6)-(5-(i%6));
+        if (buildingShape[buildingNow][pointerThisBlock] != 0) {
+          thisBlockValue = baseBuilding*10**(buildingShape[buildingNow][pointerThisBlock]-1);
+        } else {
+          thisBlockValue = 0;
+        }
+        if (buildProgress[buildingNow][pointerThisBlock] > thisBlockValue) {
+          buildProgress[buildingNow][pointerThisBlock] = thisBlockValue;
+        }
+      }
+      for (var i = 0; i < 36; i++) {
+        pointerThisBlock = (2*(i%6)+30-i);
         thisBlockValue = baseBuilding*10**(buildingShape[buildingNow][pointerThisBlock]-1);
-      } else {
-        thisBlockValue = 0;
+        if (buildProgress[buildingNow][pointerThisBlock] < thisBlockValue && buildingShape[buildingNow][pointerThisBlock] != 0) {
+          break;
+        }
+        if (buildings <= buildingNow && i == 35) {
+          buildings++;
+        }
+        pointerThisBlock = -1;
       }
-      if (buildProgress[buildingNow][pointerThisBlock] > thisBlockValue) {
-        buildProgress[buildingNow][pointerThisBlock] = thisBlockValue;
+      (bupc > block) ? bupc = block : 0;
+      (bupc > thisBlockValue) ? bupc = thisBlockValue : 0;
+      (buildings == buildingNow) ? 0 : bupc = 0;
+    } else {
+      for (var i = 0; i < 36; i++) {
+        pointerThisBlock = (2*(i%6)+30-i);
+        thisBlockValue = baseBuilding*10**(buildingShape[buildingNow][pointerThisBlock]-1);
+        if (rebuildProgress[buildingNow][pointerThisBlock] < 1 && buildingShape[buildingNow][pointerThisBlock] != 0) {
+          break;
+        }
+        if (i == 35) {
+          reBuild[buildingNow]++;
+          for (var i = 0; i < 36; i++) {
+            rebuildProgress[buildingNow][i] = 0;
+          }
+        }
+        pointerThisBlock = -1;
       }
+      (bupc > block) ? bupc = block : 0;
+      (bupc > thisBlockValue) ? bupc = thisBlockValue : 0;
     }
-    for (var i = 0; i < 36; i++) {
-      pointerThisBlock = (2*(i%6)+30-i);
-      thisBlockValue = baseBuilding*10**(buildingShape[buildingNow][pointerThisBlock]-1);
-      if (buildProgress[buildingNow][pointerThisBlock] < thisBlockValue && buildingShape[buildingNow][pointerThisBlock] != 0) {
-        break;
-      }
-      if (buildings <= buildingNow && i == 35) {
-        buildings++;
-      }
-      pointerThisBlock = -1;
+    totalRebuild = 0;
+    for (var i = 0; i < 20; i++) {
+      totalRebuild += reBuild[i];
     }
-    bupcM = ((upgradeHave[20] == 1) ? 5 : 1)*((upgradeHave[21] == 1) ? 8 : 1)*((upgradeHave[22] == 1) ? 12 : 1)*((upgradeHave[25] == 1) ? 5 : 1)*((upgradeHave[26] == 1) ? 5 : 1)*((upgradeHave[27] == 1) ? 5 : 1)*((upgradeHave[28] == 1) ? 10 : 1)*((upgradeHave[50] == 1) ? 5 : 1)*((upgradeHave[51] == 1) ? 4 : 1)*((upgradeHave[52] == 1) ? 3 : 1)*((upgradeHave[53] == 1) ? 2 : 1)*((upgradeHave[54] == 1) ? 1 : 1)*((upgradeHave[56] == 1) ? 10 : 1)*((upgradeHave[68] == 1) ? 7 : 1)*((upgradeHave[70] == 1) ? 4 : 1)*((upgradeHave[71] == 1) ? 5 : 1)*((upgradeHave[85] == 1) ? 6 : 1)*((upgradeHave[88] == 1) ? 10 : 1)*((bActive[0] == 2) ? bActive[1] : 1)*activeRolledBoost[2];
-    bupc = 100e3*2.7**buildingNow*bupcM;
-    (bupc > block) ? bupc = block : 0;
-    (bupc > thisBlockValue) ? bupc = thisBlockValue : 0;
-    (buildings == buildingNow) ? 0 : bupc = 0;
-    buildingMult = runeBuffCalc(1, runeLevels[1])**buildings;
+    reBuildMult = (runeBuffCalc(1, runeLevels[1])**runeBuffCalc(6, runeLevels[1]))**totalRebuild;
+    buildingMult = runeBuffCalc(1, runeLevels[1])**buildings*reBuildMult;
   }
   function rollBoost() {
     for (var i = 0; i < 3; i++) {
@@ -599,13 +667,13 @@ $(function (){
   function runeBuffCalc(r, l) {
     switch (r) {
       case 0:
-        return Math.floor(((l*(l+1))/2+1)*(1+l*0.03));
+        return Math.floor(((l*(l+1))/2+1)*(1+l*0.13+(1.05**l)/100));
         break;
       case 1:
         return (4+0.2*l).toFixed(1);
         break;
       case 2:
-        return l*2+1;
+        return l*(2+Math.floor(l/(5-l*0.1)))+1;
         break;
       case 3:
         return 1/((l/10)+1);
@@ -615,6 +683,18 @@ $(function (){
         break;
       case 5:
         return 1+l/(2/(l/100+1));
+        break;
+      case 6:
+        return 0.05*Math.sqrt(l);
+        break;
+      case 7:
+        return l*(1.02**l+l*(1+l/3))+1;
+        break;
+      case 8:
+        return 2**l;
+        break;
+      case 9:
+        return l;
         break;
       default:
         return 1;
@@ -639,6 +719,15 @@ $(function (){
         break;
       case 5:
         return Math.floor(12e3*((8+l/10)**l));
+        break;
+      case 6:
+        return 40e3**(l+1);
+        break;
+      case 7:
+        return 80e3*((1.01+l/100)**l+l);
+        break;
+      case 8:
+        return 200e3*(10**l);
         break;
       default:
         return 1e300;
@@ -669,7 +758,11 @@ $(function (){
           markUpThis = 'White'
           break;
       }
-      return '<span class=rune' + markUpThis + 'Markup>x' + notation(runeBuffCalc(runeOn, runeLevels[runeOn]), 2) + ' -> ' + 'x' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)), 2);
+      if (runeOn != 9) {
+        return '<span class=rune' + markUpThis + 'Markup>x' + notation(runeBuffCalc(runeOn, runeLevels[runeOn]), 2) + ' -> ' + 'x' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)), 2);
+      } else {
+        return '<span class=rune' + markUpThis + 'Markup>+' + notation(runeBuffCalc(runeOn, runeLevels[runeOn]), 2) + ' -> ' + '+' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)), 2);
+      }
     });
     $('#selRuneCostNum').html(function (index,html) {
       return notation(runeCostCalc(runeOn, runeLevels[runeOn]));
@@ -678,13 +771,19 @@ $(function (){
   function mystUpgradeCost(u, l) {
     switch (u) {
       case 0:
-        return 1e45*10**(l*0.6);
+        return 1e45*10**(l*(0.6+l/10));
         break;
       case 1:
-        return Math.floor(1e3*((l+1)**(l/10+0.7)))*2;
+        return Math.floor(1e3*((l+1)**(l/7+0.7)))*2;
         break;
       case 2:
         return 200*10**l;
+        break;
+      case 3:
+        return (l+2)*Math.max(l/2, 1)*3600;
+        break;
+      case 4:
+        return 1e3*((l**2+l)/2);
         break;
       default:
         return 1e300;
@@ -743,7 +842,12 @@ $(function (){
   });
   $(document).on('click','#buildClick',function() {
     calculateBuild();
-    buildProgress[buildingNow][pointerThisBlock] += bupc*((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 3 : 1)*((upgradeHave[69] == 1) ? 3 : 1)*((upgradeHave[87] == 1) ? 3 : 1)*activeRolledBoost[3];
+    buEff = ((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 3 : 1)*((upgradeHave[69] == 1) ? 3 : 1)*((upgradeHave[87] == 1) ? 3 : 1)*activeRolledBoost[3]*runeBuffCalc(8, runeLevels[8]);
+    if (buildings < 20 || runeLevels[6] == 0) {
+      buildProgress[buildingNow][pointerThisBlock] += bupc*buEff;
+    } else {
+      rebuildProgress[buildingNow][pointerThisBlock] += bupc/thisBlockValue;
+    }
     block -= bupc;
     blockUsedInBuilding += bupc;
     clickCount++;
@@ -848,7 +952,9 @@ $(function (){
     upgradeResThis = eval(mystRes[thisIndex][0]);
     upgradeCostThis = eval(mystUpgradeCost(thisIndex, mystLevels[thisIndex]));
     if (upgradeResThis >= upgradeCostThis) {
-      window[mystRes[thisIndex][0]] -= upgradeCostThis;
+      if (mystRes[thisIndex][1] == 1) {
+        window[mystRes[thisIndex][0]] -= upgradeCostThis;
+      }
       mystLevels[thisIndex]++;
       displayMystUpgrade();
     }

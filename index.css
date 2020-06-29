@@ -487,6 +487,14 @@
   font-weight: bold;
   text-align: center;
 }
+#rebuildNum {
+  height: 5%;
+  font-size: 3.1vh;
+  color: #19e323;
+  text-shadow: 2px 2px 0 #777;
+  font-weight: bold;
+  text-align: center;
+}
 #buildMult {
   margin-top: 3%;
   height: 6%;
@@ -500,6 +508,22 @@
   height: 6%;
   font-size: 2em;
   color: #e37919;
+  font-weight: 600;
+  text-align: center;
+}
+#rebuildMult {
+  margin-top: 7%;
+  height: 6%;
+  font-size: 1.2vh;
+  color: #19e323;
+  text-shadow: 1px 1px 0 #777;
+  font-weight: bold;
+  text-align: center;
+}
+#rebuildMult > span {
+  height: 6%;
+  font-size: 2em;
+  color: #19e323;
   font-weight: 600;
   text-align: center;
 }
