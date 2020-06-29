@@ -61,6 +61,17 @@ $(function (){
   function toRadians(deg) {
 		return deg*(Math.PI / 180);
 	}
+  function simulateClick() {
+    var evt = document.createEvent("MouseEvents");
+    evt.initMouseEvent("click", true, true, window,0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    var cb = document.getElementById("checkbox");
+    var canceled = !cb.dispatchEvent(evt);
+    if(canceled) {
+      alert("canceled");
+    } else {
+      alert("not canceled");
+    }
+  }
 
   function notation(num, dim) {
     if (num < 1e30) {
@@ -577,6 +588,9 @@ $(function (){
     if (middleMenu != 1) {
       $('#runeMenu').hide();
     }
+    if (buildingNow >= 20) {
+      buildingNow = 19;
+    }
   }
   function calculateBuild() {
     if (buildings < 20 || runeLevels[6] == 0) {
@@ -607,6 +621,9 @@ $(function (){
         if (buildings <= buildingNow && i == 35) {
           buildings++;
           buildingNow++;
+          if (buildingNow == 20) {
+            buildingNow = 19;
+          }
         }
         pointerThisBlock = -1;
       }
