@@ -775,7 +775,11 @@ $(function (){
       }
     });
     $('#selRuneCostNum').html(function (index,html) {
-      return notation(runeCostCalc(runeOn, runeLevels[runeOn]-runeBuffCalc(9, runeLevels[9]))*0.9**mystLevels[4]);
+      if (runeOn != 9) {
+        return notation(runeCostCalc(runeOn, runeLevels[runeOn]-runeBuffCalc(9, runeLevels[9]))*0.9**mystLevels[4]);
+      } else {
+        return notation(runeCostCalc(runeOn, runeLevels[runeOn])*0.9**mystLevels[4]);
+      }
     });
   }
   function mystUpgradeCost(u, l) {
@@ -821,6 +825,7 @@ $(function (){
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     ];
+    bActive = [-1, -1, -1, -1, -1];
     buildings = 0;
     buildingNow = 0;
     buildProgress = [
@@ -1321,8 +1326,8 @@ $(function (){
     });
   });
   $(document).on('click','.rune',function() {
-    if (power >= runeCostCalc(runeOn, runeLevels[runeOn]-runeBuffCalc(9, runeLevels[9]))*0.9**mystLevels[4]) {
-      power -= runeCostCalc(runeOn, runeLevels[runeOn]-runeBuffCalc(9, runeLevels[9]))*0.9**mystLevels[4];
+    if (power >= ((runeOn != 9) ? runeCostCalc(runeOn, runeLevels[runeOn]-runeBuffCalc(9, runeLevels[9]))*0.9**mystLevels[4] : runeCostCalc(runeOn, runeLevels[runeOn])*0.9**mystLevels[4])) {
+      power -= ((runeOn != 9) ? runeCostCalc(runeOn, runeLevels[runeOn]-runeBuffCalc(9, runeLevels[9]))*0.9**mystLevels[4] : runeCostCalc(runeOn, runeLevels[runeOn])*0.9**mystLevels[4]);
       runeLevels[runeOn]++;
       hoverRuneDisplay();
       drawAllRuneLine();
