@@ -369,9 +369,9 @@ $(function (){
             colorStr += blockColors[buildingShape[buildingNow][i]-1][j] + ', ';
           }
           if (rebuildProgress[buildingNow][i] == 0) {
-            colorStr += '0.2';
+            colorStr += '0.4';
           } else if (rebuildProgress[buildingNow][i] < 1) {
-            colorStr += 0.2+rebuildProgress[buildingNow][i]*0.7;
+            colorStr += 0.4+rebuildProgress[buildingNow][i]*0.7;
           } else {
             colorStr += '1';
             extraDeco = ' box-shadow: 7px 7px 0 #777;';
