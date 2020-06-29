@@ -427,7 +427,11 @@ $(function (){
     bTokenMult = Math.floor(((bActive[0] == 5) ? bActive[1] : 1)*((upgradeHave[60] == 1) ? 3 : 1)*((upgradeHave[61] == 1) ? 3 : 1)*((upgradeHave[81] == 1) ? 3 : 1)**activeRolledBoost[5]);
     bTokenGain = bTokenMult*runeBuffCalc(2, runeLevels[2]);
     $('#tokenNum').html(function (index,html) {
-      return bToken;
+      if (bToken < 1e9) {
+        return bToken;
+      } else {
+        return notation(bToken);
+      }
     });
     $('.boostType').html(function (index,html) {
       return boostShortName[boostSelData[index][0]];
