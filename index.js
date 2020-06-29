@@ -424,7 +424,7 @@ $(function (){
   }
   function displayBoost() {
     bTokenCh = (((upgradeHave[34] == 1) ? 1 : 0)+((upgradeHave[35] == 1) ? 1 : 0)+((upgradeHave[36] == 1) ? 1 : 0)+((upgradeHave[40] == 1) ? 2 : 0)+((upgradeHave[46] == 1) ? 2 : 0)+((upgradeHave[58] == 1) ? 4 : 0)+((upgradeHave[62] == 1) ? 4 : 0)+((upgradeHave[74] == 1) ? 6 : 0)+((upgradeHave[75] == 1) ? 6 : 0)+((upgradeHave[84] == 1) ? 8 : 0))*((bActive[0] == 4) ? bActive[1] : 1)*activeRolledBoost[4];
-    bTokenMult = Math.floor(((bActive[0] == 5) ? bActive[1] : 1)*((upgradeHave[60] == 1) ? 2 : 1)*((upgradeHave[61] == 1) ? 3 : 1)*((upgradeHave[81] == 1) ? 2 : 1)**activeRolledBoost[5]);
+    bTokenMult = Math.floor(((bActive[0] == 5) ? bActive[1] : 1)*((upgradeHave[60] == 1) ? 3 : 1)*((upgradeHave[61] == 1) ? 3 : 1)*((upgradeHave[81] == 1) ? 3 : 1)**activeRolledBoost[5]);
     bTokenGain = bTokenMult*runeBuffCalc(2, runeLevels[2]);
     $('#tokenNum').html(function (index,html) {
       return bToken;
@@ -598,7 +598,7 @@ $(function (){
     } else {
       baseBuilding = 1e6*3**buildingNow*((buildingNow%20 >= 12) ? 10**(buildingNow-11) : 1 )*3.486e27**(reBuild[buildingNow]+1)/runeBuffCalc(7, runeLevels[7]);
     }
-    bupcM = ((upgradeHave[20] == 1) ? 5 : 1)*((upgradeHave[21] == 1) ? 8 : 1)*((upgradeHave[22] == 1) ? 12 : 1)*((upgradeHave[25] == 1) ? 5 : 1)*((upgradeHave[26] == 1) ? 5 : 1)*((upgradeHave[27] == 1) ? 5 : 1)*((upgradeHave[28] == 1) ? 10 : 1)*((upgradeHave[50] == 1) ? 5 : 1)*((upgradeHave[51] == 1) ? 4 : 1)*((upgradeHave[52] == 1) ? 3 : 1)*((upgradeHave[53] == 1) ? 2 : 1)*((upgradeHave[54] == 1) ? 1 : 1)*((upgradeHave[56] == 1) ? 10 : 1)*((upgradeHave[68] == 1) ? 14 : 1)*((upgradeHave[70] == 1) ? 8 : 1)*((upgradeHave[71] == 1) ? 10 : 1)*((upgradeHave[85] == 1) ? 6 : 1)*((upgradeHave[88] == 1) ? 10 : 1)*((bActive[0] == 2) ? bActive[1] : 1)*activeRolledBoost[2];
+    bupcM = ((upgradeHave[20] == 1) ? 5 : 1)*((upgradeHave[21] == 1) ? 8 : 1)*((upgradeHave[22] == 1) ? 12 : 1)*((upgradeHave[25] == 1) ? 5 : 1)*((upgradeHave[26] == 1) ? 5 : 1)*((upgradeHave[27] == 1) ? 5 : 1)*((upgradeHave[28] == 1) ? 10 : 1)*((upgradeHave[50] == 1) ? 5 : 1)*((upgradeHave[51] == 1) ? 4 : 1)*((upgradeHave[52] == 1) ? 3 : 1)*((upgradeHave[53] == 1) ? 2 : 1)*((upgradeHave[54] == 1) ? 1 : 1)*((upgradeHave[56] == 1) ? 10 : 1)*((upgradeHave[68] == 1) ? 14 : 1)*((upgradeHave[70] == 1) ? 15 : 1)*((upgradeHave[71] == 1) ? 20 : 1)*((upgradeHave[85] == 1) ? 6 : 1)*((upgradeHave[88] == 1) ? 10 : 1)*((bActive[0] == 2) ? bActive[1] : 1)*activeRolledBoost[2];
     bupc = 100e3*2.7**buildingNow*bupcM+block*mystLevels[3]/1e5*((bActive[0] == 2) ? bActive[1] : 1)*activeRolledBoost[2];
     if (buildings < 20 || runeLevels[6] == 0) {
       for (var i = 0; i < 36; i++) {
