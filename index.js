@@ -197,7 +197,7 @@ $(function (){
         $('.contentBlock:eq(' + i + ') > div:nth-child(2)').show();
       }
     }
-    if (upgradeHave[99] == 1) {
+    if (upgradeHave[99] == 1 || prestigeLevelCheck(1)) {
       $('#middleContentNav > span:eq(1)').removeClass('lockedNav').addClass('openedNav');
       $('#middleContentNav > span:eq(1)').html(function (index,html) {
         return 'rune';
@@ -244,6 +244,8 @@ $(function (){
     }
     if (upgradeHave[97] == 1 && upgradeHave[98] == 1) {
       $('.upgradeContent:eq(0)').addClass('mystUpgrade');
+    } else {
+      $('.upgradeContent:eq(0)').removeClass('mystUpgrade');
     }
     if (middleMenu == 0) {
       $('#upgradeOrign').show();
@@ -283,8 +285,8 @@ $(function (){
   function displayStat() {
     (blockUnlocked[1] == 1) ? $('.statEra:eq(1)').show() : $('.statEra:eq(1)').hide();
     (blockUnlocked[2] == 1) ? $('.statEra:eq(2)').show() : $('.statEra:eq(2)').hide();
-    (upgradeHave[99] == 1) ? $('.statEra:eq(3)').show() : $('.statEra:eq(3)').hide();
-    (runeLevels[6] >= 1) ? $('.statline:eq(19)').show() : $('.statline:eq(19)').hide();
+    (upgradeHave[99] == 1 || prestigeLevelCheck(1)) ? $('.statEra:eq(3)').show() : $('.statEra:eq(3)').hide();
+    (runeLevels[6] >= 1 || prestigeLevelCheck(1)) ? $('.statline:eq(19)').show() : $('.statline:eq(19)').hide();
     statVars = [];
     statVars[0] = notation(totalBlock);
     statVars[1] = clickCount;
@@ -699,7 +701,7 @@ $(function (){
         return 2**l;
         break;
       case 9:
-        return l;
+        return (l**2+l)/2;
         break;
       default:
         return 1;
@@ -733,6 +735,9 @@ $(function (){
         break;
       case 8:
         return 200e3*(10**l);
+        break;
+      case 9:
+        return 3e12**(l+1);
         break;
       default:
         return 1e300;
@@ -770,7 +775,7 @@ $(function (){
       }
     });
     $('#selRuneCostNum').html(function (index,html) {
-      return notation(runeCostCalc(runeOn, runeLevels[runeOn])*0.9**mystLevels[4]);
+      return notation(runeCostCalc(runeOn, runeLevels[runeOn]-runeBuffCalc(9, runeLevels[9]))*0.9**mystLevels[4]);
     });
   }
   function mystUpgradeCost(u, l) {
@@ -793,6 +798,392 @@ $(function (){
       default:
         return 1e300;
     }
+  }
+
+  function prestigeLevelCheck(num) {
+    if (runeLevels[9] >= 1 && num == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  function runeLevelPrestige() {
+    runeLevels = [runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeLevels[9]];
+    upgradeHave = [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    ];
+    buildings = 0;
+    buildingNow = 0;
+    buildProgress = [
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ]
+    ];
+    bToken = 0;
+    bCool = 0;
+    power = 0;
+    pActive = false;
+    powerProgress = 0;
+    powerBulkLevel = 0;
+    rebuildLevel = [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    ];
+    mystLevels = [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ];
+    rebuildProgress = [
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ],
+      [
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0
+      ]
+    ];
+    reBuild = [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    ]
+    rollBoost();
+    bps = 0;
+    bpc = 0;
+    pps = 0;
+    block = 0;
+    setTimeout( function (){
+      block = 0;
+    }, 0);
+    setTimeout( function (){
+      block = 0;
+    }, 60);
   }
 
   $(document).on('click','#blockClick',function() {
@@ -930,11 +1321,14 @@ $(function (){
     });
   });
   $(document).on('click','.rune',function() {
-    if (power >= runeCostCalc(runeOn, runeLevels[runeOn])*0.9**mystLevels[4]) {
-      power -= runeCostCalc(runeOn, runeLevels[runeOn])*0.9**mystLevels[4];
+    if (power >= runeCostCalc(runeOn, runeLevels[runeOn]-runeBuffCalc(9, runeLevels[9]))*0.9**mystLevels[4]) {
+      power -= runeCostCalc(runeOn, runeLevels[runeOn]-runeBuffCalc(9, runeLevels[9]))*0.9**mystLevels[4];
       runeLevels[runeOn]++;
       hoverRuneDisplay();
       drawAllRuneLine();
+      if (runeOn == 9) {
+        runeLevelPrestige();
+      }
     }
   });
   $(document).on('click','#togglePower',function() {
@@ -1013,6 +1407,9 @@ $(function (){
 });
 
 function gameReset() {
+  setInterval( function (){
+    block = 0;
+  }, 0);
   for (var i = 0; i < varData.length; i++) {
     this[varData[i]] = resetData[i];
   }
@@ -1020,7 +1417,6 @@ function gameReset() {
   for (var i = 0; i < varData.length; i++) {
     saveFile[i] = eval(varData[i]);
   }
-  block = 0;
   localStorage[savePoint] = JSON.stringify(saveFile);
   location.reload();
 }
