@@ -606,6 +606,7 @@ $(function (){
         }
         if (buildings <= buildingNow && i == 35) {
           buildings++;
+          buildingNow++;
         }
         pointerThisBlock = -1;
       }
@@ -633,6 +634,10 @@ $(function (){
     totalRebuild = 0;
     for (var i = 0; i < 20; i++) {
       totalRebuild += reBuild[i];
+      buildingNow++;
+      if (buildingNow == 20) {
+        buildingNow = 0;
+      }
     }
     reBuildMult = (runeBuffCalc(1, runeLevels[1])**runeBuffCalc(6, runeLevels[1]))**totalRebuild;
     buildingMult = runeBuffCalc(1, runeLevels[1])**buildings*reBuildMult;
