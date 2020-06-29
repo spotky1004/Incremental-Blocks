@@ -546,7 +546,7 @@ boostShortName = [
   'bpc', 'bps', 'bupc', 'bu eff', 'tok p', 'tok m'
 ];
 boostRange = [
-  [2, 3], [2, 3], [4, 15], [2, 4], [2, 3], [1.5, 2]
+  [2, 3], [2, 3], [4, 15], [2, 4], [2, 3], [2, 3]
 ];
 boostLongName = [
   'bpc mult', 'bps mult', 'bupc mult', 'bupc effect', 'token %', 'token mult'
