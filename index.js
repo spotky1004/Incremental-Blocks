@@ -534,6 +534,11 @@ $(function (){
     $('#powerNum').html(function (index,html) {
       return notation(power);
     });
+    $('#blockCount').html(function (index,html) {
+      reg = /0/gi;
+      strReg1 = notation(block);
+      return strReg1.replace(reg, '<span class="num0">$&</span>');
+    });
   }
   function displayMystUpgrade() {
     totMystUp = 0;
@@ -572,7 +577,7 @@ $(function (){
       baseBuilding = 1e6*3**buildingNow*((buildingNow%20 >= 12) ? 10**(buildingNow-11) : 1 )*3.486e27**(reBuild[buildingNow]+1)/runeBuffCalc(7, runeLevels[7]);
     }
     bupcM = ((upgradeHave[20] == 1) ? 5 : 1)*((upgradeHave[21] == 1) ? 8 : 1)*((upgradeHave[22] == 1) ? 12 : 1)*((upgradeHave[25] == 1) ? 5 : 1)*((upgradeHave[26] == 1) ? 5 : 1)*((upgradeHave[27] == 1) ? 5 : 1)*((upgradeHave[28] == 1) ? 10 : 1)*((upgradeHave[50] == 1) ? 5 : 1)*((upgradeHave[51] == 1) ? 4 : 1)*((upgradeHave[52] == 1) ? 3 : 1)*((upgradeHave[53] == 1) ? 2 : 1)*((upgradeHave[54] == 1) ? 1 : 1)*((upgradeHave[56] == 1) ? 10 : 1)*((upgradeHave[68] == 1) ? 14 : 1)*((upgradeHave[70] == 1) ? 8 : 1)*((upgradeHave[71] == 1) ? 10 : 1)*((upgradeHave[85] == 1) ? 6 : 1)*((upgradeHave[88] == 1) ? 10 : 1)*((bActive[0] == 2) ? bActive[1] : 1)*activeRolledBoost[2];
-    bupc = 100e3*2.7**buildingNow*bupcM+block*mystLevels[3]/1e10*((bActive[0] == 2) ? bActive[1] : 1)*activeRolledBoost[2];
+    bupc = 100e3*2.7**buildingNow*bupcM+block*mystLevels[3]/1e5*((bActive[0] == 2) ? bActive[1] : 1)*activeRolledBoost[2];
     if (buildings < 20 || runeLevels[6] == 0) {
       for (var i = 0; i < 36; i++) {
         pointerThisBlock = (35-Math.floor(i/6)*6)-(5-(i%6));
