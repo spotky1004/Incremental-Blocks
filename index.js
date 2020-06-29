@@ -1280,6 +1280,10 @@ $(function (){
     block -= bupc;
     blockUsedInBuilding += bupc;
     clickCount++;
+    if (bTokenCh/100 > Math.random()) {
+      bToken += bTokenGain;
+      bTokenTotal += bTokenGain;
+    }
     displayBuild();
   });
   $(document).on('click','#buildingNav > span',function() {
