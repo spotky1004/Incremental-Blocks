@@ -11,12 +11,12 @@ upgradeName = [
   'bpc +1', 'bps +1', 'bpc +2', 'bps +5', 'bpc +4', 'bps +20', 'bpc +24', 'bps +60', 'bpc +96', 'bps +175',
   'bpc +384', 'bps +721', 'bps +4.400k', 'bps 5% -> bpc', 'bps +21.74k', 'bps +104.8k', 'bpc x1.5', 'bps x2', 'bpc +100k', 'bps +600k',
   'bupc x5', 'bupc x8', 'bupc x12', 'bps +2.222m', 'bps +14.000m', 'bupc x5', 'bupc x5', 'bupc x5', 'bupc x10', 'bps 10% -> bpc',
-  'bps x3', 'bps x2', 'bps x1.5', 'bps +32.00m', 'token/click 0.5%p', 'token/click 0.5%p', 'token/click 0.5%p', 'bps 15% -> bpc', 'boost effect x1.5', 'boost cool -20s',
-  'token/click 1%p', 'bps +100.0m', 'bps x1.8', 'bps x1.7', 'boost cool -30s', 'bpc x7.500k', 'token/click 1%p', 'boost cool -30s', 'bpc x9', 'bps x2',
-  'bupc x5', 'bupc x4', 'bupc x3', 'bupc x2', 'bupc x1', 'bps x2.5', 'bupc x10', 'bps x5', 'token/click 2%p', 'boost cool -30s',
-  'token x2', 'token x3', 'token/click 2%p', 'bps x4', 'bps x3', 'boost cool -20s', 'bps +333.3m', 'bu eff x3', 'bupc x14', 'bu eff x3',
-  'bupc x8', 'bupc x10', 'bps x3.5', 'boost cool -15s', 'token/click 3%', 'token/click 3%', 'boost cool -10s', 'bps x15', 'bps 20% -> bpc', 'bps 25% -> bpc',
-  'token x2', 'bps +2.109b', 'bps x3', 'boost cool -20s', 'token/click 4%', 'bupc x6', 'boost cool -10s', 'bu eff x3', 'bupc x10', 'bps x3',
+  'bps x3', 'bps x2', 'bps x1.5', 'bps +32.00m', 'token/click 1%p', 'token/click 1%p', 'token/click 1%p', 'bps 15% -> bpc', 'boost effect x1.5', 'boost cool -20s',
+  'token/click 2%p', 'bps +100.0m', 'bps x1.8', 'bps x1.7', 'boost cool -30s', 'bpc x7.500k', 'token/click 2%p', 'boost cool -30s', 'bpc x9', 'bps x2',
+  'bupc x5', 'bupc x4', 'bupc x3', 'bupc x2', 'bupc x1', 'bps x2.5', 'bupc x10', 'bps x5', 'token/click 4%p', 'boost cool -30s',
+  'token x2', 'token x3', 'token/click 4%p', 'bps x4', 'bps x3', 'boost cool -20s', 'bps +333.3m', 'bu eff x3', 'bupc x14', 'bu eff x3',
+  'bupc x8', 'bupc x10', 'bps x3.5', 'boost cool -15s', 'token/click 6%', 'token/click 6%', 'boost cool -10s', 'bps x15', 'bps 20% -> bpc', 'bps 25% -> bpc',
+  'token x2', 'bps +2.109b', 'bps x3', 'boost cool -20s', 'token/click 8%', 'bupc x6', 'boost cool -10s', 'bu eff x3', 'bupc x10', 'bps x3',
   'bps x2', 'bps x3', 'bps x5', 'bps x7', 'bps x11', 'bps x13', 'bps x17', 'bps x19', 'bps x23', 'go to next stage!'
 ];
 upgradeCost = [
@@ -25,7 +25,7 @@ upgradeCost = [
   20.23e6, 50.4e6, 160e6, 323.2e6, 888.8e6, 3.45e9, 6.23e9, 30e9, 80e9, 160e9,
   1e12, 4.5e12, 15.7e12, 53.2e12, 4e12, 12e12, 36e12, 12.34e12, 12.35e12, 12.36e12,
   96e12, 80e15, 1e15, 3.32e15, 1e15, 2.223e15, 3.612e15, 2e15, 5e15, 14e15,
-  10e15, 30e15, 90e15, 270e15, 810e15, 1.5e18, 2.43e18, 8e18, 12e18, 21e18,
+  10e15, 20e15, 40e15, 80e15, 160e15, 300e15, 900e15, 2.1e18, 4.23e18, 8.324e18,
   6.666e18, 10e18, 15e18, 46e18, 200e18, 155e18, 999.9e18, 3e21, 3e21, 15e21,
   1.515e24, 3e24, 2.345e24, 3.5e24, 20e24, 100e24, 220e24, 750e24, 1.52e27, 10e27,
   15e27, 20e27, 60e27, 120e27, 230e27, 330e27, 359e27, 396e27, 423e27, 1e30,

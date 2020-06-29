@@ -412,7 +412,7 @@ $(function (){
     });
   }
   function displayBoost() {
-    bTokenCh = (((upgradeHave[34] == 1) ? 0.5 : 0)+((upgradeHave[35] == 1) ? 0.5 : 0)+((upgradeHave[36] == 1) ? 0.5 : 0)+((upgradeHave[40] == 1) ? 1 : 0)+((upgradeHave[46] == 1) ? 1 : 0)+((upgradeHave[58] == 1) ? 2 : 0)+((upgradeHave[62] == 1) ? 2 : 0)+((upgradeHave[74] == 1) ? 3 : 0)+((upgradeHave[75] == 1) ? 3 : 0)+((upgradeHave[84] == 1) ? 4 : 0))*((bActive[0] == 4) ? bActive[1] : 1)*activeRolledBoost[4];
+    bTokenCh = (((upgradeHave[34] == 1) ? 1 : 0)+((upgradeHave[35] == 1) ? 1 : 0)+((upgradeHave[36] == 1) ? 1 : 0)+((upgradeHave[40] == 1) ? 2 : 0)+((upgradeHave[46] == 1) ? 2 : 0)+((upgradeHave[58] == 1) ? 4 : 0)+((upgradeHave[62] == 1) ? 4 : 0)+((upgradeHave[74] == 1) ? 6 : 0)+((upgradeHave[75] == 1) ? 6 : 0)+((upgradeHave[84] == 1) ? 8 : 0))*((bActive[0] == 4) ? bActive[1] : 1)*activeRolledBoost[4];
     bTokenMult = Math.floor(((bActive[0] == 5) ? bActive[1] : 1)*((upgradeHave[60] == 1) ? 2 : 1)*((upgradeHave[61] == 1) ? 3 : 1)*((upgradeHave[81] == 1) ? 2 : 1)**activeRolledBoost[5]);
     bTokenGain = bTokenMult*runeBuffCalc(2, runeLevels[2]);
     $('#tokenNum').html(function (index,html) {
