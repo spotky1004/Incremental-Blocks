@@ -571,6 +571,12 @@ $(function (){
 
   function bugFix() {
     bToken = Math.floor(bToken);
+    if (middleMenu != 0) {
+      $('#buildMenu').hide();
+    }
+    if (middleMenu != 1) {
+      $('#runeMenu').hide();
+    }
   }
   function calculateBuild() {
     if (buildings < 20 || runeLevels[6] == 0) {
@@ -1378,6 +1384,7 @@ $(function (){
     displayBoost();
     displyRune();
     displayPower();
+    bugFix();
     displayMystUpgrade();
     screenWidthBef = screenWidthNow;
     screenHeightBef = screenHeightNow;
