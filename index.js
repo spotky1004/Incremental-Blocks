@@ -1293,6 +1293,9 @@ $(function (){
           buildingNow--;
         } else {
           buildingNow = buildings;
+          if (buildings == 20) {
+            buildingNow = 19;
+          }
         }
         break;
       case 1:
