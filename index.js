@@ -1271,7 +1271,7 @@ $(function (){
   });
   $(document).on('click','#buildClick',function() {
     calculateBuild();
-    buEff = ((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 3 : 1)*((upgradeHave[69] == 1) ? 3 : 1)*((upgradeHave[87] == 1) ? 3 : 1)*activeRolledBoost[3]*runeBuffCalc(8, runeLevels[8]);
+    buEff = ((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 6 : 1)*((upgradeHave[69] == 1) ? 4 : 1)*((upgradeHave[87] == 1) ? 2 : 1)*activeRolledBoost[3]*runeBuffCalc(8, runeLevels[8]);
     if (buildings < 20 || runeLevels[6] == 0) {
       buildProgress[buildingNow][pointerThisBlock] += bupc*buEff;
     } else {
