@@ -765,7 +765,7 @@ $(function (){
       }
     });
     $('#selRuneCostNum').html(function (index,html) {
-      return notation(runeCostCalc(runeOn, runeLevels[runeOn]));
+      return notation(runeCostCalc(runeOn, runeLevels[runeOn])*0.9**mystLevels[4]);
     });
   }
   function mystUpgradeCost(u, l) {
@@ -783,7 +783,7 @@ $(function (){
         return (l+2)*Math.max(l/2, 1)*3600;
         break;
       case 4:
-        return 1e3*((l**2+l)/2);
+        return 1e3*((l**2+l)/2+1);
         break;
       default:
         return 1e300;
@@ -925,8 +925,8 @@ $(function (){
     });
   });
   $(document).on('click','.rune',function() {
-    if (power >= runeCostCalc(runeOn, runeLevels[runeOn])) {
-      power -= runeCostCalc(runeOn, runeLevels[runeOn]);
+    if (power >= runeCostCalc(runeOn, runeLevels[runeOn])*0.9**mystLevels[4]) {
+      power -= runeCostCalc(runeOn, runeLevels[runeOn])*0.9**mystLevels[4];
       runeLevels[runeOn]++;
       hoverRuneDisplay();
       drawAllRuneLine();
