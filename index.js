@@ -591,6 +591,15 @@ $(function (){
     if (buildingNow >= 20) {
       buildingNow = 19;
     }
+    if (block < 0) {
+      block = 0;
+    }
+    if (power < 0) {
+      power = 0;
+    }
+    if (powerProgress < 0) {
+      powerProgress = 0;
+    }
   }
   function calculateBuild() {
     if (buildings < 20 || runeLevels[6] == 0) {
