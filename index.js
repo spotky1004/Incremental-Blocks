@@ -649,6 +649,14 @@ $(function (){
       bToken = 0;
       bTokenTotal = 0;
     }
+    if (!isFinite(power)) {
+      power = 0;
+      powerTot = 0;
+    }
+    if (!isFinite(block)) {
+      block = 0;
+      totalBlock = 0;
+    }
   }
   function calculateBuild() {
     if (buildings < 20 || runeLevels[6] == 0) {
@@ -1497,7 +1505,7 @@ $(function (){
     timeNow = new Date().getTime();
     screenWidthNow = $(window).width();
     screenHeightNow = $(window).height();
-    tickGain = (timeNow-lastTick)/1000;
+    tickGain = (timeNow-lastTick)/1;
     block += blockPS*tickGain;
     totalBlock += blockPS*tickGain;
     clickBlock(tickGain*mystLevels[7]);
