@@ -779,7 +779,7 @@ $(function (){
         return 1+l/(2/(l/100+1));
         break;
       case 6:
-        return 0.05*Math.sqrt(l*3);
+        return 0.05*Math.sqrt(l*(l/10));
         break;
       case 7:
         return l*(1.02**l+l*(1+l/3))+1;
