@@ -312,7 +312,7 @@ $(function (){
     statVars[10] = notation(blockUsedInBuilding);
     statVars[11] = notation(bTokenTotal);
     statVars[12] = bTokenCh.toFixed(1);
-    statVars[13] = bTokenGain;
+    statVars[13] = notation(bTokenGain);
     statVars[14] = bTotal;
     statVars[15] = totMystUp;
     statVars[16] = notation(powerTot);
