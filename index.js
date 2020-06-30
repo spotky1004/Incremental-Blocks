@@ -1287,7 +1287,7 @@ $(function (){
   }
 
   function clickBlock(num) {
-    num = (Math.random() < mystLevels[6]/10) ? num*2 : 0;
+    num = (Math.random() < mystLevels[6]/10) ? num*2 : num;
     block += blockPC*num;
     totalBlock += blockPC*num;
     clickCount += num;
@@ -1299,7 +1299,7 @@ $(function (){
     displayBlock();
   }
   function clickBuild(num) {
-    num = (Math.random() < mystLevels[7]/10) ? num*2 : 0;
+    num = (Math.random() < mystLevels[7]/10) ? num*2 : num;
     calculateBuild();
     buEff = ((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 6 : 1)*((upgradeHave[69] == 1) ? 4 : 1)*((upgradeHave[87] == 1) ? 2 : 1)*activeRolledBoost[3]*runeBuffCalc(8, runeLevels[8]);
     if (buildings < 20 || runeLevels[6] == 0) {
