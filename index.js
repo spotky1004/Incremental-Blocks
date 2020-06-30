@@ -602,11 +602,15 @@ $(function (){
   }
   function displayProgress() {
     unlockProgressNow = Math.log10(totalBlock/unlockProgress[unlockReached][0])/Math.log10(unlockProgress[unlockReached][1]/unlockProgress[unlockReached][0]);
-    if (unlockProgressNow < 1 && unlockReached != 7) {
+    if (unlockProgressNow < 1 && (unlockReached != 7 && unlockReached != 8)) {
       $('#unlockProgress').css('background', 'linear-gradient(90deg, rgba(151, 213, 219, 1) ' + unlockProgressNow*100 + '% ' + unlockProgressNow*100 + '%, #b3b3b3 ' + unlockProgressNow*100 + '%)');
     } else {
       $('#unlockProgress').css('background', 'linear-gradient(90deg, rgba(0, 0, 0, 1) ' + unlockProgressNow*100 + '% ' + unlockProgressNow*100 + '%, #fff ' + unlockProgressNow*100 + '%)');
-      $('#unlockProgress > .unlockedBlock > span').css('color', 'white');
+      if (unlockReached == 7) {
+        $('#unlockProgress > .unlockedBlock > span').css('color', 'white');
+      } else {
+        $('#unlockProgress > .unlockedBlock > span').css('color', 'red');
+      }
     }
     $('#unlockName').html(function (index,html) {
       return unlockProgress[unlockReached][2];
@@ -615,7 +619,7 @@ $(function (){
       return notation(unlockProgress[unlockReached][1]);
     });
     if (unlockProgressNow >= 1) {
-      if (unlockReached != 7) {
+      if (unlockReached != 7 && unlockReached != 8) {
         unlockReached++;
       } else {
         $('#unlockProgress').css('cursor', 'pointer');
@@ -891,7 +895,7 @@ $(function (){
         return Math.floor(1e3*((l+1)**(l/7+0.7)))*2;
         break;
       case 2:
-        return 200*10**l;
+        return 200*7**l/(1+l);
         break;
       case 3:
         return (l+2)*Math.max(l/2, 1)*3600;

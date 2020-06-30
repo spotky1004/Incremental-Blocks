@@ -620,7 +620,7 @@ rebuildLevel = [
 ];
 unlockProgress = [
   [1e40, 1e45, 'myst upgrade 4'], [1e45, 1e50, 'myst upgrade 5'], [1e50, 1e55, 'myst upgrade 6'], [1e55, 1e60, 'myst upgrade 7'], [1e60, 1e65, 'myst upgrade 8'],
-  [1e65, 1e70, 'myst upgrade 9'], [1e70, 1e75, 'myst upgrade 10'], [1e75, 1e100, 'go to next stage!']
+  [1e65, 1e70, 'myst upgrade 9'], [1e70, 1e75, 'myst upgrade 10'], [1e75, 1e100, 'go to next stage!'], [1e100, 1e309, '???']
 ];
 varData = [
   'block', 'lastTick', 'upgradeHave', 'blockUnlocked', 'totalBlock',
