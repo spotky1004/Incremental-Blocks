@@ -437,7 +437,7 @@ $(function (){
     $('#rebuildMult > span:eq(1)').html(function (index,html) {
       return notation(runeBuffCalc(1, runeLevels[1])**runeBuffCalc(6, runeLevels[6]), 4);
     });
-    $('#toggleAutoBuild').css('background-color', (toggleAutoBuild) ? 'rgba(219, 177, 86, 0.8)' : 'rgba(207, 207, 207, 0.8)');
+    $('#toggleAutoBuild').css('background-color', (toggleAutoBuild) ? 'rgba(207, 207, 207, 0.8)' : 'rgba(219, 177, 86, 0.8)');
   }
   function displayBoost() {
     bTokenCh = (((upgradeHave[34] == 1) ? 1 : 0)+((upgradeHave[35] == 1) ? 1 : 0)+((upgradeHave[36] == 1) ? 1 : 0)+((upgradeHave[40] == 1) ? 2 : 0)+((upgradeHave[46] == 1) ? 2 : 0)+((upgradeHave[58] == 1) ? 4 : 0)+((upgradeHave[62] == 1) ? 4 : 0)+((upgradeHave[74] == 1) ? 6 : 0)+((upgradeHave[75] == 1) ? 6 : 0)+((upgradeHave[84] == 1) ? 8 : 0))*((bActive[0] == 4) ? bActive[1] : 1)*activeRolledBoost[4];
