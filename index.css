@@ -531,7 +531,6 @@
   margin: 12% auto; padding: 2%;
   width: 50%;
   font-size: 2vh; font-weight: bold; color: white; text-shadow: 2px 2px 0 #222; text-align: center;
-  background-color: rgba(219, 177, 86, 0.8);
   cursor: pointer;
 }
 #toggleAutoBuild:hover {
