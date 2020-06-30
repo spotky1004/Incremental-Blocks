@@ -645,6 +645,10 @@ $(function (){
     if (powerTot < 0) {
       powerTot = power;
     }
+    if (!isFinite(bToken)) {
+      bToken = 0;
+      bTokenTotal = 0;
+    }
   }
   function calculateBuild() {
     if (buildings < 20 || runeLevels[6] == 0) {
