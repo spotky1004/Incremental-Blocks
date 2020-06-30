@@ -771,7 +771,7 @@ $(function (){
         return (4+0.2*l).toFixed(1);
         break;
       case 2:
-        return l*(2+Math.floor(l/(5-l*0.1)))+1;
+        return l*(2+Math.floor(l/Math.max((5-l*0.1), 1)))+1;
         break;
       case 3:
         return 1/((l/10)+1);
