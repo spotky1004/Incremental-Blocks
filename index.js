@@ -435,7 +435,7 @@ $(function (){
       return notation(reBuildMult, 4);
     });
     $('#rebuildMult > span:eq(1)').html(function (index,html) {
-      return notation(runeBuffCalc(1, runeLevels[1])**runeBuffCalc(6, runeLevels[1]), 4);
+      return notation(runeBuffCalc(1, runeLevels[1])**runeBuffCalc(6, runeLevels[6]), 4);
     });
   }
   function displayBoost() {
