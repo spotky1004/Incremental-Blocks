@@ -1292,7 +1292,7 @@ $(function (){
     totalBlock += blockPC*num;
     clickCount += num;
     if (bTokenCh/100*num > Math.random()) {
-      bExtraMult = Math.min(1, bTokenCh/100)*num;
+      bExtraMult = Math.max(1, bTokenCh/100)*num;
       bToken += bTokenGain*bExtraMult;
       bTokenTotal += bTokenGain*bExtraMult;
     }
