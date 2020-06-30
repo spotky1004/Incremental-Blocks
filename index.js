@@ -235,6 +235,17 @@ $(function (){
     } else {
       $('#toggleAutoBuild').hide();
     }
+    if (unlockReached == 8) {
+      $('#middleContentNav > span:eq(2)').removeClass('lockedNav').addClass('openedNav');
+      $('#middleContentNav > span:eq(2)').html(function (index,html) {
+        return 'placeholder';
+      });
+    } else {
+      $('#middleContentNav > span:eq(2)').addClass('lockedNav').removeClass('openedNav');
+      $('#middleContentNav > span:eq(2)').html(function (index,html) {
+        return 'locked';
+      });
+    }
   }
   function displayBlock() {
     overallBlockM = 1.2**mystLevels[5];
@@ -740,7 +751,7 @@ $(function (){
       boostSelData[i][0] = Math.floor(Math.random()*6);
       boostSelData[i][1] = Math.floor((Math.random()*(boostRange[boostSelData[i][0]][1]-boostRange[boostSelData[i][0]][0]))+boostRange[boostSelData[i][0]][0]**(i+1)*(1/runeBuffCalc(3, runeLevels[3]))*runeBuffCalc(5, runeLevels[5]));
       boostSelData[i][2] = Math.floor((Math.random()*(20*(i+1))+(i+1)*10)*runeBuffCalc(3, runeLevels[3])*runeBuffCalc(5, runeLevels[5]));
-      boostSelData[i][3] = Math.floor((Math.random()*4+8)**(i+1)*(runeBuffCalc(5, runeLevels[5])**3))
+      boostSelData[i][3] = Math.floor((Math.random()*2+4)**(i+1)*(runeBuffCalc(5, runeLevels[5])**3))
     }
   }
   function drawAllRuneLine() {
@@ -842,7 +853,7 @@ $(function (){
         return 200e3*(10**l);
         break;
       case 9:
-        return 3e12**(l+1);
+        return 3e12**(l+1)/50e3**l;
         break;
       default:
         return 1e300;
@@ -1432,6 +1443,9 @@ $(function (){
         case 1:
           $('#middleContent').css('background-image', 'url(Resource/Rune/runeBackground.jpg)');
           drawAllRuneLine();
+          break;
+        case 2:
+          $('#middleContent').css('background-image', 'url(Resource/breakBackground.jpg)');
           break;
       }
       middleMenu = indexThis;

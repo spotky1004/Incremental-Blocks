@@ -27,8 +27,8 @@ upgradeCost = [
   96e12, 80e15, 1e15, 3.32e15, 1e15, 2.223e15, 3.612e15, 2e15, 3e15, 5e15,
   6e15, 12e15, 24e15, 48e15, 80e15, 160e15, 300e15, 770e15, 1.24e18, 3e18,
   3.333e18, 6.666e18, 9.999e18, 12e18, 50e18, 155e18, 999.9e18, 3e21, 3e21, 7e21,
-  1.515e24, 3e24, 2.345e24, 3.5e24, 6e24, 15e24, 40e24, 57e24, 163e24, 462e24,
-  1.5e27, 2e27, 60e27, 120e27, 230e27, 330e27, 359e27, 396e27, 423e27, 1e30,
+  1.515e24, 3e24, 2.345e24, 3.5e24, 5e24, 8.45e24, 17.4e24, 25.1e24, 57e24, 152e24,
+  421.5e24, 2e24, 6e27, 12e27, 23e27, 33e27, 35.9e27, 39.6e27, 42.3e27, 100e27,
   2.5e30, 5.5e30, 19.25e30, 105.8e30, 794.1e30, 9.131e33, 123.3e33, 2.157e36, 42.07e36, 10e39
 ];
 upgradeHave = [
@@ -620,7 +620,7 @@ rebuildLevel = [
 ];
 unlockProgress = [
   [1e40, 1e45, 'myst upgrade 4'], [1e45, 1e50, 'myst upgrade 5'], [1e50, 1e55, 'myst upgrade 6'], [1e55, 1e60, 'myst upgrade 7'], [1e60, 1e65, 'myst upgrade 8'],
-  [1e65, 1e70, 'myst upgrade 9'], [1e70, 1e75, 'myst upgrade 10'], [1e75, 1e100, 'go to next stage!'], [1e100, 1e309, '???']
+  [1e65, 1e70, 'myst upgrade 9'], [1e70, 1e75, 'myst upgrade 10'], [1e75, 1e100, 'go to next stage!'], [1e100, 1e300, 'placeholder..']
 ];
 varData = [
   'block', 'lastTick', 'upgradeHave', 'blockUnlocked', 'totalBlock',
