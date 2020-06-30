@@ -5,10 +5,10 @@
     <meta name="viewport" content="user-scalable=no">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css?ver=1.0.21">
-    <script src="vars.js?ver=1.0.21"></script>
-    <script src="index.js?ver=1.0.21"></script>
-    <title>Incremental Blocks v1.0.21</title>
+    <link rel="stylesheet" href="index.css?ver=1.1">
+    <script src="vars.js?ver=1.1"></script>
+    <script src="index.js?ver=1.1"></script>
+    <title>Incremental Blocks v1.1</title>
   </head>
   <body>
     <div id="warpAll">
@@ -117,7 +117,7 @@
                     block/1e5 -> bupc  (<span>0</span>)
                   </div>
                   <div>
-                    <span>1.000</span> playtime
+                    need <span>1.000</span> playtime
                   </div>
                 </div>
                 <div class="mystUpgradeContent upN">
@@ -125,7 +125,7 @@
                     rune cost x0.9 (<span>0</span>)
                   </div>
                   <div>
-                    <span>1.000k</span> click
+                    need <span>1.000k</span> click
                   </div>
                 </div>
                 <div class="mystUpgradeContent upN">
@@ -133,39 +133,39 @@
                     block x2 (<span>0</span>)
                   </div>
                   <div>
-                    <span>0</span>
+                    need <span></span> omega rune
                   </div>
                 </div>
                 <div class="mystUpgradeContent upN">
                   <div>
-                    bps 10% -> bpc (<span>0</span>)
+                    10%p double click (<span>0</span>)
                   </div>
                   <div>
-                    <span>0</span>
-                  </div>
-                </div>
-                <div class="mystUpgradeContent upN">
-                  <div>
-                    upgrade 8 (<span>0</span>)
-                  </div>
-                  <div>
-                    <span>0</span>
+                    need <span>0</span> rebuild
                   </div>
                 </div>
                 <div class="mystUpgradeContent upN">
                   <div>
-                    upgrade 9 (<span>0</span>)
+                    +1/s auto block (<span>0</span>)
                   </div>
                   <div>
-                    <span>0</span>
+                    need <span>0</span> block
                   </div>
                 </div>
                 <div class="mystUpgradeContent upN">
                   <div>
-                    upgrade 10 (<span>0</span>)
+                    +1/s auto build (<span>0</span>)
                   </div>
                   <div>
-                    <span>0</span>
+                    need <span>0</span> b used
+                  </div>
+                </div>
+                <div class="mystUpgradeContent upN">
+                  <div>
+                    pps block use x0.9 (<span>0</span>)
+                  </div>
+                  <div>
+                    need <span>0</span> score
                   </div>
                 </div>
               </div>
@@ -258,6 +258,7 @@
                   <div id="rebuildNum">rebuild 5</div>
                   <div id="buildMult">total multuply: x<span>1.000</span><br>each building multiply<br>block production by x<span>4</span></div>
                   <div id="rebuildMult">rebuild multuply: x<span>1.000</span><br>each rebuilding multiply<br>block production by x<span>1.054</span></div>
+                  <div id="toggleAutoBuild">toggle<br>auto</div>
                 </span>
               </div>
               <div id="runeMenu">
@@ -444,10 +445,12 @@
         </div>
         <div id="unlockProgress" class="contentBlock">
           <div class="unlockedBlock" style="display:none;">
-
+            <span id="uProgressTxt">
+              <span id="unlockName">myst upgrade 4</span> (<span id="unlockReq">1e45</span> blocks)
+            </span>
           </div>
           <div class="lockedBlock">
-            cost: 5.000e70 blocks
+            cost: 5.000e42 blocks
           </div>
         </div>
       </span>

@@ -44,7 +44,7 @@ upgradeHave = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
 blockCost = [
-  50, 2.5e6, 2e12, 2.5e40, 1e70, 1e3, 10
+  50, 2.5e6, 2e12, 2.5e40, 5e42, 1e3, 10
 ];
 blockUnlocked = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
@@ -573,7 +573,16 @@ mystUpgradeRes = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
 mystRes = [
-  ['block', 1], ['bToken', 1], ['power', 1], ['playtime', 0], ['clickCount', 0], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1]
+  ['block', 1], ['bToken', 1], ['power', 1], ['playtime', 0], ['clickCount', 0], ['runeLevels[9]', 0], ['totalRebuild', 0], ['block', 0], ['bTotal', 0], ['overScore', 0],
+  ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1],
+  ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1],
+  ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1],
+  ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1],
+  ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1],
+  ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1],
+  ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1],
+  ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1],
+  ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1], ['block', 1]
 ];
 mystLevels = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -596,7 +605,7 @@ runeName = [
 runeInfoStr = [
   '<span class="runeRedMarkup">boost block production</span>',
   '<span class="runeRedMarkup">boost block production per building</span>',
-  '<span class="runeRedMarkup">boost token production</span>',
+  '<span class="runeRedMarkup">boost token gain</span>',
   '<span class="runeBlueMarkup">make boost time and cool shorter, but greater boost</span>',
   '<span class="runeBlueMarkup">make part of rolled boost actived (same -> big)</span>',
   '<span class="runeBlueMarkup">boosts effect of boost, time, but increased cost(^3)</span>',
@@ -609,13 +618,18 @@ rebuildLevel = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
+unlockProgress = [
+  [1e40, 1e45, 'myst upgrade 4'], [1e45, 1e50, 'myst upgrade 5'], [1e50, 1e55, 'myst upgrade 6'], [1e55, 1e60, 'myst upgrade 7'], [1e60, 1e65, 'myst upgrade 8'],
+  [1e65, 1e70, 'myst upgrade 9'], [1e70, 1e75, 'myst upgrade 10'], [1e75, 1e100, 'go to next stage!']
+];
 varData = [
   'block', 'lastTick', 'upgradeHave', 'blockUnlocked', 'totalBlock',
   'clickCount', 'playtime', 'buildings', 'buildingNow', 'buildProgress',
   'blockUsedInBuilding', 'blockUsedInBuilding', 'boostSelData', 'bToken', 'bCool',
   'bTotal', 'bTokenTotal', 'bTokenUsed', 'runeLevels', 'power',
   'pActive', 'powerProgress', 'powerBulkLevel', 'powerTot', 'rebuildLevel',
-  'mystLevels', 'cheatEnabled', 'rebuildProgress', 'reBuild'
+  'mystLevels', 'cheatEnabled', 'rebuildProgress', 'reBuild', 'unlockReached',
+  'toggleAutoBuild', 'brokeBlock'
 ];
 resetData = {
   0: 0,
@@ -1002,5 +1016,8 @@ resetData = {
   28: [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  ]
+  ],
+  29: 0,
+  30: 0,
+  31: 0
 };
