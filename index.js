@@ -56,6 +56,7 @@ $(function (){
   overScore = 0;
   toggleAutoBuild = false;
   brokeBlock = false;
+  unlockProgressNow = 0;
 
   function copyToClipboard(val) {
     var t = document.createElement("textarea");
@@ -895,7 +896,7 @@ $(function (){
         return Math.floor(1e3*((l+1)**(l/7+0.7)))*2;
         break;
       case 2:
-        return 200*7**l/(1+l);
+        return 200*5**l/(1+2*l);
         break;
       case 3:
         return (l+2)*Math.max(l/2, 1)*3600;
@@ -1505,6 +1506,11 @@ $(function (){
       toggleAutoBuild = 0;
     }
     displayBuild();
+  });
+  $(document).on('click','#unlockProgress',function() {
+    if (unlockProgressNow >= 1 && unlockReached == 7) {
+      unlockReached++;
+    }
   });
 
   setInterval( function (){
