@@ -1505,7 +1505,7 @@ $(function (){
     timeNow = new Date().getTime();
     screenWidthNow = $(window).width();
     screenHeightNow = $(window).height();
-    tickGain = (timeNow-lastTick)/1;
+    tickGain = (timeNow-lastTick)/1000;
     block += blockPS*tickGain;
     totalBlock += blockPS*tickGain;
     clickBlock(tickGain*mystLevels[7]);
