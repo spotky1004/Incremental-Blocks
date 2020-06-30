@@ -654,8 +654,8 @@ $(function (){
       powerTot = 0;
     }
     if (!isFinite(block)) {
-      block = 0;
-      totalBlock = 0;
+      block = 1e100;
+      totalBlock = 1e100;
     }
   }
   function calculateBuild() {
@@ -791,7 +791,7 @@ $(function (){
         return 1+l/(2/(l/100+1));
         break;
       case 6:
-        return 0.05*Math.sqrt(l*10);
+        return 0.05*Math.sqrt(l*8);
         break;
       case 7:
         return l*(1.02**l+l*(1+l/3))+1;
