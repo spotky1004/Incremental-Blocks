@@ -760,8 +760,8 @@ $(function (){
       block = 1e300;
       totalBlock = 1e300;
     }
-    if (mystLevels[4] > 30) {
-      mystLevels[4] = 30;
+    if (mystLevels[4] > 40) {
+      mystLevels[4] = 40;
     }
   }
   function normalBlock() {
@@ -1009,7 +1009,7 @@ $(function (){
         return (l+2)*Math.max(l/2, 1)*3600-3600;
         break;
       case 4:
-        return (l < 30) ? 1e3*((l**2+l)/2+1) : 1e309;
+        return (l < 40) ? 1e3*((l**2+l)/2+1) : 1e309;
         break;
       case 5:
         return l+1;
