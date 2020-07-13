@@ -773,6 +773,7 @@ $(function (){
   function normalBlock() {
     if (block > beyondReq) {
       block = beyondReq*1.00001;
+      toggleAutoBuild = 1;
     }
   }
   function calculateBuild() {
