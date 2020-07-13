@@ -921,11 +921,28 @@
     box-shadow: 0px 0px 15px 15px #aaa inset;
   }
 }
-#boostToken {
+#boostTopLayer {
   margin-top: 1vh;
-  width: 45vw;
-  height: 5vh;
-  text-align: center;
+  width: 45vw; height: 5vh;
+}
+#boostToken {
+  display: block; float: left;
+  width: 80%; height: 5vh;
+}
+#cancelBoost {
+  padding-top: 1.5vh;
+  display: block; float: left;
+  width: 15%; height: 3.5vh;
+  font-size: 2vh; text-align: center; font-weight: bold; color: #ed731c; text-shadow: 0 0 2px #ed731c;
+  box-shadow: 0 0 10px 5px #fff inset, 3px 3px 5px #555;
+  background-color: rgba(220, 220, 220, 0.9);
+}
+#cancelBoost:hover {
+  box-shadow: 0 0 15px 10px #f2dfdf inset, 6px 6px 8px #555;
+}
+#cancelBoost:active {
+  box-shadow: 0 0 0px 0px #fff inset, 3px 3px 4px #555;
+  transition: all 0.1s;
 }
 #tokenImage {
   margin-left: 5vh;

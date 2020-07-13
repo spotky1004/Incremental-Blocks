@@ -498,6 +498,7 @@ $(function (){
       return notation(boostSelData[index][3]) + ' tokens';
     });
     if (bActive[2] <= 0) {
+      $('#cancelBoost').hide();
       if (bCool >= 0) {
         $('#boostSelect').attr({
           'class' : 'contentBlock'
@@ -1640,6 +1641,10 @@ $(function (){
       displayBoost();
       gameSave();
     }
+    $('#cancelBoost').show();
+  });
+  $(document).on('click','#cancelBoost',function(e) {
+    bActive[2] = 0;
   });
   $(document).on('click','#middleContentNav > span.openedNav',function() {
     indexThis = $('#middleContentNav > span').index(this);
