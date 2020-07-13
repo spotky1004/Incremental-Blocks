@@ -45,8 +45,13 @@
   height: 30vh;
   background-color: #404040;
 }
+#timeSpeed {
+  padding-top: 2vh;
+  width: 100%; height: 3vh;
+  font-size: 1.8vh; text-align: center; color: #e8c6be; text-shadow: 0 0 3px #e8c6be; font-weight: bold;
+  animation: hueRotateAnimation 5s infinite alternate;
+}
 #blocks {
-  padding-top: 5vh;
   font-weight: bold;
   color: white;
   text-align: center;

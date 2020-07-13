@@ -64,6 +64,7 @@ $(function (){
   totalBP = 0;
   bp = 0;
   extraRuneLevel = 0;
+  timeSpeed = 1;
 
   function copyToClipboard(val) {
     var t = document.createElement("textarea");
@@ -258,6 +259,7 @@ $(function (){
     }
     if (totalBlock > 1e100) {
       $('#bpContainer').show();
+      $('#timeSpeed > span').show();
     }
   }
   function displayBlock() {
@@ -677,6 +679,9 @@ $(function (){
     }
     $('#bpCounter').html(function (index,html) {
       return notation(bp);
+    });
+    $('#timeSpeedNum').html(function (index,html) {
+      return notation(timeSpeed, 2);
     });
   }
   function displayRotaionTree() {
@@ -1785,7 +1790,8 @@ $(function (){
     timeNow = new Date().getTime();
     screenWidthNow = $(window).width();
     screenHeightNow = $(window).height();
-    tickGain = (timeNow-lastTick)/1000*((rotationTreeHave[0] == 1) ? 1.7 : 1 )*((rotationTreeHave[1] == 1) ? 1.5 : 1 )*((rotationTreeHave[8] == 1) ? 1.6 :1)*((rotationTreeHave[21] == 1) ? 1.4 :1);
+    timeSpeed = ((rotationTreeHave[0] == 1) ? 1.7 : 1 )*((rotationTreeHave[1] == 1) ? 1.5 : 1 )*((rotationTreeHave[8] == 1) ? 1.6 :1)*((rotationTreeHave[21] == 1) ? 1.4 :1);
+    tickGain = (timeNow-lastTick)/1000*timeSpeed;
     block += blockPS*tickGain;
     totalBlock += blockPS*tickGain;
     clickBlock(tickGain*mystLevels[7]);
@@ -1793,7 +1799,7 @@ $(function (){
     if (toggleAutoBuild == 0) {
       clickBuild(tickGain*mystLevels[8]);
     }
-    playtime += tickGain;
+    playtime += tickGain/timeSpeed;
     normalBlock();
     displayBlock();
     displayUnlock();
