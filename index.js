@@ -883,7 +883,6 @@ $(function (){
   }
   function runeBuffCalc(r, l) {
     l += extraRuneLevel;
-    // (!rotationTreeHave[3]) ?
     switch (r) {
       case 0:
         return (!rotationTreeHave[3]) ? Math.floor(((l*(l+1))/2+1)*(1+l*0.13+(1.05**l)/100)) : Math.floor(((l*(l+1))/2+1)*(1+l*0.25+(1.11**l)/100));
@@ -1087,7 +1086,7 @@ $(function (){
         powerBulkLevel = 0;
       }
     }
-    if (rotationTreeHave[23]) {
+    if (rotationTreeHave[22]) {
       for (var i = 0; i < 10; i++) {
         upgradeResThis = eval(mystRes[i][0]);
         upgradeCostThis = eval(mystUpgradeCost(i, mystLevels[i]));
