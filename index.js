@@ -56,7 +56,14 @@ $(function (){
   overScore = 0;
   toggleAutoBuild = false;
   brokeBlock = false;
+  beyondReq = 1e308;
   unlockProgressNow = 0;
+  powerPregessDisp = 0;
+  beyondCount = 0;
+  treeRotateState = 0;
+  totalBP = 0;
+  bp = 0;
+  extraRuneLevel = 0;
 
   function copyToClipboard(val) {
     var t = document.createElement("textarea");
@@ -206,6 +213,9 @@ $(function (){
     displayBoost();
     displayMystUpgrade();
     displayProgress();
+    displayBeyond();
+    displayRotaionTree();
+    rotationTreeImgSet();
     bugFix();
     displayStat();
   }
@@ -238,7 +248,7 @@ $(function (){
     if (unlockReached == 8) {
       $('#middleContentNav > span:eq(2)').removeClass('lockedNav').addClass('openedNav');
       $('#middleContentNav > span:eq(2)').html(function (index,html) {
-        return 'placeholder';
+        return 'beyond';
       });
     } else {
       $('#middleContentNav > span:eq(2)').addClass('lockedNav').removeClass('openedNav');
@@ -246,15 +256,19 @@ $(function (){
         return 'locked';
       });
     }
+    if (totalBlock > 1e100) {
+      $('#bpContainer').show();
+    }
   }
   function displayBlock() {
-    overallBlockM = 1.2**mystLevels[5];
+    overallBlockM = 1.2**mystLevels[5]*((rotationTreeHave[4] == 1) ? 4 :1)*((rotationTreeHave[9] == 1) ? 3 :1);
     bpsP = ((upgradeHave[1] == 1) ? 1 : 0)+((upgradeHave[3] == 1) ? 5 : 0)+((upgradeHave[5] == 1) ? 20 : 0)+((upgradeHave[7] == 1) ? 60 : 0)+((upgradeHave[9] == 1) ? 175 : 0)+((upgradeHave[11] == 1) ? 721 : 0)+((upgradeHave[12] == 1) ? 4.4e3 : 0)+((upgradeHave[14] == 1) ? 21.74e3 : 0)+((upgradeHave[15] == 1) ? 104.8e3 : 0)+((upgradeHave[19] == 1) ? 600e3 : 0)+((upgradeHave[23] == 1) ? 2.222e6 : 0)+((upgradeHave[24] == 1) ? 14e6 : 0)+((upgradeHave[33] == 1) ? 32e6 : 0)+((upgradeHave[41] == 1) ? 100e6 : 0)+((upgradeHave[66] == 1) ? 333.3e6 : 0)+((upgradeHave[81] == 1) ? 2.109e9 : 0);
     bpsM = overallBlockM*(buildingMult)*((upgradeHave[17] == 1) ? 2 : 1)*((upgradeHave[30] == 1) ? 3 : 1)*((upgradeHave[31] == 1) ? 2 : 1)*((upgradeHave[32] == 1) ? 1.5 : 1)*((upgradeHave[42] == 1) ? 1.8 : 1)*((upgradeHave[43] == 1) ? 1.7 : 1)*((upgradeHave[49] == 1) ? 2 : 1)*((upgradeHave[55] == 1) ? 2.5 : 1)*((upgradeHave[57] == 1) ? 5 : 1)*((bActive[0] == 1) ? bActive[1] : 1)*((upgradeHave[63] == 1) ? 4 : 1)*((upgradeHave[64] == 1) ? 3 : 1)*((upgradeHave[72] == 1) ? 3.5 : 1)*((upgradeHave[77] == 1) ? 15 : 1)*((upgradeHave[82] == 1) ? 3 : 1)*((upgradeHave[89] == 1) ? 3 : 1)*((upgradeHave[90] == 1) ? 2 : 1)*((upgradeHave[91] == 1) ? 3 : 1)*((upgradeHave[92] == 1) ? 5 : 1)*((upgradeHave[93] == 1) ? 7: 1)*((upgradeHave[94] == 1) ? 11 : 1)*((upgradeHave[95] == 1) ? 13 : 1)*((upgradeHave[96] == 1) ? 17 : 1)*((upgradeHave[97] == 1) ? 19 : 1)*((upgradeHave[98] == 1) ? 23 : 1)*runeBuffCalc(0, runeLevels[0])*activeRolledBoost[1];
     blockPS = bpsP*bpsM;
     bpcP = 1+((upgradeHave[0] == 1) ? 1 : 0)+((upgradeHave[2] == 1) ? 2 : 0)+((upgradeHave[4] == 1) ? 4 : 0)+((upgradeHave[6] == 1) ? 24 : 0)+((upgradeHave[8] == 1) ? 96 : 0)+((upgradeHave[10] == 1) ? 384 : 0)+((upgradeHave[18] == 1) ? 100e3 : 0);
     bpcM = overallBlockM*(buildingMult)*((upgradeHave[16] == 1) ? 1.5 : 1)*((upgradeHave[45] == 1) ? 7500 : 1)*((upgradeHave[48] == 1) ? 9 : 1)*((bActive[0] == 0) ? bActive[1] : 1)*runeBuffCalc(0, runeLevels[0])*activeRolledBoost[1];
     blockPC = bpcP*bpcM+((((upgradeHave[13] == 1) ? 0.05 : 0)+((upgradeHave[29] == 1) ? 0.1 : 0)+((upgradeHave[37] == 1) ? 0.15 : 0)+((upgradeHave[78] == 1) ? 0.2 : 0)+((upgradeHave[79] == 1) ? 0.25 : 0))*blockPS)*((bActive[0] == 0) ? bActive[1] : 1)/((bActive[0] == 1) ? bActive[1] : 1)/activeRolledBoost[1];
+    normalBlock();
     $('#blockCount').html(function (index,html) {
       reg = /0/gi;
       strReg1 = notation(block);
@@ -289,9 +303,15 @@ $(function (){
     if (middleMenu == 0) {
       $('#upgradeOrign').show();
       $('#mystUpgrade').hide();
+      $('#hypeUpgrade').hide();
     } else if (middleMenu == 1) {
       $('#upgradeOrign').hide();
       $('#mystUpgrade').show();
+      $('#hypeUpgrade').hide();
+    } else if (middleMenu == 2) {
+      $('#upgradeOrign').hide();
+      $('#mystUpgrade').hide();
+      $('#hypeUpgrade').show();
     }
     for (var i = 0; i < upgradeNumShift.length; i++) {
       if (upgradeNumShift[i] != -1) {
@@ -347,11 +367,12 @@ $(function (){
     statVars[17] = totRuneLevel;
     statVars[18] = notation(powerBulkM);
     statVars[19] = totalRebuild;
-    overScore = Math.log10(totalBlock+1)**1.2+upgradeHaveCount/5+Math.sqrt(Math.sqrt(bTotal))+Math.sqrt(playtime/3600)+Math.log10(clickCount+1)**2+Math.sqrt(Math.max(buildings-20, 0))+Math.log10(bTokenTotal+1)**1.5+Math.log10(powerTot+1)**2+Math.sqrt(totRuneLevel)+totMystUp/2+totalRebuild**1.5;
+    statVars[20] = beyondCount;
+    overScore = Math.log10(totalBlock+1)**1.2+upgradeHaveCount/5+Math.sqrt(Math.sqrt(bTotal))+Math.sqrt(playtime/3600)+Math.log10(clickCount+1)**2+Math.sqrt(Math.max(buildings-20, 0))+Math.log10(bTokenTotal+1)**1.5+Math.log10(powerTot+1)**2+Math.sqrt(totRuneLevel)+totMystUp/2+totalRebuild**1.5+Math.sqrt(beyondCount)*1000;
     $('.statline > span').html(function (index,html) {
       return statVars[index];
     });
-    $('.statline:eq(20) > span').html(function (index,html) {
+    $('.statline:eq(21) > span').html(function (index,html) {
       return notation(overScore, 4);
     });
   }
@@ -519,6 +540,7 @@ $(function (){
     }
   }
   function displyRune() {
+    extraRuneLevel = ((rotationTreeHave[15] == 1) ? 2 :0)
     for (var i = 0; i < 10; i++) {
       if (i == 0 || runeLevels[i-1] >= 1 || runeLevels[9] >= 1) {
         $('.rune:eq(' + i + ')').show();
@@ -559,17 +581,22 @@ $(function (){
       power += Math.floor(thisBulk+powerProgress);
       powerTot += Math.floor(thisBulk+powerProgress);
       powerProgress += thisBulk-Math.floor(thisBulk+powerProgress);
+      if (thisBulk > 1e10) {
+        powerPregessDisp = Math.random()*0.2+0.6;
+      } else {
+        powerPregessDisp = powerProgress;
+      }
       if (blockPS > thisBulk*blockUsageM*(1/tickGain)) {
-        $('#togglePower').css('background', 'linear-gradient(90deg, rgba(71, 237, 126, 0.3) ' + powerProgress*100 + '% ' + powerProgress*100 + '%, #404040 ' + powerProgress*100 + '%)');
+        $('#togglePower').css('background', 'linear-gradient(90deg, rgba(71, 237, 126, 0.3) ' + powerPregessDisp*100 + '% ' + powerPregessDisp*100 + '%, #3f4d44 ' + powerPregessDisp*100 + '%)');
       } else {
         if (block > thisBulk*blockUsageM) {
-          $('#togglePower').css('background', 'linear-gradient(90deg, rgba(160, 237, 71, 0.3) ' + powerProgress*100 + '% ' + powerProgress*100 + '%, #404040 ' + powerProgress*100 + '%)');
+          $('#togglePower').css('background', 'linear-gradient(90deg, rgba(160, 237, 71, 0.3) ' + powerPregessDisp*100 + '% ' + powerPregessDisp*100 + '%, #444d3b ' + powerPregessDisp*100 + '%)');
         } else {
-          $('#togglePower').css('background', 'linear-gradient(90deg, rgba(237, 71, 71, 0.3) ' + powerProgress*100 + '% ' + powerProgress*100 + '%, #404040 ' + powerProgress*100 + '%)');
+          $('#togglePower').css('background', 'linear-gradient(90deg, rgba(237, 71, 71, 0.3) ' + powerPregessDisp*100 + '% ' + powerPregessDisp*100 + '%, #664e4e ' + powerPregessDisp*100 + '%)');
         }
       }
     } else {
-      $('#togglePower').css('background', 'linear-gradient(90deg, rgba(237, 179, 71, 0.3) ' + powerProgress*100 + '% ' + powerProgress*100 + '%, #404040 ' + powerProgress*100 + '%)');
+      $('#togglePower').css('background', 'linear-gradient(90deg, rgba(237, 179, 71, 0.3) ' + powerPregessDisp*100 + '% ' + powerPregessDisp*100 + '%, #595141 ' + powerPregessDisp*100 + '%)');
     }
     $('#togglePowerBlockNum').html(function (index,html) {
       return notation(powerBulkM*blockUsageM*Math.pow(2, powerBulkLevel));
@@ -613,16 +640,16 @@ $(function (){
     }
   }
   function displayProgress() {
+    if (unlockReached == 9) {
+      unlockReachee = 8;
+    }
     unlockProgressNow = Math.log10(totalBlock/unlockProgress[unlockReached][0])/Math.log10(unlockProgress[unlockReached][1]/unlockProgress[unlockReached][0]);
     if (unlockProgressNow < 1 && (unlockReached != 7 && unlockReached != 8)) {
       $('#unlockProgress').css('background', 'linear-gradient(90deg, rgba(151, 213, 219, 1) ' + unlockProgressNow*100 + '% ' + unlockProgressNow*100 + '%, #b3b3b3 ' + unlockProgressNow*100 + '%)');
+      $('#unlockProgress > .unlockedBlock > span').css('color', 'black');
     } else {
       $('#unlockProgress').css('background', 'linear-gradient(90deg, rgba(0, 0, 0, 1) ' + unlockProgressNow*100 + '% ' + unlockProgressNow*100 + '%, #fff ' + unlockProgressNow*100 + '%)');
-      if (unlockReached == 7) {
-        $('#unlockProgress > .unlockedBlock > span').css('color', 'white');
-      } else {
-        $('#unlockProgress > .unlockedBlock > span').css('color', 'red');
-      }
+      $('#unlockProgress > .unlockedBlock > span').css('color', 'white');
     }
     $('#unlockName').html(function (index,html) {
       return unlockProgress[unlockReached][2];
@@ -635,8 +662,67 @@ $(function (){
         unlockReached++;
       } else {
         $('#unlockProgress').css('cursor', 'pointer');
-        $('#unlockProgress > .unlockedBlock > span').css('color', 'red');
       }
+    }
+  }
+  function displayBeyond() {
+    beyondReq = 1e100*1e5**beyondCount;
+    $('#beyondNeedNum').html(function (index,html) {
+      return beyondReq.toExponential(0).replace('+', '');
+    });
+    if (block > beyondReq) {
+      $('#beyondButton').removeClass('beyNo').addClass('beyYes');
+    } else {
+      $('#beyondButton').removeClass('beyYes').addClass('beyNo');
+    }
+    $('#bpCounter').html(function (index,html) {
+      return notation(bp);
+    });
+  }
+  function displayRotaionTree() {
+    displayBeyond();
+    if (treeRotateState == 0) {
+      rotationTreeIndex = [
+        1, 2, 3, 4, 5,
+        6, 7, 8, 9, 10,
+        11, 12, 13, 14, 15,
+        16, 17, 18, 19, 20,
+        21, 22, 23, 24, 25
+      ];
+    } else if (treeRotateState == 1) {
+      rotationTreeIndex = [
+        21, 16, 11, 6, 1,
+        22, 17, 12, 7, 2,
+        23, 18, 13, 8, 3,
+        24, 19, 14, 9, 4,
+        25, 20, 15, 10, 5
+      ];
+    } else if (treeRotateState == 2) {
+      rotationTreeIndex = [
+        25, 24, 23, 22, 21,
+        20, 19, 18, 17, 16,
+        15, 14, 13, 12, 11,
+        10, 9, 8, 7, 6,
+        5, 4, 3, 2, 1
+      ];
+    } else if (treeRotateState == 3) {
+      rotationTreeIndex = [
+        5, 10, 15, 20, 25,
+        4, 9, 14, 19, 24,
+        3, 8, 13, 18, 23,
+        2, 7, 12, 17, 22,
+        1, 6, 11, 16, 21
+      ];
+    }
+    for (var i = 0; i < 25; i++) {
+      if (rotationTreeHave[rotationTreeIndex[i]-1] == 1) {
+        classToAdd = 'buyY';
+      } else if ((20 <= i || rotationTreeHave[rotationTreeIndex[i+5]-1] == 1) && rotationTreeCost[rotationTreeIndex[i]-1] <= bp) {
+        classToAdd = 'buyM';
+      } else {
+        classToAdd = 'buyN';
+      }
+      $('.rTreeBlock:eq(' + i + ')').removeClass('buyY').removeClass('buyM').removeClass('buyN').addClass(classToAdd);
     }
   }
 
@@ -671,15 +757,23 @@ $(function (){
       powerTot = 0;
     }
     if (!isFinite(block)) {
-      block = 1e100;
-      totalBlock = 1e100;
+      block = 1e300;
+      totalBlock = 1e300;
+    }
+    if (mystLevels[4] > 30) {
+      mystLevels[4] = 30;
+    }
+  }
+  function normalBlock() {
+    if (block > beyondReq) {
+      block = beyondReq*1.00001;
     }
   }
   function calculateBuild() {
     if (buildings < 20 || runeLevels[6] == 0) {
       baseBuilding = 1e6*3**buildingNow*((buildingNow%20 >= 12) ? 10**(buildingNow-11) : 1 )/runeBuffCalc(7, runeLevels[7]);
     } else {
-      baseBuilding = 1e6*3**buildingNow*((buildingNow%20 >= 12) ? 10**(buildingNow-11) : 1 )*3.486e27**(reBuild[buildingNow]+1)/runeBuffCalc(7, runeLevels[7]);
+      baseBuilding = 1e6*3**buildingNow*((buildingNow%20 >= 12) ? 10**(buildingNow-11) : 1 )*3.486e27**(reBuild[buildingNow]+1)/runeBuffCalc(7, runeLevels[7])*(10+Math.max(reBuild[buildingNow]*20+buildingNow-59, 0)*0.05)**Math.max(reBuild[buildingNow]*20+buildingNow-59, 0);
     }
     bupcM = ((upgradeHave[20] == 1) ? 5 : 1)*((upgradeHave[21] == 1) ? 8 : 1)*((upgradeHave[22] == 1) ? 12 : 1)*((upgradeHave[25] == 1) ? 5 : 1)*((upgradeHave[26] == 1) ? 5 : 1)*((upgradeHave[27] == 1) ? 5 : 1)*((upgradeHave[28] == 1) ? 10 : 1)*((upgradeHave[50] == 1) ? 5 : 1)*((upgradeHave[51] == 1) ? 4 : 1)*((upgradeHave[52] == 1) ? 3 : 1)*((upgradeHave[53] == 1) ? 2 : 1)*((upgradeHave[54] == 1) ? 1 : 1)*((upgradeHave[56] == 1) ? 10 : 1)*((upgradeHave[68] == 1) ? 14 : 1)*((upgradeHave[70] == 1) ? 15 : 1)*((upgradeHave[71] == 1) ? 20 : 1)*((upgradeHave[85] == 1) ? 6 : 1)*((upgradeHave[88] == 1) ? 10 : 1)*((bActive[0] == 2) ? bActive[1] : 1)*activeRolledBoost[2];
     bupc = 100e3*2.7**buildingNow*bupcM+block*mystLevels[3]/1e5*((bActive[0] == 2) ? bActive[1] : 1)*activeRolledBoost[2];
@@ -788,15 +882,17 @@ $(function (){
     $('.rune:eq(9)').css({left: radius, top: radius});
   }
   function runeBuffCalc(r, l) {
+    l += extraRuneLevel;
+    // (!rotationTreeHave[3]) ?
     switch (r) {
       case 0:
-        return Math.floor(((l*(l+1))/2+1)*(1+l*0.13+(1.05**l)/100));
+        return (!rotationTreeHave[3]) ? Math.floor(((l*(l+1))/2+1)*(1+l*0.13+(1.05**l)/100)) : Math.floor(((l*(l+1))/2+1)*(1+l*0.25+(1.11**l)/100));
         break;
       case 1:
-        return (4+0.2*l).toFixed(1);
+        return (4+0.2*Math.min(l, 80)+0.05*Math.max(l-80, 0)).toFixed(2);
         break;
       case 2:
-        return l*(2+Math.floor(l/Math.max((5-l*0.1), 0.1)))+1;
+        return (!rotationTreeHave[24]) ? l*(2+Math.floor(l/Math.max((5-l*0.1), 0.1)))+1 : (l*(2+Math.floor(l/Math.max((5-l*0.1), 0.1)))+1)*(1+l/20).toFixed(0);
         break;
       case 3:
         return 1/((l/10)+1);
@@ -811,25 +907,26 @@ $(function (){
         return 0.05*Math.sqrt(l*8);
         break;
       case 7:
-        return l*(1.02**l+l*(1+l/3))+1;
+        return (!rotationTreeHave[10]) ? l*(1.02**l+l*(1+l/3))+1 : (l*(1.02**l+l*(1+l/3))+1)*(1.06**l);
         break;
       case 8:
-        return 2**l;
+        return (!rotationTreeHave[18]) ? 2**l : 2.2**l+(10+l**2)*l;
         break;
       case 9:
-        return (l**2+l)/2;
+        return Math.min((l**2+l)/2, 10)+Math.max((l-4)*2, 0);
         break;
       default:
         return 1;
     }
   }
   function runeCostCalc(r, l) {
+    l += extraRuneLevel;
     switch (r) {
       case 0:
         return Math.floor((1+l/50)**(l/1.2));
         break;
       case 1:
-        return (l**2+6*l+5)**(2+l/10);
+        return (l**2+6*l+5)**(2+l/10)*((l > 80) ? 54.32**(l-80) : 1);
         break;
       case 2:
         return Math.floor((10*(l+1))**(l/3+1));
@@ -847,7 +944,7 @@ $(function (){
         return 40e3**(l+1);
         break;
       case 7:
-        return 80e3*((1.01+l/100)**l+l);
+        return 80e3*((1.01+l/100)**l+l)*((l > 15) ? ((l-10)**1.1)**(l-15) : 1);
         break;
       case 8:
         return 200e3*(10**l);
@@ -864,7 +961,7 @@ $(function (){
       return runeName[runeOn];
     });
     $('#selRuneLevel').html(function (index,html) {
-      return 'level ' + romanize(runeLevels[runeOn]);
+      return 'level ' + romanize(runeLevels[runeOn]+extraRuneLevel);
     });
     $('#selRuneBoostName').html(function (index,html) {
       return runeInfoStr[runeOn];
@@ -885,9 +982,9 @@ $(function (){
           break;
       }
       if (runeOn != 9) {
-        return '<span class=rune' + markUpThis + 'Markup>x' + notation(runeBuffCalc(runeOn, runeLevels[runeOn]), 2) + ' -> ' + 'x' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)), 2);
+        return '<span class=rune' + markUpThis + 'Markup>x' + notation(runeBuffCalc(runeOn, runeLevels[runeOn]), 3) + ' -> ' + 'x' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)), 3);
       } else {
-        return '<span class=rune' + markUpThis + 'Markup>+' + notation(runeBuffCalc(runeOn, runeLevels[runeOn]), 2) + ' -> ' + '+' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)), 2);
+        return '<span class=rune' + markUpThis + 'Markup>+' + notation(runeBuffCalc(runeOn, runeLevels[runeOn]), 3) + ' -> ' + '+' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)), 3);
       }
     });
     $('#selRuneCostNum').html(function (index,html) {
@@ -910,10 +1007,10 @@ $(function (){
         return 200*5**l/(1+2*l);
         break;
       case 3:
-        return (l+2)*Math.max(l/2, 1)*3600;
+        return (l+2)*Math.max(l/2, 1)*3600-3600;
         break;
       case 4:
-        return 1e3*((l**2+l)/2+1);
+        return (l < 30) ? 1e3*((l**2+l)/2+1) : 1e309;
         break;
       case 5:
         return l+1;
@@ -922,7 +1019,7 @@ $(function (){
         return 20+5*l;
         break;
       case 7:
-        return 1e70*(1e5**(l**2));
+        return 1e65*(1e5**(l**1.8));
         break;
       case 8:
         return 50*(l+1);
@@ -934,6 +1031,76 @@ $(function (){
         return 1e300;
     }
   }
+  function rotationTreeImgSet() {
+    displayRotaionTree();
+    for (var i = 0; i < 25; i++) {
+      $('.rTreeBlock:eq(' + i + ')').attr({
+        'style' : 'background-image: url(Resource/Beyond/' + rotationTreeType[rotationTreeIndex[i]-1] + '.png);'
+      });
+    }
+  }
+  function hoverRotationTreeDisplay(num) {
+    indexNum = rotationTreeIndex[num];
+    $('#rtNum').html(function (index,html) {
+      return (indexNum < 10) ? '0' + indexNum.toString() : indexNum;
+    });
+    $('#rtName').html(function (index,html) {
+      return rotationTreeName[indexNum-1];
+    });
+    $('#rtAdvencedDesc').html(function (index,html) {
+      return rotationTreeDesc[indexNum-1] + '<br>cost: ' + rotationTreeCost[indexNum-1] + ' bp';
+    });
+  }
+  function beyondAuto() {
+    if (rotationTreeHave[6]) {
+      for (var i = 9; i >= 0; i--) {
+        if (power >= ((i != 9) ? runeCostCalc(i, runeLevels[i]-runeBuffCalc(9, runeLevels[9]))*0.9**mystLevels[4] : runeCostCalc(i, runeLevels[i])*0.9**mystLevels[4])) {
+          power -= ((i != 9) ? runeCostCalc(i, runeLevels[i]-runeBuffCalc(9, runeLevels[9]))*0.9**mystLevels[4] : runeCostCalc(i, runeLevels[i])*0.9**mystLevels[4]);
+          runeLevels[i]++;
+          if (i == 9) {
+            runeLevelPrestige();
+          }
+        }
+      }
+    }
+    if (rotationTreeHave[14]) {
+      powerBulkM = 2**(mystLevels[0]+mystLevels[1]+mystLevels[2]);
+      ppsCap = powerBulkM*Math.pow(2, powerBulkLevel);
+      blockUsageM = 1e40*1.5**Math.log(Math.max(ppsCap, 1))*0.9**mystLevels[9];
+      thisBulk = Math.min(ppsCap*tickGain, block/blockUsageM);
+      if (blockPS < thisBulk*blockUsageM*(1/tickGain)) {
+        powerBulkLevel--;
+        if (powerBulkLevel <= -30) {
+          powerBulkLevel = -30;
+        }
+      } else {
+        powerBulkLevel++;
+        powerBulkM = 2**(mystLevels[0]+mystLevels[1]+mystLevels[2]);
+        ppsCap = powerBulkM*Math.pow(2, powerBulkLevel);
+        blockUsageM = 1e40*1.5**Math.log(Math.max(ppsCap, 1))*0.9**mystLevels[9];
+        thisBulk = Math.min(ppsCap*tickGain, block/blockUsageM);
+        if (blockPS < thisBulk*blockUsageM*(1/tickGain)) {
+          powerBulkLevel--;
+        }
+      }
+      if (powerBulkLevel > 0) {
+        powerBulkLevel = 0;
+      }
+    }
+    if (rotationTreeHave[23]) {
+      for (var i = 0; i < 10; i++) {
+        upgradeResThis = eval(mystRes[i][0]);
+        upgradeCostThis = eval(mystUpgradeCost(i, mystLevels[i]));
+        if (upgradeResThis >= upgradeCostThis) {
+          if (mystRes[i][1] == 1) {
+            window[mystRes[i][0]] -= upgradeCostThis;
+          }
+          mystLevels[i]++;
+          displayMystUpgrade();
+        }
+      }
+    }
+  }
 
   function prestigeLevelCheck(num) {
     if (runeLevels[9] >= 1 && num == 1) {
@@ -942,186 +1109,197 @@ $(function (){
       return false;
     }
   }
+  function makeBlockZero() {
+    buildingMult = 1;
+    bpcM = 0;
+    blockPC = 0;
+    blockPS = 0;
+    bps = 0;
+    block = 0;
+  }
   function runeLevelPrestige() {
     runeLevels = [runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeBuffCalc(9, runeLevels[9]), runeLevels[9]];
-    upgradeHave = [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 1
-    ];
+    if (!rotationTreeHave[13]) {
+      upgradeHave = [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+      ];
+    }
     bActive = [-1, -1, -1, -1, -1];
-    buildings = 0;
+    if (!rotationTreeHave[17]) {
+      buildings = 0;
+      buildProgress = [
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ],
+        [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ]
+      ];
+    }
     buildingNow = 0;
-    buildProgress = [
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ],
-      [
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0
-      ]
-    ];
-    bToken = 0;
     bCool = 0;
     power = 0;
     pActive = false;
@@ -1131,9 +1309,11 @@ $(function (){
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     ];
-    for (var i = 0; i < mystLevels.length; i++) {
-      if (mystRes[i][1] != 0) {
-        mystLevels[i] = 0;
+    if (!rotationTreeHave[11]) {
+      for (var i = 0; i < mystLevels.length; i++) {
+        if (mystRes[i][1] != 0) {
+          mystLevels[i] = 0;
+        }
       }
     }
     rebuildProgress = [
@@ -1301,18 +1481,40 @@ $(function (){
     reBuild = [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    ]
-    rollBoost();
+    ];
+    if (!rotationTreeHave[7]) {
+      bToken = 0;
+      rollBoost();
+    }
     bps = 0;
     bpc = 0;
     pps = 0;
+    blockPC = 0;
     block = 0;
-    setTimeout( function (){
-      block = 0;
-    }, 0);
-    setTimeout( function (){
-      block = 0;
-    }, 60);
+    bpcM = 0;
+    makeBlockZero();
+  }
+  function beyondLevelPrestige() {
+    runeLevelPrestige();
+    runeLevels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    setTimeout( function () {
+      bToken = 0;
+    }, 100);
+    for (var i = 0; i < mystLevels.length; i++) {
+      mystLevels[i] = 0;
+    }
+  }
+
+  function respecRotationTree() {
+    rotationTreeHave = [
+      0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0
+    ];
+    bp = beyondCount;
+    displayRotaionTree();
   }
 
   function clickBlock(num) {
@@ -1326,15 +1528,19 @@ $(function (){
       bTokenTotal += bTokenGain*bExtraMult;
     }
     displayBlock();
+    bugFix();
   }
   function clickBuild(num) {
     num = (Math.random() < mystLevels[7]/10) ? num*2 : num;
     calculateBuild();
-    buEff = ((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 6 : 1)*((upgradeHave[69] == 1) ? 4 : 1)*((upgradeHave[87] == 1) ? 2 : 1)*activeRolledBoost[3]*runeBuffCalc(8, runeLevels[8]);
+    buEff = ((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 6 : 1)*((upgradeHave[69] == 1) ? 4 : 1)*((upgradeHave[87] == 1) ? 2 : 1)*activeRolledBoost[3]*runeBuffCalc(8, runeLevels[8])*((rotationTreeHave[2] == 1) ? 9 :1)*((rotationTreeHave[5] == 1) ? 6 :1)*((rotationTreeHave[16] == 1) ? 4 :1)*((rotationTreeHave[19] == 1) ? 7 :1)*((rotationTreeHave[20] == 1) ? 8 :1)*((rotationTreeHave[23] == 1) ? 5 :1);
     if (buildings < 20 || runeLevels[6] == 0) {
       buildProgress[buildingNow][pointerThisBlock] += bupc*buEff*num;
     } else {
       rebuildProgress[buildingNow][pointerThisBlock] += bupc/thisBlockValue*num;
+    }
+    if (bupc*num > block) {
+      bupc = block/num;
     }
     block -= bupc*num;
     blockUsedInBuilding += bupc*num;
@@ -1526,22 +1732,70 @@ $(function (){
       unlockReached++;
     }
   });
+  $(document).on('click','#beyondButton.beyYes',function() {
+    bp++;
+    totalBP++;
+    beyondCount++;
+    beyondLevelPrestige();
+    displayBeyond();
+    displayRotaionTree();
+  });
+  $(document).on('click','#rotationL',function() {
+    treeRotateState--;
+    if (treeRotateState == -1) {
+      treeRotateState = 3;
+    }
+    rotationTreeImgSet();
+    respecRotationTree();
+  });
+  $(document).on('click','#rotationR',function() {
+    treeRotateState++;
+    if (treeRotateState == 4) {
+      treeRotateState = 0;
+    }
+    rotationTreeImgSet();
+    respecRotationTree();
+  });
+  $(document).on('mouseover','.rTreeBlock',function(e) {
+    thisIndex = $(".rTreeBlock").index(this);
+    hoverRotationTreeDisplay(thisIndex);
+  });
+  $(document).on('mouseout','.rTreeBlock',function(e) {
+    $('#rtNum').html(function (index,html) {
+      return '00';
+    });
+    $('#rtName').html(function (index,html) {
+      return 'hover on tree';
+    });
+    $('#rtAdvencedDesc').html(function (index,html) {
+      return '';
+    });
+  });
+  $(document).on('click','.rTreeBlock.buyM',function(e) {
+    thisIndex = $(".rTreeBlock").index(this);
+    indexNum = rotationTreeIndex[thisIndex]-1;
+    rotationTreeHave[indexNum] = 1;
+    bp -= rotationTreeCost[indexNum];
+    if (indexNum == 12) {
+      bp += 15;
+    }
+    displayRotaionTree();
+  });
 
   setInterval( function (){
     timeNow = new Date().getTime();
     screenWidthNow = $(window).width();
     screenHeightNow = $(window).height();
-    tickGain = (timeNow-lastTick)/1000;
+    tickGain = (timeNow-lastTick)/1000*((rotationTreeHave[0] == 1) ? 1.7 : 1 )*((rotationTreeHave[1] == 1) ? 1.5 : 1 )*((rotationTreeHave[8] == 1) ? 1.6 :1)*((rotationTreeHave[21] == 1) ? 1.4 :1);
     block += blockPS*tickGain;
     totalBlock += blockPS*tickGain;
     clickBlock(tickGain*mystLevels[7]);
+    normalBlock();
     if (toggleAutoBuild == 0) {
       clickBuild(tickGain*mystLevels[8]);
     }
     playtime += tickGain;
-    if (brokeBlock == 0 && block > 1e100) {
-      block = 1e100;
-    }
+    normalBlock();
     displayBlock();
     displayUnlock();
     displayStat();
@@ -1559,6 +1813,7 @@ $(function (){
     displayUpgrade();
     displayBuild();
     gameSave();
+    displayBeyond();
     if (resetTimer < 100) {
       resetTimer++;
       $('.optionBlock:eq(4)').html(function (index,html) {
@@ -1570,6 +1825,9 @@ $(function (){
       });
     }
   }, 500);
+  setInterval( function (){
+    beyondAuto();
+  }, 200);
 
   gameLoad();
   displayAll();

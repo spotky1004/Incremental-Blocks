@@ -604,15 +604,15 @@ runeName = [
 ];
 runeInfoStr = [
   '<span class="runeRedMarkup">boost block production</span>',
-  '<span class="runeRedMarkup">boost block production per building</span>',
+  '<span class="runeRedMarkup">boost block production gained per building</span>',
   '<span class="runeRedMarkup">boost token gain</span>',
-  '<span class="runeBlueMarkup">make boost time and cool shorter, but greater boost</span>',
-  '<span class="runeBlueMarkup">make part of rolled boost actived (same -> big)</span>',
-  '<span class="runeBlueMarkup">boosts effect of boost, time, but increased cost(^3)</span>',
-  '<span class="runeGreenMarkup">you can build again, but harder to build and reduced effect</span>',
-  '<span class="runeGreenMarkup">divide cost of building</span>',
-  '<span class="runeGreenMarkup">boost base bu eff</span>',
-  '<span class="runeWhiteMarkup">add all runes level, but loose all progress</span>'
+  '<span class="runeBlueMarkup">make boost time and cooldown shorter, but greater boost</span>',
+  '<span class="runeBlueMarkup">other boosts you didnt pick work at reduced effect</span>',
+  '<span class="runeBlueMarkup">increases effect and time of boosts, but increases cost (x^3)</span>',
+  '<span class="runeGreenMarkup">you can build again, but much harder to build and reduced effect</span>',
+  '<span class="runeGreenMarkup">divide cost of building blocks</span>',
+  '<span class="runeGreenMarkup">boost base building efficiency</span>',
+  '<span class="runeWhiteMarkup">add all runes level, but lose all pre-runes progress and reset runes</span>'
 ];
 rebuildLevel = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -620,7 +620,49 @@ rebuildLevel = [
 ];
 unlockProgress = [
   [1e40, 1e45, 'myst upgrade 4'], [1e45, 1e50, 'myst upgrade 5'], [1e50, 1e55, 'myst upgrade 6'], [1e55, 1e60, 'myst upgrade 7'], [1e60, 1e65, 'myst upgrade 8'],
-  [1e65, 1e70, 'myst upgrade 9'], [1e70, 1e75, 'myst upgrade 10'], [1e75, 1e100, 'go to next stage!'], [1e100, 1e300, 'placeholder..']
+  [1e65, 1e70, 'myst upgrade 9'], [1e70, 1e75, 'myst upgrade 10'], [1e75, 1e100, 'go to next stage!'], [1e100, 1e300, 'ascend']
+];
+rotationTreeHave = [
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0
+];
+rotationTreeCost = [
+  3, 2, 6, 1, 3,
+  2, 2, 2, 3, 2,
+  6, 2, 9, 2, 2,
+  3, 1, 2, 2, 1,
+  1, 1, 4, 1, 2
+];
+rotationTreeType = [
+  0, 0, 1, 2, 6,
+  1, 4, 3, 0, 6,
+  2, 3, 7, 3, 4,
+  5, 1, 3, 2, 1,
+  1, 0, 4, 1, 2
+];
+rotationTreeIndex = [
+  1, 2, 3, 4, 5,
+  6, 7, 8, 9, 10,
+  11, 12, 13, 14, 15,
+  16, 17, 18, 19, 20,
+  21, 22, 23, 24, 25
+];
+rotationTreeName = [
+  'speed x1.7', 'speed x1.5', 'bu eff x9', 'rune 1', 'block x4',
+  'bu eff x6', 'autobuy rune', 'keep token', 'speed x1.6', 'block x3',
+  'rune 8', 'keep myst upgrade', 'bp +15', 'keep basic upgrade', 'autotarget power',
+  'rune +2', 'bu eff x4', 'keep build', 'rune 9', 'bu eff x7',
+  'bu eff x8', 'speed x1.4', 'autobuy myst upgrade', 'bu eff x5', 'rune 3'
+];
+rotationTreeDesc = [
+  'game speed x1.7', 'game speed x1.5', 'base bu eff x9', 'better rune 1 formula', 'block production x4',
+  'base bu eff x6', 'autobuy rune 5/s (property: rune 10-> rune 1)', 'keep token, rolled boost on reset', 'game speed x1.6', 'block production x3',
+  'better rune 8 formula', 'keep myst upgrades on reset', 'get extra bp', 'keep upgrades on reset', 'autotarget power to best effect 5/s',
+  'all runes level +2', 'base bu eff x4', 'keep build on reset (expect rebuild)', 'better rune 9 formula', 'base bu eff x7',
+  'base bu eff x8', 'game speed x1.4', 'autobuy myst upgrade 5/s', 'base bu eff x5', 'better rune 3 formula'
 ];
 varData = [
   'block', 'lastTick', 'upgradeHave', 'blockUnlocked', 'totalBlock',
@@ -629,7 +671,8 @@ varData = [
   'bTotal', 'bTokenTotal', 'bTokenUsed', 'runeLevels', 'power',
   'pActive', 'powerProgress', 'powerBulkLevel', 'powerTot', 'rebuildLevel',
   'mystLevels', 'cheatEnabled', 'rebuildProgress', 'reBuild', 'unlockReached',
-  'toggleAutoBuild', 'brokeBlock'
+  'toggleAutoBuild', 'brokeBlock', 'rotationTreeHave', 'beyondCount', 'treeRotateState',
+  'bp', 'totalBP'
 ];
 resetData = {
   0: 0,
@@ -1019,5 +1062,16 @@ resetData = {
   ],
   29: 0,
   30: 0,
-  31: 0
+  31: 0,
+  32: [
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0
+  ],
+  33: 0,
+  34: 0,
+  35: 0,
+  36: 0
 };

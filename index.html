@@ -5,10 +5,10 @@
     <meta name="viewport" content="user-scalable=no">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css?ver=1.1.18">
-    <script src="vars.js?ver=1.1.18"></script>
-    <script src="index.js?ver=1.1.18"></script>
-    <title>Incremental Blocks v1.1.18</title>
+    <link rel="stylesheet" href="index.css?ver=1.2">
+    <script src="vars.js?ver=1.2"></script>
+    <script src="index.js?ver=1.2"></script>
+    <title>Incremental Blocks v1.2</title>
   </head>
   <body>
     <div id="warpAll">
@@ -24,6 +24,24 @@
             <div id="blockClickTxtWarp">
               <p id="blockClickPlus">+</p><p id="blockPerClick">1</p><p id="blocClickTxt">blocks</p>
             </div>
+          </div>
+          <div id="otherRes">
+            <span id="bpContainer" class="innerOtherRes" style="display:none;">
+              <div id="bpCounter" class="otherResNum">
+                0
+              </div>
+              <div id="bpTxt" class="otehrResName">
+                bp
+              </div>
+            </span>
+            <span id="apCounter" class="innerOtherRes" style="display:none;">
+              <div id="apCounter" class="otherResNum">
+                0
+              </div>
+              <div id="apTxt" class="otehrResName">
+                ap
+              </div>
+            </span>
           </div>
         </div>
         <div id="basicUpgrade" class="contentBlock">
@@ -170,6 +188,21 @@
                 </div>
               </div>
             </div>
+            <div id="hypeUpgrade" style="display:none;">
+              <div id="hypeUpgradeBanner">
+                <p>owo</p>
+              </div>
+              <div id="mystUpgradeList">
+                <div class="mystUpgradeContent upN">
+                  <div>
+                    pps x2 (<span>0</span>)
+                  </div>
+                  <div>
+                    <span>1e45</span> block
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="lockedBlock">
             cost: 50 blocks
@@ -247,7 +280,7 @@
                     </div>
                   </div>
                   <div id="baseBlockVaule">
-                    base vaule: <span id="baseBlockVauleMinNum">0</span> ~ <span id="baseBlockVauleMaxNum">0</span>
+                    base value: <span id="baseBlockVauleMinNum">0</span> ~ <span id="baseBlockVauleMaxNum">0</span>
                   </div>
                 </span>
                 <span>
@@ -357,8 +390,122 @@
                   </span>
                 </div>
               </div>
-              <div id="">
+              <div id="beyondMenu">
+                <div id="beyondButton" class="beyNo">
+                  reach <span id="beyondNeedNum">1e100</span> block to beyond<br>get <span id="beyondGetNum">a</span> beyond point
+                </div>
+                <div id="rTreeTxt">
+                  rotation tree
+                </div>
+                <div id="rTreeDesc">
+                  <div id="rtBasicDesc">
+                    t<span id="rtNum">00</span> - <span id="rtName">hover on tree</span>
+                  </div>
+                  <div id="rtAdvencedDesc">
 
+                  </div>
+                </div>
+                <div id="rtUI">
+                  <span class="rotationButtonWarp">
+                    <div id="rotationL" class="rotationButton">
+                      &#129044;
+                    </div>
+                  </span>
+                  <span id="rtBorder">
+                    <div id="rotationTree">
+                      <div class="rTreeLine">
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                      </div>
+                      <div class="rTreeLine">
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                      </div>
+                      <div class="rTreeLine">
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                      </div>
+                      <div class="rTreeLine">
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                      </div>
+                      <div class="rTreeLine">
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                        <span class="rTreeBlock buyN">
+
+                        </span>
+                      </div>
+                    </div>
+                  </span>
+                  <span class="rotationButtonWarp">
+                    <div id="rotationR" class="rotationButton">
+                      &#129046;
+                    </div>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -529,6 +676,11 @@
               </div>
               <div class="statline">
                 -rebuild count: <span>0</span>
+              </div>
+            </div>
+            <div class="statEra">
+              <div class="statline">
+                -total bp: <span>0</span>
               </div>
             </div>
             <div class="statEra">
