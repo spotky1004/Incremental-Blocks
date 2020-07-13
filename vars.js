@@ -630,11 +630,11 @@ rotationTreeHave = [
   0, 0, 0, 0, 0
 ];
 rotationTreeCost = [
-  3, 2, 6, 1, 3,
-  2, 2, 2, 3, 2,
-  6, 2, 9, 2, 2,
+  2, 1, 2, 1, 1,
+  2, 1, 2, 3, 2,
+  2, 2, 7, 2, 2,
   3, 1, 2, 2, 1,
-  1, 1, 4, 1, 2
+  1, 1, 2, 1, 2
 ];
 rotationTreeType = [
   0, 0, 1, 2, 6,
@@ -653,7 +653,7 @@ rotationTreeIndex = [
 rotationTreeName = [
   'speed x1.7', 'speed x1.5', 'bu eff x9', 'rune 1', 'block x4',
   'bu eff x6', 'autobuy rune', 'keep token', 'speed x1.6', 'block x3',
-  'rune 8', 'keep myst upgrade', 'bp +15', 'keep basic upgrade', 'autotarget power',
+  'rune 8', 'keep myst upgrade', 'bp +13', 'keep basic upgrade', 'autotarget power',
   'rune +2', 'bu eff x4', 'keep build', 'rune 9', 'bu eff x7',
   'bu eff x8', 'speed x1.4', 'autobuy myst upgrade', 'bu eff x5', 'rune 3'
 ];
