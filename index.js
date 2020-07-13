@@ -1785,7 +1785,7 @@ $(function (){
     timeNow = new Date().getTime();
     screenWidthNow = $(window).width();
     screenHeightNow = $(window).height();
-    tickGain = (timeNow-lastTick)/1*((rotationTreeHave[0] == 1) ? 1.7 : 1 )*((rotationTreeHave[1] == 1) ? 1.5 : 1 )*((rotationTreeHave[8] == 1) ? 1.6 :1)*((rotationTreeHave[21] == 1) ? 1.4 :1);
+    tickGain = (timeNow-lastTick)/1000*((rotationTreeHave[0] == 1) ? 1.7 : 1 )*((rotationTreeHave[1] == 1) ? 1.5 : 1 )*((rotationTreeHave[8] == 1) ? 1.6 :1)*((rotationTreeHave[21] == 1) ? 1.4 :1);
     block += blockPS*tickGain;
     totalBlock += blockPS*tickGain;
     clickBlock(tickGain*mystLevels[7]);
