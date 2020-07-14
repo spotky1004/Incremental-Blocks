@@ -594,7 +594,7 @@ $(function (){
       } else {
         powerPregessDisp = powerProgress;
       }
-      if (blockPS > thisBulk*blockUsageM*(1/tickGain)) {
+      if (blockPS > ppsCap*blockUsageM) {
         $('#togglePower').css('background', 'linear-gradient(90deg, rgba(71, 237, 126, 0.3) ' + powerPregessDisp*100 + '% ' + powerPregessDisp*100 + '%, #3f4d44 ' + powerPregessDisp*100 + '%)');
       } else {
         if (block > thisBulk*blockUsageM) {
