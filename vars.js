@@ -612,7 +612,7 @@ runeInfoStr = [
   '<span class="runeGreenMarkup">you can build again, but much harder to build and reduced effect</span>',
   '<span class="runeGreenMarkup">divide cost of building blocks</span>',
   '<span class="runeGreenMarkup">boost base building efficiency</span>',
-  '<span class="runeWhiteMarkup">add all runes level, but lose all pre-runes progress and reset runes</span>'
+  '<span class="runeWhiteMarkup">add all runes level, but lose all progress even rune 1~9</span>'
 ];
 rebuildLevel = [
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
