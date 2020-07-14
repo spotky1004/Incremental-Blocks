@@ -973,7 +973,7 @@ $(function (){
       return runeName[runeOn];
     });
     $('#selRuneLevel').html(function (index,html) {
-      return 'level ' + romanize(runeLevels[runeOn]+extraRuneLevel);
+      return 'level ' + romanize(runeLevels[runeOn]+((runeOn != 9) ? extraRuneLevel : 0));
     });
     $('#selRuneBoostName').html(function (index,html) {
       return runeInfoStr[runeOn];
