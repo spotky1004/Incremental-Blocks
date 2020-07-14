@@ -16,6 +16,7 @@ $(function (){
   buildingMult = 1;
   bupcM = 1;
   mBlock = 0;
+  upgradeHaveCount = 0;
   pointerThisBlock = 0;
   blockUsedInBuilding = 0;
   bToken = 0;
@@ -164,11 +165,15 @@ $(function (){
     localStorage[savePoint] = JSON.stringify(saveFile);
   }
   function gameLoad() {
-    savedFile = JSON.parse(localStorage[savePoint]);
-    dataCopy = JSON.parse(JSON.stringify(resetData));
-    Object.assign(dataCopy, savedFile);
-    for (var i = 0; i < varData.length; i++) {
-      this[varData[i]] = dataCopy[i];
+    try {
+      savedFile = JSON.parse(localStorage[savePoint]);
+      dataCopy = JSON.parse(JSON.stringify(resetData));
+      Object.assign(dataCopy, savedFile);
+      for (var i = 0; i < varData.length; i++) {
+        this[varData[i]] = dataCopy[i];
+      }
+    } catch (e) {
+
     }
   }
   function gameExport() {
@@ -370,7 +375,7 @@ $(function (){
     statVars[18] = notation(powerBulkM);
     statVars[19] = totalRebuild;
     statVars[20] = beyondCount;
-    overScore = Math.log10(totalBlock+1)**1.2+upgradeHaveCount/5+Math.sqrt(Math.sqrt(bTotal))+Math.sqrt(playtime/3600)+Math.log10(clickCount+1)**2+Math.sqrt(Math.max(buildings-20, 0))+Math.log10(bTokenTotal+1)**1.5+Math.log10(powerTot+1)**2+Math.sqrt(totRuneLevel)+totMystUp/2+totalRebuild**1.5+Math.sqrt(beyondCount)*1000;
+    overScore = Math.log10(totalBlock+1)**1.2+Math.sqrt(Math.sqrt(bTotal))+Math.sqrt(playtime/3600)+Math.log10(clickCount+1)**2+Math.sqrt(Math.max(buildings-20, 0))+Math.log10(bTokenTotal+1)**1.5+Math.log10(powerTot+1)**2+Math.sqrt(totRuneLevel)+totMystUp/2+totalRebuild**1.5+Math.sqrt(beyondCount)*1000;
     $('.statline > span').html(function (index,html) {
       return statVars[index];
     });
@@ -889,7 +894,9 @@ $(function (){
     $('.rune:eq(9)').css({left: radius, top: radius});
   }
   function runeBuffCalc(r, l) {
-    l += extraRuneLevel;
+    if (l != 9) {
+      l += extraRuneLevel;
+    }
     switch (r) {
       case 0:
         return (!rotationTreeHave[3]) ? Math.floor(((l*(l+1))/2+1)*(1+l*0.13+(1.05**l)/100)) : Math.floor(((l*(l+1))/2+1)*(1+l*0.25+(1.11**l)/100));
@@ -926,7 +933,9 @@ $(function (){
     }
   }
   function runeCostCalc(r, l) {
-    l += extraRuneLevel;
+    if (l != 9) {
+      l += extraRuneLevel;
+    }
     switch (r) {
       case 0:
         return Math.floor((1+l/50)**(l/1.2));
