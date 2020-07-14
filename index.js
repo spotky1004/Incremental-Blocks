@@ -1080,7 +1080,7 @@ $(function (){
       ppsCap = powerBulkM*Math.pow(2, powerBulkLevel);
       blockUsageM = 1e40*1.5**Math.log(Math.max(ppsCap, 1))*0.9**mystLevels[9];
       thisBulk = Math.min(ppsCap*tickGain, block/blockUsageM);
-      if (blockPS < thisBulk*blockUsageM*(1/tickGain)) {
+      if (blockPS < ppsCap*blockUsageM) {
         powerBulkLevel--;
         if (powerBulkLevel <= -50) {
           powerBulkLevel = -50;
