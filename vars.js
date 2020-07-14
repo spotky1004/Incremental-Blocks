@@ -651,18 +651,18 @@ rotationTreeIndex = [
   21, 22, 23, 24, 25
 ];
 rotationTreeName = [
-  'speed x1.7', 'speed x1.5', 'bu eff x9', 'rune 1', 'block x4',
-  'bu eff x6', 'autobuy rune', 'keep token', 'speed x1.6', 'block x3',
+  'speed x2.0', 'speed x1.8', 'bu eff x9', 'rune 1', 'block x4',
+  'bu eff x6', 'autobuy rune', 'keep token', 'speed x2.1', 'block x3',
   'rune 8', 'keep myst upgrade', 'bp +13', 'keep basic upgrade', 'autotarget power',
   'rune +2', 'bu eff x4', 'keep build', 'rune 9', 'bu eff x7',
-  'bu eff x8', 'speed x1.4', 'autobuy myst upgrade', 'bu eff x5', 'rune 3'
+  'bu eff x8', 'speed x1.9', 'autobuy myst upgrade', 'bu eff x5', 'rune 3'
 ];
 rotationTreeDesc = [
-  'game speed x1.7', 'game speed x1.5', 'base bu eff x9', 'better rune 1 formula', 'block production x4',
-  'base bu eff x6', 'autobuy rune 5/s (property: rune 10-> rune 1)', 'keep token, rolled boost on reset', 'game speed x1.6', 'block production x3',
+  'game speed x2.0', 'game speed x1.8', 'base bu eff x9', 'better rune 1 formula', 'block production x4',
+  'base bu eff x6', 'autobuy rune 5/s (property: rune 10-> rune 1)', 'keep token, rolled boost on reset', 'game speed x2.1', 'block production x3',
   'better rune 8 formula', 'keep myst upgrades on reset', 'get extra bp', 'keep upgrades on reset', 'autotarget power to best effect 5/s',
   'all runes level +2', 'base bu eff x4', 'keep build on reset (expect rebuild)', 'better rune 9 formula', 'base bu eff x7',
-  'base bu eff x8', 'game speed x1.4', 'autobuy myst upgrade 5/s', 'base bu eff x5', 'better rune 3 formula'
+  'base bu eff x8', 'game speed x1.9', 'autobuy myst upgrade 5/s', 'base bu eff x5', 'better rune 3 formula'
 ];
 varData = [
   'block', 'lastTick', 'upgradeHave', 'blockUnlocked', 'totalBlock',
