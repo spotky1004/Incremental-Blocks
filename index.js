@@ -66,6 +66,7 @@ $(function (){
   bp = 0;
   extraRuneLevel = 0;
   timeSpeed = 1;
+  blockUsageEff = 1;
 
   function copyToClipboard(val) {
     var t = document.createElement("textarea");
@@ -579,7 +580,8 @@ $(function (){
     });
     powerBulkM = 2**(mystLevels[0]+mystLevels[1]+mystLevels[2]);
     ppsCap = powerBulkM*Math.pow(2, powerBulkLevel);
-    blockUsageM = 1e40*1.5**Math.log(Math.max(ppsCap, 1))*0.9**mystLevels[9];
+    blockUsageEff = (10/9)**mystLevels[9]*((rotationTreeHave[2] == 1) ? 7 :1)*((rotationTreeHave[5] == 1) ? 7 :1)*((rotationTreeHave[16] == 1) ? 4 :1)*((rotationTreeHave[19] == 1) ? 9 :1)*((rotationTreeHave[20] == 1) ? 4 :1)*((rotationTreeHave[23] == 1) ? 5 :1);
+    blockUsageM = 1e40*1.5**Math.log(Math.max(ppsCap, 1))/blockUsageEff;
     if (pActive) {
       thisBulk = Math.min(ppsCap*tickGain, block/blockUsageM);
       block -= thisBulk*blockUsageM;
@@ -1078,7 +1080,7 @@ $(function (){
     if (rotationTreeHave[14]) {
       powerBulkM = 2**(mystLevels[0]+mystLevels[1]+mystLevels[2]);
       ppsCap = powerBulkM*Math.pow(2, powerBulkLevel);
-      blockUsageM = 1e40*1.5**Math.log(Math.max(ppsCap, 1))*0.9**mystLevels[9];
+      blockUsageM = 1e40*1.5**Math.log(Math.max(ppsCap, 1))/blockUsageEff;
       thisBulk = Math.min(ppsCap*tickGain, block/blockUsageM);
       if (blockPS < ppsCap*blockUsageM) {
         powerBulkLevel--;
@@ -1547,7 +1549,7 @@ $(function (){
   function clickBuild(num) {
     num = (Math.random() < mystLevels[7]/10) ? num*2 : num;
     calculateBuild();
-    buEff = ((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 6 : 1)*((upgradeHave[69] == 1) ? 4 : 1)*((upgradeHave[87] == 1) ? 2 : 1)*activeRolledBoost[3]*runeBuffCalc(8, runeLevels[8])*((rotationTreeHave[2] == 1) ? 9 :1)*((rotationTreeHave[5] == 1) ? 6 :1)*((rotationTreeHave[16] == 1) ? 4 :1)*((rotationTreeHave[19] == 1) ? 7 :1)*((rotationTreeHave[20] == 1) ? 8 :1)*((rotationTreeHave[23] == 1) ? 5 :1);
+    buEff = ((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 6 : 1)*((upgradeHave[69] == 1) ? 4 : 1)*((upgradeHave[87] == 1) ? 2 : 1)*activeRolledBoost[3]*runeBuffCalc(8, runeLevels[8]);
     if (buildings < 20 || runeLevels[6] == 0) {
       buildProgress[buildingNow][pointerThisBlock] += bupc*buEff*num;
     } else {
