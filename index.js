@@ -1512,8 +1512,10 @@ $(function (){
     setTimeout( function () {
       bToken = 0;
     }, 100);
-    for (var i = 0; i < mystLevels.length; i++) {
-      mystLevels[i] = 0;
+    if (!rotationTreeHave[11]) {
+      for (var i = 0; i < mystLevels.length; i++) {
+        mystLevels[i] = 0;
+      }
     }
   }
 
