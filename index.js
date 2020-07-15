@@ -354,6 +354,7 @@ $(function (){
     (blockUnlocked[2] == 1) ? $('.statEra:eq(2)').show() : $('.statEra:eq(2)').hide();
     (upgradeHave[99] == 1 || prestigeLevelCheck(1)) ? $('.statEra:eq(3)').show() : $('.statEra:eq(3)').hide();
     (runeLevels[6] >= 1 || prestigeLevelCheck(1)) ? $('.statline:eq(19)').show() : $('.statline:eq(19)').hide();
+    (totalBlock >= 1e100 || prestigeLevelCheck(2)) ? $('.statEra:eq(4)').show() : $('.statEra:eq(4)').hide();
     statVars = [];
     statVars[0] = notation(totalBlock);
     statVars[1] = notation(clickCount);
@@ -935,7 +936,7 @@ $(function (){
         return (!rotationTreeHave[18]) ? 2**l : 2.2**l+(10+l**2)*l;
         break;
       case 9:
-        return Math.min((l**2+l)/2, 10)+Math.max((l-4)*2, 0);
+        return Math.min((l**2+l)/2, 10)+Math.max(Math.floor((l-4)*(3+l/3)), 0);
         break;
       default:
         return 1;
