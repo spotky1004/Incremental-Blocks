@@ -773,6 +773,10 @@ $(function (){
       block = 1e300;
       totalBlock = 1e300;
     }
+    if (!isFinite(totalBlock)) {
+      block = 1e300;
+      totalBlock = 1e300;
+    }
     if (mystLevels[4] > 40) {
       mystLevels[4] = 40;
     }
@@ -781,6 +785,9 @@ $(function (){
     if (block > beyondReq) {
       block = beyondReq*1.00001;
       toggleAutoBuild = 1;
+    }
+    if (totalBlock > beyondReq) {
+      totalBlock = beyondReq*1.00001;
     }
   }
   function calculateBuild() {
@@ -1512,7 +1519,10 @@ $(function (){
     runeLevelPrestige();
     runeLevels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     setTimeout( function () {
-      bToken = 0;
+      if (!rotationTreeHave[7]) {
+        bToken = 0;
+        rollBoost();
+      }
     }, 100);
     if (!rotationTreeHave[11]) {
       for (var i = 0; i < mystLevels.length; i++) {
