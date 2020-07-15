@@ -672,7 +672,7 @@ varData = [
   'pActive', 'powerProgress', 'powerBulkLevel', 'powerTot', 'rebuildLevel',
   'mystLevels', 'cheatEnabled', 'rebuildProgress', 'reBuild', 'unlockReached',
   'toggleAutoBuild', 'brokeBlock', 'rotationTreeHave', 'beyondCount', 'treeRotateState',
-  'bp', 'totalBP', 'powerPregessDisp'
+  'bp', 'totalBP', 'powerPregessDisp', 'genSelected'
 ];
 resetData = {
   0: 0,
@@ -1074,5 +1074,6 @@ resetData = {
   34: 0,
   35: 0,
   36: 0,
-  37: 0
+  37: 0,
+  38: 0
 };

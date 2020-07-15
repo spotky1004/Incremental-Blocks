@@ -67,6 +67,7 @@ $(function (){
   extraRuneLevel = 0;
   timeSpeed = 1;
   blockUsageEff = 1;
+  genSelected = 0;
 
   function copyToClipboard(val) {
     var t = document.createElement("textarea");
@@ -218,6 +219,7 @@ $(function (){
     displayUpgrade();
     displayBuild();
     displayBoost();
+    displayPowerBulk();
     displayMystUpgrade();
     displayProgress();
     displayBeyond();
@@ -266,6 +268,7 @@ $(function (){
     if (totalBlock > 1e100) {
       $('#bpContainer').show();
       $('#timeSpeed > span').show();
+      $('#powerGenOptions').show();
     }
   }
   function displayBlock() {
@@ -870,6 +873,10 @@ $(function (){
       boostSelData[i][3] = Math.floor((Math.random()*2+4)**(i+1)*(runeBuffCalc(5, runeLevels[5])**3))
     }
   }
+  function displayPowerBulk() {
+    $('#powerGenOptions > span').removeClass('genSel');
+    $('#powerGenOptions > span:eq(' + genSelected + ')').addClass('genSel');
+  }
   function drawAllRuneLine() {
     /*
     $('#runeRotation').css('animation', 'none');
@@ -1092,8 +1099,8 @@ $(function (){
       thisBulk = Math.min(ppsCap*tickGain, block/blockUsageM);
       if (blockPS < ppsCap*blockUsageM) {
         powerBulkLevel--;
-        if (powerBulkLevel <= -1000) {
-          powerBulkLevel = -1000;
+        if (powerBulkLevel <= -600) {
+          powerBulkLevel = -600;
         }
       } else {
         powerBulkLevel++;
@@ -1665,7 +1672,7 @@ $(function (){
     }
     $('#cancelBoost').show();
   });
-  $(document).on('click','#cancelBoost',function(e) {
+  $(document).on('click','#cancelBoost',function() {
     bActive[2] = 0;
   });
   $(document).on('click','#middleContentNav > span.openedNav',function() {
@@ -1733,10 +1740,21 @@ $(function (){
   $(document).on('click','.powerBulkButton',function() {
     thisIndex = $(".powerBulkButton").index(this);
     if (thisIndex == 0 && powerBulkLevel < 0) {
-      powerBulkLevel++;
+      powerBulkLevel += 10**genSelected;
     } else if (thisIndex == 1 && powerBulkLevel >= -1000){
-      powerBulkLevel--;
+      powerBulkLevel -= 10**genSelected;
     }
+    if (powerBulkLevel > 0) {
+      powerBulkLevel = 0;
+    }
+    if (powerBulkLevel < -1000) {
+      powerBulkLevel = -1000;
+    }
+  });
+  $(document).on('click','#powerGenOptions > span',function() {
+    indexThis = $('#powerGenOptions > span').index(this);
+    genSelected = indexThis;
+    displayPowerBulk();
   });
   $(document).on('click','.mystUpgradeContent.upY',function() {
     thisIndex = $(".mystUpgradeContent").index(this);
