@@ -1092,8 +1092,8 @@ $(function (){
       thisBulk = Math.min(ppsCap*tickGain, block/blockUsageM);
       if (blockPS < ppsCap*blockUsageM) {
         powerBulkLevel--;
-        if (powerBulkLevel <= -600) {
-          powerBulkLevel = -600;
+        if (powerBulkLevel <= -1000) {
+          powerBulkLevel = -1000;
         }
       } else {
         powerBulkLevel++;
@@ -1734,7 +1734,7 @@ $(function (){
     thisIndex = $(".powerBulkButton").index(this);
     if (thisIndex == 0 && powerBulkLevel < 0) {
       powerBulkLevel++;
-    } else if (thisIndex == 1 && powerBulkLevel >= -600){
+    } else if (thisIndex == 1 && powerBulkLevel >= -1000){
       powerBulkLevel--;
     }
   });
