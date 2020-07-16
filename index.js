@@ -1573,7 +1573,7 @@ $(function (){
     if (buildings < 20 || runeLevels[6] == 0) {
       buildProgress[buildingNow][pointerThisBlock] += bupc*buEff*num;
     } else {
-      rebuildProgress[buildingNow][pointerThisBlock] += bupc/thisBlockValue*num;
+      rebuildProgress[buildingNow][pointerThisBlock] += bupc/thisBlockValue*num*buEff;
     }
     if (bupc*num > block) {
       bupc = block/num;
