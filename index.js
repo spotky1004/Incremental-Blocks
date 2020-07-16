@@ -940,7 +940,7 @@ $(function (){
         return (!rotationTreeHave[10]) ? l*(1.02**l+l*(1+l/3))+1 : (l*(1.02**l+l*(1+l/3))+1)*(1.06**l);
         break;
       case 8:
-        return (!rotationTreeHave[18]) ? 1.2**l : 1.23**l+(5+l**1.2)*l;
+        return (!rotationTreeHave[18]) ? 1.2**l+l**2 : 1.23**l+(5+l**1.2)*l+l**2.5;
         break;
       case 9:
         return Math.min((l**2+l)/2, 10)+Math.max(Math.floor((l-4)*(3+l/3)), 0);
