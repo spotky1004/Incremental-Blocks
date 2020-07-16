@@ -68,6 +68,7 @@ $(function (){
   timeSpeed = 1;
   blockUsageEff = 1;
   genSelected = 0;
+  buEff = 1;
 
   function copyToClipboard(val) {
     var t = document.createElement("textarea");
@@ -369,22 +370,23 @@ $(function (){
     statVars[7] = buildings;
     statVars[8] = notation(buildingMult);
     statVars[9] = notation(bupcM);
-    statVars[10] = notation(blockUsedInBuilding);
-    statVars[11] = notation(bTokenTotal);
-    statVars[12] = bTokenCh.toFixed(1);
-    statVars[13] = notation(bTokenGain);
-    statVars[14] = bTotal;
-    statVars[15] = totMystUp;
-    statVars[16] = notation(powerTot);
-    statVars[17] = totRuneLevel;
-    statVars[18] = notation(powerBulkM);
-    statVars[19] = totalRebuild;
-    statVars[20] = beyondCount;
+    statVars[10] = notation(buEff);
+    statVars[11] = notation(blockUsedInBuilding);
+    statVars[12] = notation(bTokenTotal);
+    statVars[13] = bTokenCh.toFixed(1);
+    statVars[14] = notation(bTokenGain);
+    statVars[15] = bTotal;
+    statVars[16] = totMystUp;
+    statVars[17] = notation(powerTot);
+    statVars[18] = totRuneLevel;
+    statVars[19] = notation(powerBulkM);
+    statVars[20] = totalRebuild;
+    statVars[21] = beyondCount;
     overScore = Math.log10(totalBlock+1)**1.2+Math.sqrt(Math.sqrt(bTotal))+Math.sqrt(playtime/3600)+Math.log10(clickCount+1)**2+Math.sqrt(Math.max(buildings-20, 0))+Math.log10(bTokenTotal+1)**1.5+Math.log10(powerTot+1)**2+Math.sqrt(totRuneLevel)+totMystUp/2+totalRebuild**1.5+Math.sqrt(beyondCount)*1000;
     $('.statline > span').html(function (index,html) {
       return statVars[index];
     });
-    $('.statline:eq(21) > span').html(function (index,html) {
+    $('.statline:eq(22) > span').html(function (index,html) {
       return notation(overScore, 4);
     });
   }
@@ -795,6 +797,7 @@ $(function (){
     }
   }
   function calculateBuild() {
+    buEff = ((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 6 : 1)*((upgradeHave[69] == 1) ? 4 : 1)*((upgradeHave[87] == 1) ? 2 : 1)*activeRolledBoost[3]*runeBuffCalc(8, runeLevels[8]);
     if (buildings < 20 || runeLevels[6] == 0) {
       baseBuilding = 1e6*3**buildingNow*((buildingNow%20 >= 12) ? 10**(buildingNow-11) : 1 )/runeBuffCalc(7, runeLevels[7]);
     } else {
@@ -1569,7 +1572,6 @@ $(function (){
   function clickBuild(num) {
     num = (Math.random() < mystLevels[7]/10) ? num*2 : num;
     calculateBuild();
-    buEff = ((bActive[0] == 3) ? bActive[1] : 1)*((upgradeHave[67] == 1) ? 6 : 1)*((upgradeHave[69] == 1) ? 4 : 1)*((upgradeHave[87] == 1) ? 2 : 1)*activeRolledBoost[3]*runeBuffCalc(8, runeLevels[8]);
     if (buildings < 20 || runeLevels[6] == 0) {
       buildProgress[buildingNow][pointerThisBlock] += bupc*buEff*num;
     } else {
