@@ -1010,10 +1010,12 @@ $(function (){
           markUpThis = 'White'
           break;
       }
-      if (runeOn != 9) {
-        return '<span class=rune' + markUpThis + 'Markup>x' + notation(runeBuffCalc(runeOn, runeLevels[runeOn]), 3) + ' -> ' + 'x' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)), 3);
-      } else {
+      if (runeOn == 9) {
         return '<span class=rune' + markUpThis + 'Markup>+' + notation(runeBuffCalc(runeOn, runeLevels[runeOn]), 3) + ' -> ' + '+' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)), 3);
+      } else if (runeOn == 4) {
+        return '<span class=rune' + markUpThis + 'Markup>^' + notation(runeBuffCalc(runeOn, runeLevels[runeOn]), 3) + ' -> ' + '^' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)), 3);
+      } else {
+        return '<span class=rune' + markUpThis + 'Markup>x' + notation(runeBuffCalc(runeOn, runeLevels[runeOn]), 3) + ' -> ' + 'x' + notation(runeBuffCalc(runeOn, (runeLevels[runeOn]+1)), 3);
       }
     });
     $('#selRuneCostNum').html(function (index,html) {
