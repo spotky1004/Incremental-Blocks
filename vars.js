@@ -659,7 +659,7 @@ rotationTreeName = [
 ];
 rotationTreeDesc = [
   'game speed x2.0', 'game speed x1.8', 'pps block use /4', 'better rune 1 formula', 'block production x4',
-  'pps block use /3', 'autobuy rune 5/s (property: rune 10-> rune 1)', 'keep token, rolled boost on reset', 'game speed x2.1', 'block production x3',
+  'pps block use /3', 'autobuy rune 5/s (priority: rune 10-> rune 1)', 'keep token, rolled boost on reset', 'game speed x2.1', 'block production x3',
   'better rune 8 formula', 'keep myst upgrades on reset', 'get extra bp', 'keep upgrades on reset', 'autotarget power to best effect 5/s',
   'all runes level +2', 'pps block use /4', 'keep build on reset (expect rebuild)', 'better rune 9 formula', 'pps block use /9',
   'pps block use /4', 'game speed x1.9', 'autobuy myst upgrade 5/s', 'pps block use /5', 'better rune 3 formula'
